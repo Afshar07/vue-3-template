@@ -37,15 +37,15 @@
           <VInput v-model="loginData.password"  :placeHolder="'Password'" :dataType="'password'"></VInput>
         </div>
       </div>
+<!--      <div class="flex items-center justify-center">-->
+<!--        <div class="text-sm">-->
+<!--          <span class=" text-center dark:text-white text-xs  font-bold tracking-tight cursor-pointer ">New To Trader ?</span>-->
+<!--          <span @click="changeActiveComponent" class=" text-center dark:text-white  text-xs font-bold tracking-tight cursor-pointer !text-primary">Register</span>-->
+<!--        </div>-->
+<!--      </div>-->
       <div class="flex items-center justify-center">
         <div class="text-sm">
-          <span class=" text-center dark:text-white text-xs  font-bold tracking-tight cursor-pointer ">New To Trader? </span>
-          <span @click="changeActiveComponent" class=" text-center dark:text-white  text-xs font-bold tracking-tight cursor-pointer !text-primary">Register</span>
-        </div>
-      </div>
-      <div class="flex items-center justify-center">
-        <div class="text-sm">
-          <span class=" text-center dark:text-white text-xs  font-bold tracking-tight cursor-pointer ">You have lost your password?</span>
+          <span class=" text-center dark:text-white text-xs  font-bold tracking-tight cursor-pointer ">You have lost your password ?</span>
 
           <label for="optionsModal"
                  class="font-medium cursor-pointer text-xs text-indigo-600 dark:text-white transition-all  hover:!text-primary">

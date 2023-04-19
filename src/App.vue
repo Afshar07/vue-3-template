@@ -19,7 +19,10 @@ const appStore = useAppStore()
 const siteTheme = computed(()=>{
   return appStore.getSiteTheme
 })
-
+onMounted(()=>{
+  const body:any = document.querySelector('body')
+  body.classList.add('dark')
+})
 watch(siteTheme,async (val)=>{
 
   const body:any = document.querySelector('body')
