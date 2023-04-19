@@ -1,29 +1,30 @@
 <template>
-  <div class="w-full bg-slate-600 p-10 rounded-3xl max-w-md space-y-8">
+  <div class="col-span-12 md:col-span-5 xl:col-span-3 bg-dark-muted p-10 space-y-8 flex flex-col justify-center">
+
+    <!--  Forgot pass Modal region  -->
     <input type="checkbox" id="optionsModal" ref="optionsModal" class="modal-toggle"/>
-    <div class="modal ">
+    <div class="modal">
       <label for="" style="direction: ltr!important;" class="modal-box bg-white dark:bg-dark-muted">
-        <div class="w-full ">
+        <div class="w-full">
           <div>
             <label for="email-address" class=" text-black dark:text-white">Enter Your Account Email Address</label>
             <VInput v-model="loginData.mail" :dataType="'text'"
                     :error="emailNotValid"
-                    :errorMessage="'Email Not Valid'"
+                    :errorMessage="'Email is not valid'"
                     :placeHolder="'example@example.com'"></VInput>
           </div>
         </div>
         <div class="modal-action !justify-start">
           <label @click="forgetPassword" for="optionsModal" class="btn bg-green-500 text-white">send</label>
           <label  for="optionsModal" class="btn bg-gray-400 text-white">close</label>
-
         </div>
-
       </label>
     </div>
-    <div class="!m-0">
-        <h2 class=" text-center dark:text-white  text-3xl font-bold tracking-tight text-gray-900">Login</h2>
+    <!--  Forgot pass Modal region End -->
 
-    </div>
+    <h1 class="text-white text-[2rem] sm:text-[3rem] mb-3">
+      Welcome to {{ appName }} 👋
+    </h1>
     <form class="mt-8 space-y-6" action="/" @submit.prevent method="POST">
       <input type="hidden" name="remember" value="true">
       <div class="space-y-4 rounded-md shadow-sm">
@@ -56,7 +57,7 @@
 
       <div>
         <button @click="login" type="submit"
-                class="group bg-primary relative flex w-full justify-center rounded-md  py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                class="group bg-violet relative flex w-full justify-center rounded-md  py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
           <span class="absolute inset-y-0 left-0 flex items-center pl-3">
             <LockIcon v-if="emailNotValid !==false" class="fill-white"></LockIcon>
           </span>
@@ -84,6 +85,9 @@ const toastStore = useToastStore()
 const authStore:any = useAuthStore()
 const router = useRouter()
 const api: any = inject('repositories')
+
+const helper:any = inject('helper')
+const appName = helper.appName
 
 let loginData = reactive<signDto>({
   mobile: '',
@@ -137,7 +141,7 @@ async function forgetPassword() {
     toastStore.showToast = true
     toastStore.toastData = {
       title: 'Failed',
-      content: 'Email Not Valid',
+      content: 'Email is not valid',
       icon: 'Alert'
     }
   }
@@ -164,7 +168,7 @@ async function login() {
     toastStore.showToast = true
     toastStore.toastData = {
       title: 'Failed',
-      content: 'Email Not Valid',
+      content: 'Email  is not valid',
       icon: 'Alert'
     }
   }

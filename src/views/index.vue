@@ -1,9 +1,11 @@
 <template>
-  <div class="min-h-screen flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-    <h1 class="text-white text-[3rem] mb-3">
-      Welcome to {{ appName }}
-    </h1>
+  <div class="min-h-screen grid grid-cols-12">
+
     <component :is="componentInstance" @changeActiveSlug="changeActiveComponent"></component>
+
+    <div class="md:col-span-7 xl:col-span-9 hidden md:flex justify-center items-center">
+      <login-pic2></login-pic2>
+    </div>
   </div>
 </template>
 
@@ -11,6 +13,7 @@
 import SignIn from "@/components/main/SignIn.vue";
 import SignUp from "@/components/main/SignUp.vue";
 import {computed, inject, onMounted, ref} from "vue";
+import LoginPic2 from "@/components/icons/loginPic2.vue";
 const components:any = {
   SignUp,
   SignIn
