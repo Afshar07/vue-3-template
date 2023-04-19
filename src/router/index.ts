@@ -21,7 +21,6 @@ const router = createRouter({
             meta: {
                 auth: true,
                 title: 'Trader | Dashboard'
-
             }
         },
         {
@@ -31,7 +30,6 @@ const router = createRouter({
             meta: {
                 auth: true,
                 title: 'Trader | My Account'
-
             }
         },
         {
@@ -41,7 +39,6 @@ const router = createRouter({
             meta: {
                 auth: true,
                 title: 'Trader | All Orders'
-
             }
         },
         {
@@ -51,7 +48,6 @@ const router = createRouter({
             meta: {
                 auth: true,
                 title: 'Trader | All Users'
-
             }
         },
         {
@@ -61,7 +57,6 @@ const router = createRouter({
             meta: {
                 auth: true,
                 title: 'Trader | My Orders'
-
             }
         },
         {
@@ -71,7 +66,6 @@ const router = createRouter({
             meta: {
                 auth: true,
                 title: 'Trader | Create Order'
-
             }
         },
         {
@@ -81,7 +75,6 @@ const router = createRouter({
             meta: {
                 auth: true,
                 title: 'Trader | api Keys'
-
             }
         },
     ]

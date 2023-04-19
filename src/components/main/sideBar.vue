@@ -5,7 +5,7 @@
     <div class="drawer-side shadow-2xl">
       <label ref="sideBarLabel" @click="countTouch" for="my-drawer-2" class="drawer-overlay"></label>
       <ul class="menu p-4 w-[16rem] bg-white dark:bg-dark-muted  text-base-content">
-        <h1 class="font-bold text-gray-700 dark:text-white text-2xl p-2">Trader </h1>
+        <h1 class="font-bold text-gray-800 dark:text-white text-2xl p-2">{{ appName }}</h1>
         <!-- Sidebar content here -->
         <NavItem :class="{'collapse-open':isSelectedItem(item)}" @click="setSelectedNavItem(item)"
                  v-for="(item,idx) in navigationItems" :key="idx" :item="item"></NavItem>
@@ -13,7 +13,7 @@
                          :item="item"></NavItemCollapse>
         <div @click="logout" class="my-1 text-black dark:text-white fill-black dark:fill-white">
           <div
-              class=" flex items-center gap-2 hover:fill-white rounded-2xl p-3.5 cursor-pointer hover:bg-primary hover:text-white text-md font-medium">
+              class=" flex items-center gap-2 hover:fill-white rounded-xl px-3.5 py-3 cursor-pointer hover:bg-primary hover:text-white text-md font-medium">
             <DoorIcon></DoorIcon>
             <span class="mt-1">
             Logout
@@ -21,13 +21,12 @@
           </div>
         </div>
       </ul>
-
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import {computed, onMounted, reactive, ref, watch} from "vue";
+import {computed, onMounted, reactive, ref, watch , inject} from "vue";
 import KeyIcon from "../icons/KeyIcon.vue";
 import TasksIcon from "../icons/TasksIcon.vue";
 import {useSideBarStore} from "../../stores/sideBar.js";
@@ -50,6 +49,9 @@ let getSideBarStatus = computed(() => {
   return sideBarStore.showSideBar
 })
 
+const helper:any = inject('helper');
+const appName = helper.appName;
+
 function isSelectedItem(item: any): Boolean {
   //@ts-ignore
   return selectedNavItem?.value?.title === item.title;
@@ -68,11 +70,7 @@ function countTouch() {
     sideBarStore.showSideBar = false
     count.value = 0
     sideBarLabel.value.click()
-
-
   }
-
-
 }
 
 function setSelectedNavItem(item: any) {
@@ -103,13 +101,11 @@ const navigationItems = reactive<navItems[]>([
         title: 'edit Profile',
         link: '/user/profile',
         hasAccess: true,
-
       },
       {
         title: 'Api Keys',
         link: '/user/apiKeys',
         hasAccess: true,
-
       },
     ]
   },
@@ -125,7 +121,6 @@ const navigationItems = reactive<navItems[]>([
         link: '/dashboard/users/AllUsers',
         hasAccess: user.role !== 'Subscriber',
       },
-
     ]
   },
   {
@@ -152,7 +147,6 @@ const navigationItems = reactive<navItems[]>([
       },
     ]
   },
-
 ])
 
 function logout() {

@@ -1,8 +1,7 @@
 <template>
-  <div class="w-full my-2">
+  <div class="w-full my-1">
     <section
-        class="  flex items-center justify-between rounded-2xl p-3 cursor-pointer dark:text-white dark:fill-white gap-2 hover:fill-white  hover:!bg-primary hover:text-white text-md font-medium"
-
+        class="flex items-center justify-between rounded-xl px-3.5 py-2 cursor-pointer dark:text-white dark:fill-white gap-2 hover:fill-white hover:!bg-primary hover:text-white text-md font-medium"
         @click="toggleIsOpen"
     >
       <h4 class="text-lg z-10 col-start-1 col-end-5">
@@ -22,8 +21,6 @@
         />
       </svg>
     </section>
-
-
 
     <transition name="slide" mode="out-in">
       <section

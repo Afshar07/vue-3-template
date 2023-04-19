@@ -1,5 +1,8 @@
 <template>
-  <div class="bg-white mb-3 sticky dark:bg-dark-muted rounded-xl flex items-center justify-between w-full shadow   gap-3 p-3 ">
+  <div class="bg-white mb-3 sticky dark:bg-dark-muted rounded-xl flex items-center justify-between w-full shadow gap-3 p-3">
+    <div @click="openSideBar" class="md:hidden block hover:fill-primary ">
+      <MenuIcon class="fill-black dark:fill-white "></MenuIcon>
+    </div>
     <div class="flex items-center">
       <label class="swap swap-rotate">
         <!-- this hidden checkbox controls the state -->
@@ -8,15 +11,9 @@
         <MoonIcon class="fill-black dark:fill-white" ></MoonIcon>
         <!-- sun icon -->
         <SunIcon class="fill-black dark:fill-white"></SunIcon>
-
-
       </label>
     </div>
-    <div @click="openSideBar" class=" md:hidden block hover:fill-primary ">
-      <MenuIcon class="fill-black dark:fill-white "></MenuIcon>
-    </div>
   </div>
-
 </template>
 
 <script setup>
@@ -36,15 +33,9 @@ watch(themeToggler,async (val)=>{
     appStore.theme = ''
   }
 },{immediate:true})
-
-
-
 function openSideBar() {
   sideBar.showSideBar = !sideBar.showSideBar
 }
-
-
-
 </script>
 
 <style scoped>

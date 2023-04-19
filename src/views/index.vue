@@ -22,8 +22,8 @@ const helper:any = inject('helper')
 const selectedComponent = ref('SignIn')
 const componentInstance = computed(() => {
   return components[selectedComponent.value]
-})
-const appName = helper.appName
+});
+const appName = helper.appName;
 function changeActiveComponent(slug: string): void {
 selectedComponent.value = slug
 }

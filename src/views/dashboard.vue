@@ -5,10 +5,9 @@
     </div>
     <div class="md:col-span-10 p-5 col-span-12 z-[12] drawer-content">
       <Header></Header>
-      <div class="bg-white dark:bg-dark-muted rounded-xl shadow col-span-12 h-[40rem]   gap-3 p-5 ">
+      <div class="bg-white dark:bg-dark-muted rounded-xl shadow col-span-12 h-[40rem] gap-3 p-5 ">
         <Chart></Chart>
       </div>
-
     </div>
   </div>
 </template>

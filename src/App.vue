@@ -1,4 +1,3 @@
-
 <template>
 <div class="min-h-screen bg-gray-100 dark:bg-dark">
   <Overlay></Overlay>
@@ -20,19 +19,17 @@ const siteTheme = computed(()=>{
   return appStore.getSiteTheme
 })
 onMounted(()=>{
-  const body:any = document.querySelector('body')
-  body.classList.add('dark')
+  const body:any = document.querySelector('body');
+  body.classList.add('dark');
 })
 watch(siteTheme,async (val)=>{
-
-  const body:any = document.querySelector('body')
+  const body:any = document.querySelector('body');
   if(val==='dark'){
   body.classList.add(val)
   }else{
     body.classList.remove('dark')
   }
 },{immediate:true})
-
 </script>
 
 

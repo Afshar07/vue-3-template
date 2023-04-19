@@ -45,7 +45,6 @@
             <!-- head -->
             <thead>
             <tr>
-
               <th>time Frame</th>
               <th>Type</th>
               <th>Amount</th>
