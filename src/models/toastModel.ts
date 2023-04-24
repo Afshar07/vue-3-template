@@ -1,5 +1,5 @@
 export interface toastModel {
-    title:string,
+    variant:string,
     content:string,
-    icon:string
+    icon?:string
 }

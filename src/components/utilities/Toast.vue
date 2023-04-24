@@ -1,84 +1,118 @@
 <template>
-  <transition name="SlideUp" appear>
-    <div v-if="show" class="fixed top-10   w-full  sm:px-[10%] md:px-[20%] lg:px-[30%] xl:px-[40%]  z-[9999] p-4">
-      <div :class="{'!bg-green-500':icon==='check','!bg-red-500':icon==='alert',}" class=" w-full  shadow-lg dark:bg-slate-500 rounded-xl shadow p-3">
+  <transition-group name="SlideRight" appear>
+    <div v-if="toastData.show && toastData.variant==='success'"
+         class="fixed top-10  flex justify-end  w-full    z-[9999] py-4 md:px-10 px-5">
+      <div class=" !bg-green-500 relative overflow-x-hidden  shadow-lg dark:bg-slate-500 rounded-xl shadow p-3 ">
         <div class="flex items-center justify-between py-2 border-b-1">
-          <p class="dark:text-white" style="overflow-wrap: anywhere">
-            {{content}}
+          <div class="p-2  rounded-full">
+            <component class="mr-2 fill-white" :is="toastIcons[toastStore.toastData.icon]"></component>
+          </div>
+          <p class="dark:text-white mt-1" style="overflow-wrap: anywhere">
+            {{ toastData.content }}
           </p>
-          <div @click="closeToast" class="p-2  rounded-full">
-            <CloseIcon :class="{'!fill-green-500':icon==='check','!fill-red-500':icon==='alert',}" class=" bg-white rounded-full cursor-pointer"></CloseIcon>
+          <div @click="closeToast">
+            <XIcon class=" w-5 h-5 ml-2 fill-white rounded-full opacity-50 hover:opacity-100  cursor-pointer"></XIcon>
           </div>
         </div>
+        <div class="left-0 bottom-0 absolute bg-white h-1 transition-all " :style="`width:${dynamicWidth}%`"></div>
       </div>
     </div>
-  </transition>
+    <div v-if="toastData.show && toastData.variant==='error'"
+         class="fixed top-10  flex justify-end  w-full    z-[9999] py-4 md:px-10 px-5">
+      <div class=" !bg-red-500 relative overflow-x-hidden  shadow-lg dark:bg-slate-500 rounded-xl shadow p-3 ">
+        <div class="flex items-center justify-between py-2 border-b-1">
+          <div class="p-2  rounded-full">
+            <component class="mr-2 fill-white" :is="toastIcons[toastStore.toastData.icon]"></component>
+          </div>
+          <p class="dark:text-white mt-1" style="overflow-wrap: anywhere">
+            {{ toastData.content }}
+          </p>
+          <div @click="closeToast">
+            <XIcon class=" w-5 h-5 ml-2 fill-white rounded-full opacity-50 hover:opacity-100  cursor-pointer"></XIcon>
+          </div>
+        </div>
+        <div class="left-0 bottom-0 absolute bg-white h-1 transition-all " :style="`width:${dynamicWidth}%`"></div>
+      </div>
+    </div>
+  </transition-group>
 
 </template>
 
 <script setup lang="ts">
-import {computed, ref, watch} from "vue";
+import {computed, onMounted, reactive, ref, watch} from "vue";
 import CheckIcon from "../icons/CheckIcon.vue";
-import ErrorIcon from "../icons/ErrorIcon.vue";
 import CloseIcon from "../icons/CloseIcon.vue";
 import {useToastStore} from "@/stores/toast";
+import XIcon from "@/components/icons/XIcon.vue";
+
 let toastStore = useToastStore()
 const notifier = ref(null)
-let content = ref('')
-let title = ref('')
-let icon = ref('CheckIcon')
-let show = ref(false)
-function closeToast(){
-      show.value = false
+let toastData = reactive({
+  content: '',
+  icon: '',
+  show: false,
+  variant: ''
+})
+const toastIcons = {
+  CheckIcon,
+  CloseIcon,
+  XIcon
+}
+
+function closeToast() {
+  toastData.show = false
   toastStore.showToast = false
   //@ts-ignore
-      clearTimeout(notifier.value)
+  clearTimeout(notifier.value)
 }
-const getToastStoreState = computed(()=>{
+
+let progressWidth = ref<number>(0)
+let progressInterval = ref<any>(0)
+
+let dynamicWidth = computed(() => {
+  let num: any = ref(0)
+  if (progressWidth.value < 100) {
+
+  progressInterval = setInterval((): number => {
+
+      progressWidth.value += 1
+      num.value = progressWidth.value
+  }, 500)
+  return progressWidth.value
+  }else{
+    clearInterval(progressInterval)
+    return progressWidth.value
+  }
+
+
+})
+const getToastStoreState = computed(() => {
   return toastStore.getToast
 })
-
-watch(getToastStoreState,async ()=>{
-  if(!show){
+watch(getToastStoreState, async (val) => {
+  if (toastData.show) {
     //@ts-ignore
     clearTimeout(notifier.value)
-        }
-        show.value = true;
-        content.value = toastStore.toastData.content;
-        title.value = toastStore.toastData.title;
-        icon.value = toastStore.toastData.icon
+  } else {
+    toastData.show = true;
+    toastData.content = toastStore.toastData.content;
+    toastData.variant = toastStore.toastData.variant
 // @ts-ignore
-        notifier.value =  setTimeout(()=>{
-          show.value = false
-          toastStore.showToast = false
+    notifier.value = setTimeout(() => {
+      toastData.show = false
+      toastStore.showToast = false
+      toastData.variant = ''
+      console.log(toastData.show)
+    }, 5000)
+  }
+})
 
-        },2000)
-},)
 
 </script>
 
 <style scoped>
-.CustomWidth{
+.CustomWidth {
   @apply w-1/2 !important;
-}
-.SlideUp-enter-active{
-  animation: SlideUpAnm 0.5s ease-in-out;
-
-}
-
-.SlideUp-leave-active{
-  animation: SlideUpAnm reverse 0.5s ease-in-out;
-
-}
-@keyframes SlideUpAnm {
-  0%{
-    opacity: 0;
-    transform: translateY(-100%);
-  }
-  100%{
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 </style>

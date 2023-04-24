@@ -130,23 +130,29 @@ async function handleImage() {
 }
 
 async function updateUser() {
-  try {
-    appStore.showOverlay = true
-    userInfo.value.selfieFileData = base64Image.value
-    const res = await api.updateUser.setPayload(userInfo.value)
-    toastStore.showToast = true
-    toastStore.toastData = {
-      title: 'Succeed',
-      content: 'Information Has Been Updated',
-      icon: 'check'
-    }
-    await getUserById()
-  } catch (e) {
-    console.log(e)
-  } finally {
-    appStore.showOverlay = false
-
+  toastStore.showToast = true
+  toastStore.toastData = {
+    content: 'Information Has Been Updated',
+    variant:'success',
   }
+
+  // try {
+  //   appStore.showOverlay = true
+  //   userInfo.value.selfieFileData = base64Image.value
+  //   const res = await api.updateUser.setPayload(userInfo.value)
+  //   toastStore.showToast = true
+  //   toastStore.toastData = {
+  //     title: 'Succeed',
+  //     content: 'Information Has Been Updated',
+  //     icon: 'check'
+  //   }
+  //   await getUserById()
+  // } catch (e) {
+  //   console.log(e)
+  // } finally {
+  //   appStore.showOverlay = false
+  //
+  // }
 }
 </script>
 
