@@ -1,0 +1,63 @@
+<template>
+  <!--  Modal region  -->
+  <input type="checkbox" :id="props.id" ref="closeModalRef" class="modal-toggle"/>
+  <div class="modal">
+    <label for="" style="direction: ltr!important;" class="modal-box p-0 bg-white dark:bg-dark-muted">
+      <div v-if="props.title" class=" flex items-center justify-center pb-2  my-3 border-b border-gray-400">
+        <strong class="text-white text-xl">{{ props.title }}</strong>
+      </div>
+      <slot name="modalBody"></slot>
+      <div class=" border-t border-gray-400 mt-3 space-x-3 !justify-start p-3">
+        <label @click="ok" for="optionsModal" class="btn bg-violet text-white">
+          <span class="mt-1">
+          {{ props.okModalTitle }}
+          </span>
+        </label>
+        <label @click="closeModal" :for="props.id" class="btn bg-gray-400 text-white">
+          <span class="mt-1">
+          {{ props.closeModalTitle }}
+          </span>
+        </label>
+      </div>
+    </label>
+
+  </div>
+  <!--  Modal region End -->
+</template>
+
+<script setup lang="ts">
+import {reactive, ref} from "vue";
+
+const props = defineProps({
+  id: {
+    type: String,
+  },
+  title:{
+    type:String
+  },
+  closeModalTitle:{
+    type:String,
+    required:false,
+    default:'close'
+  },
+  okModalTitle:{
+    type:String
+  }
+})
+const emits = defineEmits(['closeModal','ok'])
+
+const closeModalRef: any = ref(null)
+
+function ok():void{
+  emits('ok')
+}
+function closeModal(): void {
+  emits('closeModal')
+  closeModalRef.click()
+}
+
+</script>
+
+<style scoped>
+
+</style>

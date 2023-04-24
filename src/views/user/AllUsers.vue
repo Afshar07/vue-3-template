@@ -6,7 +6,7 @@
     <div class="md:col-span-10 p-5 col-span-12 z-[1]">
       <Header></Header>
       <div class="bg-white dark:bg-dark-muted rounded-xl shadow grid grid-cols-12  gap-3 p-5 ">
-        <div class="overflow-x-auto w-full col-span-12">
+        <div class="overflow-x-auto rounded-xl  w-full col-span-12">
          <Table
          :items="user.users"
          :fields="userFields"
@@ -16,7 +16,10 @@
              <span >{{ data.items.userId }}</span>
            </template>
            <template #actions="data">
-              <TrashIcon></TrashIcon>
+             <div class="flex items-center  space-x-2">
+              <TrashIcon class="fill-red-500 cursor-pointer  "></TrashIcon>
+             <EditIcon class="dark:fill-white fill-sky-500 cursor-pointer  "></EditIcon>
+             </div>
            </template>
          </Table>
         </div>
@@ -36,6 +39,7 @@ import {useAppStore} from "@/stores/app";
 import Pagination from "../../components/utilities/Pagination.vue";
 import Table from "@/components/utilities/Table.vue";
 import TrashIcon from "@/components/icons/TrashIcon.vue";
+import EditIcon from "@/components/icons/EditIcon.vue";
 let appStore = useAppStore()
 const helper = inject('helper')
 let api = inject('repositories')

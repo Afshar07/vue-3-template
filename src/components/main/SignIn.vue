@@ -1,11 +1,9 @@
 <template>
   <div class="col-span-12 md:col-span-5 xl:col-span-3 bg-dark-muted p-10 space-y-8 flex flex-col justify-center">
-
-    <!--  Forgot pass Modal region  -->
-    <input type="checkbox" id="optionsModal" ref="optionsModal" class="modal-toggle"/>
-    <div class="modal">
-      <label for="" style="direction: ltr!important;" class="modal-box bg-white dark:bg-dark-muted">
-        <div class="w-full">
+    <Modal :id="'optionsModal'" @ok="forgetPassword" :closeModalTitle="'Close'" :okModalTitle="'Send'"
+           :title="'Forgot Password'">
+      <template #modalBody>
+        <div class="w-full p-3">
           <div>
             <label for="email-address" class=" text-black dark:text-white">Enter Your Account Email Address</label>
             <VInput v-model="loginData.mail" :dataType="'text'"
@@ -14,13 +12,8 @@
                     :placeHolder="'example@example.com'"></VInput>
           </div>
         </div>
-        <div class="modal-action !justify-start">
-          <label @click="forgetPassword" for="optionsModal" class="btn bg-green-500 text-white">send</label>
-          <label  for="optionsModal" class="btn bg-gray-400 text-white">close</label>
-        </div>
-      </label>
-    </div>
-    <!--  Forgot pass Modal region End -->
+      </template>
+    </Modal>
 
     <h1 class="text-white text-[2rem] sm:text-[3rem] mb-3">
       Welcome to {{ appName }} 👋
@@ -35,15 +28,15 @@
                   :placeHolder="'Email'"></VInput>
         </div>
         <div>
-          <VInput v-model="loginData.password"  :placeHolder="'Password'" :dataType="'password'"></VInput>
+          <VInput v-model="loginData.password" :placeHolder="'Password'" :dataType="'password'"></VInput>
         </div>
       </div>
-<!--      <div class="flex items-center justify-center">-->
-<!--        <div class="text-sm">-->
-<!--          <span class=" text-center dark:text-white text-xs  font-bold tracking-tight cursor-pointer ">New To Trader ?</span>-->
-<!--          <span @click="changeActiveComponent" class=" text-center dark:text-white  text-xs font-bold tracking-tight cursor-pointer !text-primary">Register</span>-->
-<!--        </div>-->
-<!--      </div>-->
+      <!--      <div class="flex items-center justify-center">-->
+      <!--        <div class="text-sm">-->
+      <!--          <span class=" text-center dark:text-white text-xs  font-bold tracking-tight cursor-pointer ">New To Trader ?</span>-->
+      <!--          <span @click="changeActiveComponent" class=" text-center dark:text-white  text-xs font-bold tracking-tight cursor-pointer !text-primary">Register</span>-->
+      <!--        </div>-->
+      <!--      </div>-->
       <div class="flex items-center justify-center">
         <div class="text-sm">
           <span class=" text-center dark:text-white text-xs  font-bold tracking-tight cursor-pointer ">You have lost your password ?</span>
@@ -79,14 +72,15 @@ import {useToastStore} from "@/stores/toast";
 import {useAuthStore} from "@/stores/auth";
 import {useRouter} from "vue-router";
 import errorHandler from "@/plugins/errorHandler";
+import Modal from "@/components/utilities/Modal.vue";
 
 const appStore = useAppStore()
 const toastStore = useToastStore()
-const authStore:any = useAuthStore()
+const authStore: any = useAuthStore()
 const router = useRouter()
 const api: any = inject('repositories')
 
-const helper:any = inject('helper')
+const helper: any = inject('helper')
 const appName = helper.appName
 
 let loginData = reactive<signDto>({
@@ -117,27 +111,27 @@ async function forgetPassword() {
     try {
       appStore.showOverlay = true
       const res = await api.forgetPassword.setParams({
-        type:2,
-        PhoneOrEmail:loginData.mail
+        type: 2,
+        PhoneOrEmail: loginData.mail
       })
-      if(res.data.data.status===7){
-      toastStore.showToast = true
-      toastStore.toastData = {
-        title: 'Succeed',
-        content: 'Your Password Has Been Sent To Your Email',
-        icon: 'check'
-      }
-      }else{
+      if (res.data.data.status === 7) {
+        toastStore.showToast = true
+        toastStore.toastData = {
+          title: 'Succeed',
+          content: 'Your Password Has Been Sent To Your Email',
+          icon: 'check'
+        }
+      } else {
         errorHandler(res.data.data.status)
       }
       loginData.mail = ''
     } catch (e) {
       console.log(e)
-    }finally {
+    } finally {
       appStore.showOverlay = false
 
     }
-  }else{
+  } else {
     toastStore.showToast = true
     toastStore.toastData = {
       title: 'Failed',
