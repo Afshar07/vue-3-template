@@ -7,12 +7,11 @@
 <script setup>
 import {useToastStore} from "@/stores/toast";
 import {inject} from "vue";
-const toast = inject('toast')
+const toast = inject('toast');
 const toastStore = useToastStore();
 
 function showToast(){
-  toast.error({content:'hello world'})
-
+  toast.success({content:'hello world'});
 }
 </script>
 
