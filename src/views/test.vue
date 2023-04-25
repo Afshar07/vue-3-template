@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="showToast" type="button" class="btn bg-primary my-3 text-white">rgtrgfm</button>
+    <button @click="showToast" type="button" class="btn bg-primary my-3 text-white">Submit</button>
   </div>
 </template>
 
