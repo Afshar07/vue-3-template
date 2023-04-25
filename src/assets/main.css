@@ -139,4 +139,26 @@ body {
     }
 }
 
+.rotate-enter-active {
+    animation: rotateAnm 0.3s ease-in-out;
+}
+
+.rotate-leave-active {
+    animation: rotateAnm reverse 0.3s ease-in-out;
+}
+
+@keyframes rotateAnm {
+    0% {
+        opacity: 0;
+        transform: rotate(0deg);
+    }
+    100% {
+        opacity: 1;
+        transform: rotate(360deg);
+    }
+}
+
+
+
+
 /* transitions region  end*/

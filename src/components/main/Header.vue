@@ -3,15 +3,19 @@
     <div @click="openSideBar" class="md:hidden block hover:fill-primary ">
       <MenuIcon class="fill-black dark:fill-white "></MenuIcon>
     </div>
-    <div class="flex items-center">
-      <label class="swap swap-rotate">
-        <!-- this hidden checkbox controls the state -->
-        <input v-model="themeToggler" type="checkbox"/>
+    <div class="flex cursor-pointer items-center">
+      <div class="relative flex ">
+        <small class="opacity-0">asd</small>
+
+          <transition name="rotate">
         <!-- moon icon -->
-        <MoonIcon class="fill-black dark:fill-white" ></MoonIcon>
+        <MoonIcon  v-if="appStore.getSiteTheme" :class="{'!block ': appStore.getSiteTheme,'absolute':appStore.getSiteTheme}"  @click="toggleSiteTheme" class="fill-black  left-0   dark:fill-white " ></MoonIcon>
+          </transition>
+        <transition name="rotate">
         <!-- sun icon -->
-        <SunIcon class="fill-black dark:fill-white"></SunIcon>
-      </label>
+        <SunIcon   v-if="!appStore.getSiteTheme" :class="{'!block ':!appStore.getSiteTheme,'absolute':!appStore.getSiteTheme}" @click="toggleSiteTheme" class="fill-black  left-0   dark:fill-white "></SunIcon>
+        </transition>
+      </div>
     </div>
   </div>
 </template>
@@ -25,14 +29,9 @@ import SunIcon from "@/components/icons/SunIcon.vue";
 import {ref, watch} from "vue";
 const sideBar = useSideBarStore()
 const appStore = useAppStore()
-const themeToggler = ref(true)
-watch(themeToggler,async (val)=>{
-  if(val){
-    appStore.theme = 'dark'
-  }else{
-    appStore.theme = ''
-  }
-},{immediate:true})
+function toggleSiteTheme(){
+  appStore.toggleSiteTheme()
+}
 function openSideBar() {
   sideBar.showSideBar = !sideBar.showSideBar
 }

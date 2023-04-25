@@ -21,32 +21,24 @@ import {computed, onMounted, watch} from "vue";
 import {RouterView, useRoute} from 'vue-router'
 import Header from "@/components/main/Header.vue";
 import Toast from "@/components/utilities/Toast.vue";
-import {useAppStore} from "@/stores/app";
 import Overlay from "@/components/utilities/Overlay.vue";
 import SideBar from "@/components/main/sideBar.vue";
-
-
+import {useAppStore} from "@/stores/app";
 const appStore = useAppStore()
-const siteTheme = computed(() => {
-  return appStore.getSiteTheme
-})
-const route:any = useRoute();
-let fullLayout = computed(() =>{
+const route: any = useRoute();
+let fullLayout = computed(() => {
   return route.name !== undefined
       && route.name === 'index'
 })
 onMounted(() => {
-  const body: any = document.querySelector('body');
-  body.classList.add('dark');
-})
-watch(siteTheme, async (val) => {
-  const body: any = document.querySelector('body');
-  if (val === 'dark') {
-    body.classList.add(val)
+  const body: any = document.querySelector('body')
+  if (appStore.getSiteTheme) {
+    body.classList.add('dark')
   } else {
     body.classList.remove('dark')
   }
-}, {immediate: true})
+})
+
 </script>
 
 
