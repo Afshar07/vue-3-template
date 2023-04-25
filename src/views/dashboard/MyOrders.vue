@@ -16,11 +16,7 @@
         </div>
       </label>
     </div>
-    <div class="md:col-span-2 col-span-12">
-      <side-bar></side-bar>
-    </div>
-    <div class="md:col-span-10 p-5 col-span-12 z-[1]">
-      <Header></Header>
+    <div class="col-span-12 z-[1]">
       <div class="bg-white dark:bg-dark-muted rounded-xl shadow grid grid-cols-12  gap-3 p-5 ">
 
         <div class="col-span-12 grid grid-cols-12 flex items-center gap-2">

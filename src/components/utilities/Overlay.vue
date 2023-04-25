@@ -1,5 +1,5 @@
 <template>
-  <div v-if="showLoadingOverlay" class="z-[99999] w-full fixed min-h-full flex items-center justify-center" style="background: rgba(0,0,0,0.3)">
+  <div v-if="showLoadingOverlay" class="z-[99999] w-full fixed min-h-full flex items-center justify-center" style="background: rgba(0,0,0,0.5)">
     <div class="code-loader">
       <span>{</span><span>}</span>
     </div>
