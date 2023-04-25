@@ -1,15 +1,17 @@
 <template>
-  <div class="min-h-screen w-full grid grid-cols-12 bg-gray-50 dark:bg-dark">
+  <div class="min-h-screen w-full grid grid-cols-12 bg-gray-100 dark:bg-dark">
+    <Overlay></Overlay>
+    <Toast></Toast>
     <div v-if="!fullLayout" class="md:col-span-2 col-span-12">
       <side-bar></side-bar>
     </div>
     <div :class="[fullLayout ? '' : 'p-5']" class="md:col-span-10 col-span-12 z-[1]">
       <Header v-if="!fullLayout"></Header>
-      <Overlay></Overlay>
-      <Toast></Toast>
-      <transition name="fade" mode="out-in">
-        <RouterView/>
-      </transition>
+      <router-view v-slot="{ Component }">
+        <transition name="fade" mode="out-in">
+          <component :is="Component"/>
+        </transition>
+      </router-view>
     </div>
   </div>
 </template>

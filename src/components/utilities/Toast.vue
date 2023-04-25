@@ -1,5 +1,4 @@
 <template>
-  <transition-group name="SlideRight" appear>
     <div v-if="toastData.show && toastData.variant==='success'"
          class="fixed top-10  flex justify-end  w-full    z-[9999] py-4 md:px-10 px-5">
       <div class=" !bg-green-500 relative overflow-x-hidden  shadow-lg dark:bg-slate-500 rounded-xl shadow p-3 ">
@@ -34,7 +33,6 @@
         <div class="left-0 bottom-0 absolute bg-white h-1 transition-all " :style="`width:${dynamicWidth}%`"></div>
       </div>
     </div>
-  </transition-group>
 
 </template>
 
@@ -90,22 +88,26 @@ const getToastStoreState = computed(() => {
   return toastStore.getToast
 })
 watch(getToastStoreState, async (val) => {
-  if (toastData.show) {
-    //@ts-ignore
-    clearTimeout(notifier.value)
-  } else {
-    toastData.show = true;
-    toastData.content = toastStore.toastData.content;
-    toastData.variant = toastStore.toastData.variant
-// @ts-ignore
-    notifier.value = setTimeout(() => {
-      toastData.show = false
-      toastStore.showToast = false
-      toastData.variant = ''
-      console.log(toastData.show)
-    }, 5000)
-  }
-})
+  toastData.show = true;
+  toastData.content = toastStore.toastData.content;
+  toastData.variant = toastStore.toastData.variant
+
+//   if (toastData.show) {
+//     //@ts-ignore
+//     clearTimeout(notifier.value)
+//   } else {
+//     toastData.show = true;
+//     toastData.content = toastStore.toastData.content;
+//     toastData.variant = toastStore.toastData.variant
+// // @ts-ignore
+//     notifier.value = setTimeout(() => {
+//       toastData.show = false
+//       toastStore.showToast = false
+//       toastData.variant = ''
+//       console.log(toastData.show)
+//     }, 5000)
+//   }
+},{immediate:true})
 
 
 </script>

@@ -1,10 +1,6 @@
 <template>
   <div class=" min-h-full w-full grid grid-cols-12">
-    <div class="md:col-span-2 col-span-12">
-      <side-bar></side-bar>
-    </div>
-    <div class="md:col-span-10 p-5 col-span-12 z-[1]">
-      <Header></Header>
+    <div class="col-span-12 z-[1]">
       <div class="bg-white dark:bg-dark-muted rounded-xl shadow grid grid-cols-12  gap-3 p-5 ">
         <!--        <div class="stats bg-white dark:bg-slate-600 text-black dark:text-white col-span-12 shadow">-->
         <!--          <div class="stat">-->
@@ -63,7 +59,6 @@ import SelectMarket from "@/components/order/SelectMarket.vue";
 import TradeData from "@/components/order/TradeData.vue";
 import SelectApiKey from "@/components/order/SelectApiKey.vue";
 import ProfitType from "@/components/order/ProfitType.vue";
-
 const toastStore = useToastStore()
 const authStore = useAuthStore()
 const appStore = useAppStore()
@@ -160,7 +155,6 @@ async function createOrder() {
     }
   }
 }
-
 </script>
 
 <style scoped>

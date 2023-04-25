@@ -77,6 +77,15 @@ const router = createRouter({
                 title: 'Trader | api Keys'
             }
         },
+        {
+            path: '/test',
+            name: 'test',
+            component: () => import('../views/test.vue'),
+            meta: {
+                auth: true,
+                title: 'Trader | test'
+            }
+        },
     ]
 })
 router.beforeEach((to, from, next) => {
