@@ -1,5 +1,5 @@
 <template>
-  <div class="drawer drawer-mobile fixed   "
+  <div class="drawer drawer-mobile fixed"
        :class="{'!z-[99]':sideBarStore.showSideBar,'!z-[1]':!sideBarStore.showSideBar}">
     <input id="my-drawer-2" type="checkbox" class="drawer-toggle"/>
     <div class="drawer-side shadow-2xl">
