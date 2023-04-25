@@ -14,6 +14,7 @@ import helper from "@/plugins/helper";
 // @ts-ignore
 import { LMap, LTileLayer, LMarker } from "leaflet";
 import "leaflet/dist/leaflet.css";
+import toast from "@/plugins/toast";
 const app = createApp(App)
 app.component("l-map", LMap);
 app.component("l-tile-layer", LTileLayer);
@@ -23,5 +24,6 @@ app.use(pinia)
 app.use(router)
 app.use(repositories)
 app.use(helper)
+app.use(toast)
 
 app.mount('#app')

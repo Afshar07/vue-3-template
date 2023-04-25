@@ -6,15 +6,13 @@
 
 <script setup>
 import {useToastStore} from "@/stores/toast";
-
+import {inject} from "vue";
+const toast = inject('toast')
 const toastStore = useToastStore();
 
 function showToast(){
-  toastStore.showToast = true
-  toastStore.toastData = {
-    content: 'Information Has Been Updated',
-    variant: 'success',
-  }
+  toast.error({content:'hello world'})
+
 }
 </script>
 
