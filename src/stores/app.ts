@@ -4,7 +4,7 @@ import {defineStore} from 'pinia'
 export const useAppStore = defineStore('app', {
     persist: true,
     state: () => ({
-        theme: false,
+        theme: true,
         showOverlay: false,
         isRTL:false,
     }),
