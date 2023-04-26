@@ -4,7 +4,7 @@
       <div class="bg-white dark:bg-dark-muted flex flex-col justify-center items-center rounded-xl shadow col-span-12 h-[50rem] gap-3 p-5 ">
 <!--        <Chart></Chart>-->
         <h1 class="text-[1.5rem] md:text-[3rem] text-gray-700 dark:text-white">Welcome to {{ appName }}</h1>
-        <img src="../../public/favicon.png" class="w-[20rem] h-[20rem] rounded-xl" alt="">
+        <img src="../../public/logo.png" class="w-[15rem] h-[20rem] rounded-xl" alt="">
       </div>
     </div>
   </div>

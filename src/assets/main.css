@@ -4,7 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 .link-active-class {
-    @apply text-white bg-primary rounded-2xl;
+    @apply text-white bg-primary rounded-xl;
     @apply fill-white !important;
 }
 
