@@ -32,13 +32,18 @@ let fullLayout = computed(() => {
 })
 onMounted(() => {
   const body: any = document.querySelector('body')
+
+  // Set theme
   if (appStore.getSiteTheme) {
     body.classList.add('dark')
   } else {
     body.classList.remove('dark')
   }
-})
 
+  // Set RTL
+  const isRTL  = appStore.isRTL;
+  if (isRTL) body.style.direction = 'rtl';
+})
 </script>
 
 
