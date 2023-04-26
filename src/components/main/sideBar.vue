@@ -29,7 +29,7 @@
 import {computed, onMounted, reactive, ref, watch , inject} from "vue";
 import KeyIcon from "../icons/KeyIcon.vue";
 import TasksIcon from "../icons/TasksIcon.vue";
-import {useSideBarStore} from "../../stores/sideBar.js";
+import {useSideBarStore} from "@/stores/sideBar";
 import CircleIcon from "@/components/icons/CircleIcon.vue";
 import UserIcon from "@/components/icons/UserIcon.vue";
 import type {navItems} from "@/models/navigationItems";
@@ -38,6 +38,7 @@ import NavItem from "@/components/utilities/NavItem.vue";
 import DoorIcon from "@/components/icons/DoorIcon.vue";
 import {useAuthStore} from "@/stores/auth";
 import {useRouter} from "vue-router";
+import {sideBarItems} from "@/models/sideBarItems";
 
 const router = useRouter()
 const authStore: any = useAuthStore()
@@ -81,74 +82,8 @@ function setSelectedNavItem(item: any) {
   }
 }
 
-const navigationItems = reactive<navItems[]>([
-  {
-    title: 'DashBoard',
-    link: '/dashboard',
-    icon: 'DashboardIcon',
-    hasChildren: false,
-    hasAccess: true,
-    children: []
-  },
-  {
-    title: 'Profile',
-    link: '',
-    icon: 'UserIcon',
-    hasChildren: true,
-    hasAccess: true,
-    children: [
-      {
-        title: 'edit Profile',
-        link: '/user/profile',
-        hasAccess: true,
-      },
-      {
-        title: 'Api Keys',
-        link: '/user/apiKeys',
-        hasAccess: true,
-      },
-    ]
-  },
-
-  {
-    title: 'Users',
-    link: '',
-    icon: 'UsersIcon',
-    hasChildren: true,
-    hasAccess: user.role !== 'Subscriber',
-    children: [
-      {
-        title: 'All Users',
-        link: '/dashboard/users/AllUsers',
-        hasAccess: user.role !== 'Subscriber',
-      },
-    ]
-  },
-  {
-    title: 'Orders',
-    link: '',
-    icon: 'OrderIcon',
-    hasChildren: true,
-    hasAccess: true,
-    children: [
-      {
-        title: 'All Orders',
-        link: '/dashboard/AllOrders',
-        hasAccess: user.role !== 'Subscriber',
-      },
-      {
-        title: 'My Orders',
-        link: '/dashboard/MyOrders',
-        hasAccess: true,
-      },
-      {
-        title: 'Create Order',
-        link: '/dashboard/CreateOrder',
-        hasAccess: true,
-      },
-    ]
-  },
-])
+// Setting Items of Sidebar
+const navigationItems = sideBarItems;
 
 function logout() {
   authStore.logout()

@@ -4,5 +4,5 @@ export interface navItems {
     icon:string,
     hasChildren?:Boolean,
     hasAccess?:boolean,
-    children?:Object[]
+    children?:Object[]|[]
 }
