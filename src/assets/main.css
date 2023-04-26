@@ -9,7 +9,7 @@
 }
 
 body {
-    font-family: Vazir, serif !important;
+    font-family: PELAK-Economic, serif !important;
     direction: ltr;
 
 
@@ -72,16 +72,23 @@ body {
     transition: opacity 0.25s;
 
 }
+
 .my-page-enter,
 .my-page-leave-to {
     opacity: 0;
 }
+
 /* End Region */
 
 .fade-enter-active,
-.fade-leave-active {  transition: opacity 0.5s ease;}
+.fade-leave-active {
+    transition: opacity 0.5s ease;
+}
+
 .fade-enter-from,
-.fade-leave-to {  opacity: 0;}
+.fade-leave-to {
+    opacity: 0;
+}
 
 
 .slide-up-enter-active,
@@ -157,8 +164,6 @@ body {
         transform: rotate(360deg);
     }
 }
-
-
 
 
 /* transitions region  end*/

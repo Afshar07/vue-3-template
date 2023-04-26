@@ -32,15 +32,7 @@ const router = createRouter({
                 title: 'Trader | My Account'
             }
         },
-        {
-            path: '/dashboard/AllOrders',
-            name: 'AllOrders',
-            component: () => import('../views/dashboard/AllOrders.vue'),
-            meta: {
-                auth: true,
-                title: 'Trader | All Orders'
-            }
-        },
+
         {
             path: '/dashboard/users/AllUsers',
             name: 'AllUsers',
@@ -48,24 +40,6 @@ const router = createRouter({
             meta: {
                 auth: true,
                 title: 'Trader | All Users'
-            }
-        },
-        {
-            path: '/dashboard/MyOrders',
-            name: 'MyOrders',
-            component: () => import('../views/dashboard/MyOrders.vue'),
-            meta: {
-                auth: true,
-                title: 'Trader | My Orders'
-            }
-        },
-        {
-            path: '/dashboard/CreateOrder',
-            name: 'CreateOrder',
-            component: () => import('../views/dashboard/CreateOrder.vue'),
-            meta: {
-                auth: true,
-                title: 'Trader | Create Order'
             }
         },
         {

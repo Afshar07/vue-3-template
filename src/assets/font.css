@@ -1,25 +1,14 @@
-
+/* Font Family Region */
 @font-face {
-    font-family: Vazir;
-    font-style: normal;
-    font-weight: 900;
-    src: url('fonts/woff2/Vazir.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
-    url('fonts/woff/Vazir.woff') format('woff');  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-    font-display: swap
-}
-@font-face {
-    font-family: Vazir;
-    font-style: normal;
-    font-weight: bold;
-    src: url('fonts/woff2/Vazir-Bold.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
-    url('fonts/woff/Vazir-Bold.woff') format('woff');  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-    font-display: swap
-}
-@font-face {
-    font-family: Vazir;
+    font-family: PELAK-Economic;
     font-style: normal;
     font-weight: normal;
-    src: url('fonts/woff2/Vazir-Medium.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
-    url('fonts/woff/Vazir-Medium.woff') format('woff');  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
-    font-display: swap
+    src: url("fonts/PELAK-Economic/Pelak FontFamily/webfonts/eot/Pelak-light.eot") format("eot"), url("fonts/PELAK-Economic/Pelak FontFamily/webfonts/woff/Pelak-light.woff") format("woff"), url("fonts/PELAK-Economic/Pelak FontFamily/webfonts/woff2/Pelak-light.woff2") format("woff2");
 }
+@font-face {
+    font-family: PELAK-Economic;
+    font-style: normal;
+    font-weight: bold;
+    src: url("fonts/PELAK-Economic/Pelak FontFamily/webfonts/eot/Pelak-bold.eot") format("eot"), url("fonts/PELAK-Economic/Pelak FontFamily/webfonts/woff/Pelak-bold.woff") format("woff"), url("fonts/PELAK-Economic/Pelak FontFamily/webfonts/woff2/Pelak-bold.woff2") format("woff2");
+}
+/* Font Family Region End */

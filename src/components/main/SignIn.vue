@@ -39,15 +39,15 @@
       <!--      </div>-->
       <div class="flex items-center justify-center">
         <div class="text-sm">
-          <span class=" text-center dark:text-white text-xs  font-bold tracking-tight cursor-pointer ">You have lost your password ?</span>
+          <span class=" text-center dark:text-white text-xs text-white  font-bold tracking-tight cursor-pointer ">You have lost your password ?</span>
 
           <label for="optionsModal"
                  class="font-medium cursor-pointer text-xs text-indigo-600 dark:text-white transition-all  hover:!text-primary">
             Forget Password
+
           </label>
         </div>
       </div>
-
       <div>
         <button @click="login" type="submit"
                 class="group bg-violet relative flex w-full justify-center rounded-md  py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
@@ -76,6 +76,7 @@ import Modal from "@/components/utilities/Modal.vue";
 
 const appStore = useAppStore()
 const toastStore = useToastStore()
+const toast:any = inject('toast')
 const authStore: any = useAuthStore()
 const router = useRouter()
 const api: any = inject('repositories')
@@ -115,12 +116,8 @@ async function forgetPassword() {
         PhoneOrEmail: loginData.mail
       })
       if (res.data.data.status === 7) {
-        toastStore.showToast = true
-        toastStore.toastData = {
-          title: 'Succeed',
-          content: 'Your Password Has Been Sent To Your Email',
-          icon: 'check'
-        }
+        toast.success({content:'Your Password Has Been Sent To Your Email'})
+
       } else {
         errorHandler(res.data.data.status)
       }
@@ -132,12 +129,7 @@ async function forgetPassword() {
 
     }
   } else {
-    toastStore.showToast = true
-    toastStore.toastData = {
-      title: 'Failed',
-      content: 'Email is not valid',
-      icon: 'Alert'
-    }
+    toast.error({content:'Email is not valid'})
   }
 }
 
@@ -159,12 +151,8 @@ async function login() {
       appStore.showOverlay = false
     }
   } else {
-    toastStore.showToast = true
-    toastStore.toastData = {
-      title: 'Failed',
-      content: 'Email  is not valid',
-      icon: 'Alert'
-    }
+    toast.error({content:'Email  is not valid'})
+
   }
   appStore.showOverlay = false
 

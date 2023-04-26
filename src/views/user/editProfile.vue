@@ -61,7 +61,7 @@
     <!--          <VInput :dataType="`text`" v-model="userInfo.coinexSecretKey" :placeHolder="`example`" class="my-1"></VInput>-->
     <!--        </div>-->
     <!--      </div>-->
-    <button @click="updateUser" type="button" class="btn bg-primary my-3 text-white">submit</button>
+    <button @click="updateUser" type="button" class="btn border-none bg-primary my-3 text-white">submit</button>
   </div>
 </template>
 

@@ -1,13 +1,8 @@
 import {useToastStore} from "@/stores/toast";
 import {SignErrors} from "@/models/signErrors";
-
+import {inject} from "vue";
+const toast:any = inject('toast')
 export default (errorCode:number)=>{
-const toastStore = useToastStore()
-    toastStore.showToast = true
-    toastStore.toastData ={
-        title: 'Failed',
-        content: SignErrors[errorCode],
-        icon: 'alert'
-    }
+    toast.error({content:SignErrors[errorCode]});
 
 }
