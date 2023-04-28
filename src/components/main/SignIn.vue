@@ -141,9 +141,12 @@ async function login() {
       if (res.data.data.data === "") {
         errorHandler(res.data.data.status)
       } else {
-        console.log(res.data)
-        authStore.setUser(res.data.data)
-        await router.push('/dashBoard')
+        if (res.data.status === 7){
+          authStore.setUser(res.data.data);
+          await router.push('/dashBoard')
+        }else {
+          return errorHandler(res.data.status);
+        }
       }
     } catch (e) {
       console.log(e)
@@ -152,10 +155,8 @@ async function login() {
     }
   } else {
     toast.error({content:'Email  is not valid'})
-
   }
   appStore.showOverlay = false
-
 }
 
 const emits = defineEmits(['changeActiveSlug'])

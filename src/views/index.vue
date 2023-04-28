@@ -15,7 +15,6 @@ import SignIn from "@/components/main/SignIn.vue";
 import {computed, inject, onMounted, ref} from "vue";
 import LoginPic2 from "@/components/icons/loginPic2.vue";
 const components:any = {
-
   SignIn
 }
 const helper:any = inject('helper')
