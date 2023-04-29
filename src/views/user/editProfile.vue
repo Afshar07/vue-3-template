@@ -1,6 +1,6 @@
 <template>
-  <div class="min-h-full w-full">
-    <div v-if="userInfo" class="bg-white dark:bg-dark-muted rounded-xl shadow grid grid-cols-12 gap-3 p-5">
+  <div class="main-card w-full">
+    <div v-if="userInfo" class="grid grid-cols-12 gap-3 p-5">
       <div class="w-full col-span-12 mb-5">
         <input @input="handleImage" type="file" ref="fileInput" class="hidden">
         <div class="relative">

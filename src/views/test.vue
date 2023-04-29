@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-card">
     <button @click="showToast" type="button" class="btn border-none bg-primary my-3 text-white">Submit</button>
   </div>
 </template>

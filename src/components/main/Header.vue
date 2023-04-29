@@ -1,6 +1,6 @@
 <template>
   <div
-      class="bg-white mb-3 sticky dark:bg-dark-muted rounded-xl flex items-center justify-between w-full shadow gap-3 p-3">
+      class="bg-white mb-3 sticky dark:bg-dark-muted rounded-xl flex items-center justify-between w-full shadow gap-3 p-5">
     <div @click="openSideBar" class="md:hidden block hover:fill-primary">
       <MenuIcon class="fill-black dark:fill-white "></MenuIcon>
     </div>

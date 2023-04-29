@@ -1,10 +1,10 @@
 <template>
-  <div class="w-full grid grid-cols-12">
+  <div class="main-card grid-cols-12">
     <div class="col-span-12 z-[12] drawer-content">
-      <div class="bg-white dark:bg-dark-muted flex flex-col justify-center items-center rounded-xl shadow col-span-12 h-[50rem] gap-3 p-5 ">
+      <div class="flex flex-col justify-center items-center col-span-12 h-[45rem] gap-3 p-5">
 <!--        <Chart></Chart>-->
         <h1 class="text-[1.5rem] md:text-[3rem] text-gray-700 dark:text-white">Welcome to {{ appName }}</h1>
-        <img src="../../public/logo.png" class="w-[15rem] h-[20rem] rounded-xl" alt="">
+        <img src="../../public/logo.png" class="w-[15rem] h-[15rem] rounded-xl" alt="">
       </div>
     </div>
   </div>

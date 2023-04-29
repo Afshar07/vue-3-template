@@ -11,8 +11,10 @@
 body {
     font-family: PELAK-Economic, serif !important;
     direction: ltr;
+}
 
-
+.main-card{
+    @apply w-full bg-white dark:bg-dark-muted rounded-xl shadow-lg p-5;
 }
 
 .vs--single {
