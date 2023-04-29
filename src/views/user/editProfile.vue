@@ -22,7 +22,7 @@
         <small class="text-gray-500 dark:text-white">Email Address</small>
         <VInput :dataType="`text`" v-model="userInfo.email" :placeHolder="`example`" class="my-1"></VInput>
       </div>
-      <div class="md:col-span-4 col-span-12 ">
+      <div class="md:col-span-6 col-span-12 ">
         <small class="text-gray-500 dark:text-white">userName</small>
         <VInput :dataType="`text`" v-model="userInfo.userName" :placeHolder="`example`" class="my-1"></VInput>
       </div>
