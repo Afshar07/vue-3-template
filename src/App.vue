@@ -1,9 +1,9 @@
 <template>
-  <div class="min-h-screen w-full grid grid-cols-12 bg-gray-100 dark:bg-dark">
+  <div class="min-h-screen relative items-between w-full grid grid-cols-12 bg-gray-100 dark:bg-dark">
     <Overlay></Overlay>
     <Toast></Toast>
 
-    <div v-if="!fullLayout"    :class="{' md:!block md:!relative fixed  hidden ':!sideBarStore.showSideBar}"  class="md:col-span-2  top-0 left-0 z-10   col-span-12 ">
+    <div v-if="!fullLayout"    :class="{' md:!block md:!relative   hidden ':!sideBarStore.showSideBar}"  class="md:col-span-2 fixed  top-0 left-0 z-10   col-span-12 ">
       <side-bar></side-bar>
     </div>
     <div :class="[fullLayout ? '' : 'p-5']" class="md:col-span-10 col-span-12 z-[1]">
@@ -13,6 +13,9 @@
           <component :is="Component"/>
         </transition>
       </router-view>
+    </div>
+    <div class="col-span-12 md:hidden block sticky mt-2 bottom-0 left-0 z-50 flex items-end">
+      <BottomNav></BottomNav>
     </div>
   </div>
 </template>
@@ -26,6 +29,7 @@ import Overlay from "@/components/utilities/Overlay.vue";
 import SideBar from "@/components/main/sideBar.vue";
 import {useAppStore} from "@/stores/app";
 import {useSideBarStore} from "@/stores/sideBar";
+import BottomNav from "@/components/main/BottomNav.vue";
 const appStore = useAppStore()
 const sideBarStore = useSideBarStore()
 const route: any = useRoute();
