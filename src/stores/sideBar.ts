@@ -1,9 +1,10 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
-export const useSideBarStore = defineStore('counter', {
+export const useSideBarStore = defineStore('sideBar', {
+    persist:true,
     state:()=>({
-            showSideBar:false
+            showSideBar:true
     }),
     getters:{
 

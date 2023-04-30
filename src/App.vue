@@ -2,7 +2,8 @@
   <div class="min-h-screen w-full grid grid-cols-12 bg-gray-100 dark:bg-dark">
     <Overlay></Overlay>
     <Toast></Toast>
-    <div v-if="!fullLayout" :class="{'hidden':!sideBarStore.showSideBar}" class="md:col-span-2 md:relative fixed top-0 left-0 z-10 col-span-12 ">
+
+    <div v-if="!fullLayout"    :class="{' md:!block md:!relative fixed  hidden ':!sideBarStore.showSideBar}"  class="md:col-span-2  top-0 left-0 z-10   col-span-12 ">
       <side-bar></side-bar>
     </div>
     <div :class="[fullLayout ? '' : 'p-5']" class="md:col-span-10 col-span-12 z-[1]">

@@ -63,7 +63,6 @@ watch(getSideBarStatus, async (val) => {
   sideBarLabel.value.click()
 })
 let count = ref(0)
-
 function countTouch() {
   if (count.value === 0) {
     count.value++
