@@ -10,7 +10,7 @@ const router = createRouter({
             path: '/',
             name: 'index',
             meta: {
-                title: 'Trader | Login'
+                title: 'Dashboard | Login'
             },
             component: () => import('../views/index.vue')
         },
@@ -20,7 +20,7 @@ const router = createRouter({
             component: () => import('../views/dashboard.vue'),
             meta: {
                 auth: true,
-                title: 'Trader | Dashboard'
+                title: 'Dashboard | Dashboard'
             }
         },
         {
@@ -29,7 +29,7 @@ const router = createRouter({
             component: () => import('../views/user/editProfile.vue'),
             meta: {
                 auth: true,
-                title: 'Trader | My Account'
+                title: 'Dashboard | My Account'
             }
         },
 
@@ -39,7 +39,7 @@ const router = createRouter({
             component: () => import('../views/user/AllUsers.vue'),
             meta: {
                 auth: true,
-                title: 'Trader | All Users'
+                title: 'Dashboard | All Users'
             }
         },
         {
@@ -48,7 +48,7 @@ const router = createRouter({
             component: () => import('../views/user/apiKeys.vue'),
             meta: {
                 auth: true,
-                title: 'Trader | api Keys'
+                title: 'Dashboard | api Keys'
             }
         },
         {
@@ -57,7 +57,7 @@ const router = createRouter({
             component: () => import('../views/test.vue'),
             meta: {
                 auth: true,
-                title: 'Trader | test'
+                title: 'Dashboard | test'
             }
         },
     ]
