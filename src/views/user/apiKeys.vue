@@ -1,5 +1,5 @@
 <template>
-  <div class=" min-h-full w-full   grid grid-cols-12">
+  <div class="main-card grid grid-cols-12">
     <!--    Create Crypto Account-->
     <input type="checkbox" id="createApiKey" ref="changeOrderStatus" class="modal-toggle"/>
     <div class="modal ">
@@ -107,17 +107,13 @@
         </div>
       </label>
     </div>
-    <div class="md:col-span-2 col-span-12">
-      <side-bar></side-bar>
-    </div>
-    <div class="md:col-span-10  p-5 col-span-12 z-[1]">
-      <Header></Header>
+    <div class="col-span-12 z-[1]">
       <div class="overflow-x-auto w-full col-span-12">
         <div class="col-span-12 my-3">
 
         </div>
         <div class="col-span-12 grid grid-cols-12 flex items-end mb-4 gap-2">
-          <label for="createApiKey" class=" btn  md:col-span-2 col-span-6 btn-sm bg-primary border-none text-white">
+          <label for="createApiKey" class="btn md:col-span-2 h-full col-span-6 btn-sm bg-primary border-none text-white">
             Create Api Key
           </label>
           <div class="md:col-span-2 col-span-12 md:my-0 my-3 flex flex-col justify-center">

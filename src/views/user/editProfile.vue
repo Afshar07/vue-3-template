@@ -1,6 +1,6 @@
 <template>
-  <div class="min-h-full w-full">
-    <div v-if="userInfo" class="bg-white dark:bg-dark-muted rounded-xl shadow grid grid-cols-12 gap-3 p-5">
+  <div class="main-card w-full">
+    <div v-if="userInfo" class="grid grid-cols-12 gap-3 p-5">
       <div class="w-full col-span-12 mb-5">
         <input @input="handleImage" type="file" ref="fileInput" class="hidden">
         <div class="relative">
@@ -22,7 +22,7 @@
         <small class="text-gray-500 dark:text-white">Email Address</small>
         <VInput :dataType="`text`" v-model="userInfo.email" :placeHolder="`example`" class="my-1"></VInput>
       </div>
-      <div class="md:col-span-4 col-span-12 ">
+      <div class="md:col-span-6 col-span-12 ">
         <small class="text-gray-500 dark:text-white">userName</small>
         <VInput :dataType="`text`" v-model="userInfo.userName" :placeHolder="`example`" class="my-1"></VInput>
       </div>
