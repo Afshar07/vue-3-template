@@ -14,7 +14,7 @@
     <template v-slot:content>
       <div v-if="props.item?.children.length>0" class="p-0 dark:bg-dark-muted">
         <li v-for="(el,idx) in props.item.children">
-          <router-link :to="el.link" v-if="el.hasAccess" class="my-0.5 hover:!fill-white fill-gray-400"
+          <router-link :to="el.link" v-if="el.hasAccess"  class="my-0.5 hover:!fill-white fill-gray-400"
                        exact-active-class="link-active-class">
             <div class="flex items-center gap-2">
               <CircleIcon class="w-3 h-3"></CircleIcon>

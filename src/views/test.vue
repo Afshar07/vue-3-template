@@ -1,10 +1,11 @@
 <template>
   <div class="main-card">
-    <button @click="showToast" type="button" class="btn border-none bg-primary my-3 text-white">Submit</button>
+<Chat></Chat>
   </div>
 </template>
 
 <script setup>
+import Chat from '@/components/main/Chat.vue'
 import {useToastStore} from "@/stores/toast";
 import {inject} from "vue";
 const toast = inject('toast');

@@ -6,7 +6,7 @@
     <div v-if="!fullLayout"    :class="{' md:!block md:!relative   hidden ':!sideBarStore.showSideBar}"  class="md:col-span-2 fixed  top-0 left-0 z-10   col-span-12 ">
       <side-bar></side-bar>
     </div>
-    <div :class="[fullLayout ? '' : 'p-5']" class="md:col-span-10 col-span-12 z-[1]">
+    <div :class="[fullLayout ? '' : 'p-2']" class="md:col-span-10 col-span-12 z-[1]">
       <Header v-if="!fullLayout"></Header>
       <router-view v-slot="{ Component }">
         <transition name="fade" mode="out-in">

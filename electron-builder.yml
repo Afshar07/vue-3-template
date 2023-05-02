@@ -1,0 +1,13 @@
+appId: Dashboard
+productName: Dashboard
+directories:
+  output: dist
+
+files:
+  - "**/*"
+extraResources:
+  - ./node_modules/**/*
+nsis:
+  oneClick: false
+  allowElevation: true
+  allowToChangeInstallationDirectory: true

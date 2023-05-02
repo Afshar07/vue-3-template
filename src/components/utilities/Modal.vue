@@ -3,17 +3,17 @@
   <input type="checkbox" :id="props.id" ref="closeModalRef" class="modal-toggle"/>
   <div class="modal">
     <label for="" style="direction: ltr!important;" class="modal-box p-0 bg-white dark:bg-dark-muted">
-      <div v-if="props.title" class=" flex items-center justify-center pb-2  my-3 border-b border-gray-400">
+      <div v-if="props.title" class=" flex items-center justify-center pb-2  my-3 border-b dark:border-gray-400 border-gray-200">
         <strong class="text-white text-xl">{{ props.title }}</strong>
       </div>
       <slot name="modalBody"></slot>
-      <div class=" border-t border-gray-400 mt-3 space-x-3 !justify-start p-3">
-        <label @click="ok" for="optionsModal" class="btn bg-violet text-white">
+      <div class=" border-t dark:border-gray-400 border-gray-200  mt-3 space-x-3 !justify-start p-3">
+        <label @click="ok" for="optionsModal" class="btn bg-violet border-none text-white">
           <span class="mt-1">
           {{ props.okModalTitle }}
           </span>
         </label>
-        <label @click="closeModal" :for="props.id" class="btn bg-gray-400 text-white">
+        <label @click="closeModal" :for="props.id" class="btn dark:bg-gray-400 bg-gray-500 border-none text-white">
           <span class="mt-1">
           {{ props.closeModalTitle }}
           </span>

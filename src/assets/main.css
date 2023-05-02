@@ -4,10 +4,14 @@
 @tailwind components;
 @tailwind utilities;
 .link-active-class {
-    @apply text-white bg-primary rounded-xl;
+    @apply  bg-primary rounded-xl;
+    @apply text-white !important;
     @apply fill-white !important;
 }
-
+.link-active-class span {
+    @apply text-white !important;
+    
+}
 body {
     font-family: PELAK-Economic, serif !important;
     direction: ltr;
