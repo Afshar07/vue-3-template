@@ -1,9 +1,9 @@
 <template>
-  <div class="drawer drawer-mobile  fixed  "
+  <div class="drawer drawer-mobile   z-0  "
        :class="{'!z-[99] ':sideBarStore.showSideBar,'!z-[1]':!sideBarStore.showSideBar}">
     <input id="my-drawer-2" type="checkbox" class="drawer-toggle"/>
-    <div class="drawer-side shadow-2xl w-full ">
-      <label ref="sideBarLabel" @click="countTouch" for="my-drawer-2" class="drawer-overlay "></label>
+    <div class="drawer-side   shadow-2xl w-full  ">
+      <label ref="sideBarLabel" @click="countTouch" for="my-drawer-2" class="drawer-overlay fixed h-full  "></label>
       <ul class="menu h-full p-4 w-[16rem] bg-white dark:bg-dark-muted  text-base-content">
         <h1 class="font-bold text-gray-800 dark:text-white text-2xl p-2">{{ appName }}</h1>
         <!-- Sidebar content here -->
