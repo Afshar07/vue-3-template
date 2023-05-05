@@ -62,6 +62,15 @@ const router = createRouter({
                 title: 'داشبورد | گزارشات'
             }
         },
+        {
+            path: '/reports/seasonalReports',
+            name: 'seasonalReports',
+            component: () => import('../views/reports/seasonalReports.vue'),
+            meta: {
+                auth: true,
+                title: 'داشبورد | گزارشات فصلی'
+            }
+        },
         // reports end
 
         // services start
@@ -82,7 +91,7 @@ const router = createRouter({
             component: () => import('../views/services/statement.vue'),
             meta: {
                 auth: true,
-                title: 'داشبورد | خدمات'
+                title: 'داشبورد | اظهار‌نامه'
             }
         },
         // services end

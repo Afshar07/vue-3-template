@@ -1,0 +1,56 @@
+<template>
+  <div class="md:main-card  grid gap-2 grid-cols-12">
+    <Modal :id="'viewStatement'"  :closeModalTitle="'بستن'"
+           :title="'اظهار‌نامه مالیاتی'">
+      <template #modalBody>
+        <div class="w-full grid grid-cols-2 p-3">
+
+        </div>
+      </template>
+    </Modal>
+    <div class="col-span-12 dark:text-white  p-3 rounded-xl dark:bg-dark-muted bg-white shadow ">
+      <div class="w-full flex border-b pb-3 items-center justify-between">
+        <strong>اظهار نامه سالیانه</strong>
+        <div class="flex items-center justify-center gap-2">
+          <button class=" btn-sm border-none p-2 !h-full btn bg-primary text-white fill-white rounded-xl shadow">
+            <label for="viewStatement">
+            <EyeIcon class="w-6 h-6"></EyeIcon>
+            </label>
+          </button>
+        <span class="p-2 border border-green-500 text-green-500 rounded-xl shadow">پرداخت شده</span>
+        </div>
+      </div>
+      <div class="w-full flex pt-3 flex-col items-start">
+        <p class="flex-wrap dark:text-white text-gray-500">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از
+
+          اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</p>
+      </div>
+      <div class="w-full border-b pb-3 flex items-center justify-end">
+        <small class="text-gray-400 ">{{new Date(Date.now()).toLocaleDateString('fa-IR',{})}}</small>
+      </div>
+      <div class="w-full pt-3 flex flex-col items-start">
+        <div class="flex w-full items-center justify-between">
+          <span class="text-gray-400">مبلغ محاسبه شده</span>
+        <strong>120,000 تومان</strong>
+        </div>
+        <div class="w-full mt-3  flex gap-1">
+          <button class="w-1/2 btn bg-green-500 border-none">پرداخت</button>
+          <button class="w-1/2 btn bg-red-500 border-none">بازگشت</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import ListIcon from "@/components/icons/listIcon.vue";
+import EyeIcon from "@/components/icons/EyeIcon.vue";
+import Modal from "@/components/utilities/Modal.vue";
+
+
+</script>
+
+<style scoped>
+
+</style>
