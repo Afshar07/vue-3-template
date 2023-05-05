@@ -1,7 +1,7 @@
 <template>
   <div class="main-card w-full">
     <div v-if="userInfo" class="grid grid-cols-12 gap-3 p-5">
-      <div class="w-full col-span-12 mb-5">
+      <div class="w-full col-span-12 flex flex-row justify-center md:justify-start mb-5">
         <input @input="handleImage" type="file" ref="fileInput" class="hidden">
         <div class="relative">
           <div @click="openFileHandler" class="p-1  bg-primary rounded-full absolute bottom-0 ">
@@ -10,46 +10,43 @@
           <img :src="computedProfileImage" class="rounded-full object-contain shadow-xl w-40 h-40" alt="">
         </div>
       </div>
-      <div class="md:col-span-6 col-span-12 ">
+      <div class="md:col-span-4 col-span-12 ">
         <small class="text-gray-500 dark:text-white">نام</small>
         <VInput :dataType="`text`" v-model="userInfo.name" :placeHolder="`example@gmail.com`" class="my-1"></VInput>
       </div>
-      <div class="md:col-span-6 col-span-12 ">
+      <div class="md:col-span-4 col-span-12 ">
         <small class="text-gray-500 dark:text-white">نام خانوادگی</small>
         <VInput :dataType="`text`" v-model="userInfo.familyName" :placeHolder="`example`" class="my-1"></VInput>
       </div>
-      <div class="md:col-span-6 col-span-12 ">
+      <div class="md:col-span-4 col-span-12 ">
         <small class="text-gray-500 dark:text-white">ایمیل</small>
         <VInput :dataType="`text`" v-model="userInfo.email" :placeHolder="`example`" class="my-1"></VInput>
       </div>
-      <div class="md:col-span-6 col-span-12 ">
+      <div class="md:col-span-4 col-span-12 ">
         <small class="text-gray-500 dark:text-white">شناسه tax.gov</small>
         <VInput :dataType="`text`" v-model="userInfo.userName" :placeHolder="`example`" class="my-1"></VInput>
       </div>
-      <div class="col-span-2">
-      <button @click="updateUser" type="button" class="btn border-none bg-primary my-3 text-white">ثبت</button>
+      <div class="col-span-12 grid grid-cols-12">
+        <div class="col-span-12 md:col-span-1">
+          <button @click="updateUser" type="button" class="btn w-full border-none bg-primary my-3 text-white">ثبت</button>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import SideBar from "../../components/main/sideBar.vue";
 import PlusIcon from "../../components/icons/PlusIcon.vue";
 import VInput from "../../components/utilities/VInput.vue";
 import {computed, inject, onMounted, reactive, ref} from "vue";
-import Header from "../../components/main/Header.vue";
-import KuCoinIcon from "../../components/icons/KuCoinIcon.vue";
-import CoinexIcon from "../../components/icons/CoinexIcon.vue";
 import {useAppStore} from "@/stores/app";
-import {useToastStore} from "@/stores/toast";
 import {SignErrors} from "@/models/signErrors";
 import {useAuthStore} from "@/stores/auth";
 import {useRoute} from "vue-router";
+const toast = inject('toast');
 
 const api = inject("repositories")
 const appStore = useAppStore()
-const toastStore = useToastStore()
 const fileInput = ref(null)
 const authStore = useAuthStore()
 const helper = inject('helper')
@@ -94,29 +91,17 @@ async function handleImage() {
 }
 
 async function updateUser() {
-  toastStore.showToast = true
-  toastStore.toastData = {
-    content: 'Information Has Been Updated',
-    variant: 'success',
+  try {
+    appStore.showOverlay = true
+    userInfo.value.selfieFileData = base64Image.value
+    const res = await api.updateUser.setPayload(userInfo.value)
+    toast.success({content:'عملیات انجام شد'});
+    await getUserById()
+  } catch (e) {
+    console.log(e)
+  } finally {
+    appStore.showOverlay = false
   }
-
-  // try {
-  //   appStore.showOverlay = true
-  //   userInfo.value.selfieFileData = base64Image.value
-  //   const res = await api.updateUser.setPayload(userInfo.value)
-  //   toastStore.showToast = true
-  //   toastStore.toastData = {
-  //     title: 'Succeed',
-  //     content: 'Information Has Been Updated',
-  //     icon: 'check'
-  //   }
-  //   await getUserById()
-  // } catch (e) {
-  //   console.log(e)
-  // } finally {
-  //   appStore.showOverlay = false
-  //
-  // }
 }
 </script>
 
