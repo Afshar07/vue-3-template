@@ -63,6 +63,7 @@ import CircleIcon from "@/components/icons/CircleIcon.vue";
 import OrderIcon from "../icons/OrderIcon.vue"
 import UsersIcon from "@/components/icons/UsersIcon.vue";
 import Dropdown from "@/components/utilities/DropDown.vue";
+import ListIcon from "@/components/icons/listIcon.vue";
 
 const props = defineProps({
   item: Object
@@ -73,7 +74,8 @@ const icons = {
   TasksIcon,
   OrderIcon,
   DashboardIcon,
-  UsersIcon
+  UsersIcon,
+  ListIcon
 }
 
 </script>

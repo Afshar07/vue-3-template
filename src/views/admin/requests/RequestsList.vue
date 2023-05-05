@@ -57,8 +57,28 @@
       </div>
     </div>
 
+    <!--  Delete Modal  -->
     <Modal :id="'deleteRequest'" @ok="test" :closeModalTitle="'بستن'" :okModalTitle="'حذف'" :has-body="false"
            :title="'آیا از انجام این عملیات اطمینان دارید؟'"></Modal>
+
+    <!--  Show Modal  -->
+    <Modal :id="'showRequest'" @ok="test" :closeModalTitle="'بستن'" :okModalTitle="'ارسال'"
+           :title="'اطلاعات درخواست'">
+      <template #modalBody>
+        <div class="w-full grid grid-cols-2 p-3">
+          <div class="col-span-2">
+            <label for="" class="text-gray-800 "> : وضعیت</label>
+            <v-select
+                class="w-full mt-2"
+                :options="statusItems"
+                label="name"
+                :reduce="(name) => name.value"
+                :clearable="false">
+            </v-select>
+          </div>
+        </div>
+      </template>
+    </Modal>
   </div>
 </template>
 
@@ -79,10 +99,12 @@ const helper = inject('helper')
 let api = inject('repositories')
 let requests = reactive([])
 let pageCountItems = reactive([
-  {name: '10', value: 10}, {name: '20', value: 20}, {name: '30', value: 30}, {name: '40', value: 40}, {
-    name: '50',
-    value: 50
-  }
+  {name: '10', value: 10}, {name: '20', value: 20}, {name: '30', value: 30}, {name: '40', value: 40}, {name: '50', value: 50}
+])
+let statusItems = reactive([
+  {name: 'انجام شده', value: 1},
+  {name: 'انجام نشده', value: 2},
+  {name: 'درحال بررسی', value: 3},
 ])
 let pageCount = ref(10);
 let searchCommand = '';
