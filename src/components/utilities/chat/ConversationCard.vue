@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="flex flex-col items-start justify-between h-full">
-      <p class="font-semibold">کاربر شماره یک</p>
+      <p class="font-semibold">کاربر</p>
       <p class="text-sm text-gray-700 w-[10rem] max-w-[10rem] truncate">
         لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده
         از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و
