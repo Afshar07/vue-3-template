@@ -3,7 +3,7 @@
     <Overlay></Overlay>
     <Toast></Toast>
 
-    <div v-if="!fullLayout"    :class="{' md:!block md:!relative   hidden ':!sideBarStore.showSideBar}"  class="md:col-span-2 fixed  top-0 left-0 z-10   col-span-12 ">
+    <div v-if="!fullLayout" :class="{' md:!block md:!relative   hidden ':!sideBarStore.showSideBar}"  class="md:col-span-2 fixed  top-0 left-0 z-10   col-span-12 ">
       <side-bar></side-bar>
     </div>
     <div :class="[fullLayout ? '' : 'p-2']" class="md:col-span-10 col-span-12 z-[1]">
@@ -14,7 +14,7 @@
         </transition>
       </router-view>
     </div>
-    <div class="col-span-12 md:hidden block sticky mt-2 bottom-0 left-0 z-50 flex items-end">
+    <div v-if="showBottomNav" class="col-span-12 md:hidden block sticky mt-2 bottom-0 left-0 z-50 flex items-end">
       <BottomNav></BottomNav>
     </div>
   </div>
@@ -30,12 +30,16 @@ import SideBar from "@/components/main/sideBar.vue";
 import {useAppStore} from "@/stores/app";
 import {useSideBarStore} from "@/stores/sideBar";
 import BottomNav from "@/components/main/BottomNav.vue";
-const appStore = useAppStore()
-const sideBarStore = useSideBarStore()
+const appStore = useAppStore();
+const sideBarStore = useSideBarStore();
 const route: any = useRoute();
 let fullLayout = computed(() => {
   return route.name !== undefined
       && route.name === 'index'
+})
+let showBottomNav = computed(()=>{
+  return route.name !== undefined
+      && route.name !== 'index'
 })
 onMounted(() => {
   const body: any = document.querySelector('body')

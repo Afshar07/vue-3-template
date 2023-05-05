@@ -25,7 +25,7 @@ export default {
                 return colors[Math.ceil(Math.random()*6)]
             },
             appName:'داشبورد',
-            baseUrl :'https://api.1minex.com/'
+            baseUrl :'https://api.tambord.com/'
         }
         app.provide('helper', helper)
     }

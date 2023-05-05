@@ -1,11 +1,11 @@
 export interface signDto {
     mobile?: string,
-    mail:string,
+    mail?:string,
     firstName?:  string,
     lastName?: string,
     password: string,
     verifyCode: string,
     encryptedMail?: string,
-    type: 2,
+    type: number,
     userName:string
 }

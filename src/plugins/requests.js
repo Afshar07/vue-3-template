@@ -3,7 +3,7 @@ import {useAuthStore} from "@/stores/auth";
 import {useRouter} from "vue-router";
 import App from "@/App.vue";
 import router from "@/router";
-axios.defaults.baseURL = 'https://api.1minex.com/api/';
+axios.defaults.baseURL = 'https://api.tambord.com/api/';
 axios.interceptors.response.use(
     res => res,
     err => {
