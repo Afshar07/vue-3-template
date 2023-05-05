@@ -5,7 +5,7 @@
         helper.detailedParsedDate(props.createDate)
       }}</time>
     </div>
-    <div class="chat-bubble">{{ props.chatMessage }}</div>
+    <div class="chat-bubble text-sm">{{ props.chatMessage }}</div>
     <div
       v-if="props.chatDirection != 'start'"
       class="chat-footer opacity-50 flex items-center relative mt-1"

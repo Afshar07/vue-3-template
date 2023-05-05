@@ -97,50 +97,50 @@ import ChevronLeft from "@/components/icons/ChevronLeft.vue";
 import ChatBubble from "@/components/utilities/chat/mini/ChatBubble.vue";
 const chatMessages = ref([
   {
-    message: "What kind of nonsense is this",
+    // message: "What kind of nonsense is this",
+    message: "این دیگه چه مزخرفیه",
     createDate: new Date("2023-05-04T17:53:26.000Z"),
     position: "start",
     isRead: null,
     isDelivered: null,
   },
   {
-    message: "Put me on the Council and not make me a Master!??",
+    message: "من رو توی شورا قرار بدید، اما به یه مستر تبدیلم نکنید!؟؟",
     createDate: new Date(Date.now()),
     position: "start",
     isRead: null,
     isDelivered: null,
   },
   {
-    message:
-      "That's never been done in the history of the Jedi. It's insulting!",
+    message: "این قضیه هیچوقت توی تاریخ جدای ها اتفاق نیوفتاده و تحقیر آمیزه!!",
     createDate: new Date(Date.now()),
     position: "start",
     isRead: null,
     isDelivered: null,
   },
   {
-    message: "Calm down, Anakin.",
+    message: "آروم باش، آناکین",
     createDate: new Date(Date.now()),
     position: "end",
     isRead: true,
     isDelivered: true,
   },
   {
-    message: "You have been given a great honor..",
+    message: "تو افتخار بزرگی به دست آوردی...",
     createDate: new Date(Date.now()),
     position: "end",
     isRead: true,
     isDelivered: true,
   },
   {
-    message: "To be on the Council at your age.",
+    message: "در این سن، حزوی از شورا بودن",
     createDate: new Date(Date.now()),
     position: "end",
     isDelivered: true,
     isRead: false,
   },
   {
-    message: "It's never happened before.",
+    message: "تا به حال سابقه نداشته.",
     createDate: new Date(Date.now()),
     position: "end",
     isRead: false,
