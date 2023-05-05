@@ -39,8 +39,13 @@
             </template>
             <template #actions="data">
               <div class="flex justify-center items-center">
-                <i title="حذف" class="ri-delete-bin-line text-xl text-red-500 cursor-pointer"></i>
-                <i title="نمایش" class="ri-file-list-3-line dark:text-white text-sky-500 cursor-pointer text-xl mr-2"></i>
+                <label for="deleteRequest">
+                  <i title="حذف" class="ri-delete-bin-line text-xl text-red-500 cursor-pointer"></i>
+                </label>
+                <label for="showRequest">
+                  <i title="نمایش"
+                     class="ri-file-list-3-line dark:text-white text-sky-500 cursor-pointer text-xl mr-2"></i>
+                </label>
               </div>
             </template>
           </Table>
@@ -51,6 +56,9 @@
                     @PageChanged="changePage($event)"></Pagination>
       </div>
     </div>
+
+    <Modal :id="'deleteRequest'" @ok="test" :closeModalTitle="'بستن'" :okModalTitle="'حذف'" :has-body="false"
+           :title="'آیا از انجام این عملیات اطمینان دارید؟'"></Modal>
   </div>
 </template>
 
@@ -64,6 +72,7 @@ import Table from "@/components/utilities/Table.vue";
 import TrashIcon from "@/components/icons/TrashIcon.vue";
 import EditIcon from "@/components/icons/EditIcon.vue";
 import VInput from "@/components/utilities/VInput.vue";
+import Modal from "@/components/utilities/Modal.vue";
 
 let appStore = useAppStore()
 const helper = inject('helper')
@@ -105,6 +114,10 @@ watch(pageCount, async () => {
 onMounted(() => {
   getAllRequests()
 })
+
+function test() {
+  console.log('Here')
+}
 
 function changePage(id) {
   selectedPageId.value = id
