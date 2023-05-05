@@ -1,13 +1,13 @@
 import {navItems} from "@/models/navigationItems";
 export const sideBarItems:navItems[] = [
-    {
-        title: 'داشبورد',
-        link: '/dashboard',
-        icon: 'DashboardIcon',
-        hasChildren: false,
-        hasAccess: true,
-        children: []
-    },
+        // {
+        //     title: 'داشبورد',
+        //     link: '/dashboard',
+        //     icon: 'DashboardIcon',
+        //     hasChildren: false,
+        //     hasAccess: true,
+        //     children: []
+        // },
     {
         title: 'گزارشات',
         link: '/reports',
