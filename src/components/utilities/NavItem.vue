@@ -19,6 +19,7 @@ import ServicesIcon from "@/components/icons/ServicesIcon.vue";
 import ReportsIcon from "@/components/icons/ReportsIcon.vue";
 import ChatIcon from "@/components/icons/ChatIcon.vue";
 import VIPIcon from "@/components/icons/VIPIcon.vue";
+import ListIcon from "@/components/icons/listIcon.vue";
 const props = defineProps({
   item: Object
 })
@@ -28,7 +29,8 @@ const icons = {
   ServicesIcon,
   ReportsIcon,
   ChatIcon,
-  VIPIcon
+  VIPIcon,
+  ListIcon,
 }
 
 

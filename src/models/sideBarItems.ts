@@ -68,20 +68,34 @@ export const sideBarItems:navItems[] = [
     //         },
     //     ]
     // },
-    // {
-    //     title: 'Users',
-    //     link: '',
-    //     icon: 'UsersIcon',
-    //     hasChildren: true,
-    //     hasAccess: true,
-    //     children: [
-    //         {
-    //             title: 'All Users',
-    //             link: '/dashboard/users/AllUsers',
-    //             hasAccess: true,
-    //         },
-    //     ]
-    // },
+    {
+        title: 'کاربران',
+        link: '',
+        icon: 'UsersIcon',
+        hasChildren: true,
+        hasAccess: true,
+        children: [
+            {
+                title: 'لیست',
+                link: '/dashboard/users/AllUsers',
+                hasAccess: true,
+            },
+        ]
+    },
+    {
+        title: 'درخواست ها',
+        link: '',
+        icon: 'ListIcon',
+        hasChildren: true,
+        hasAccess: true,
+        children: [
+            {
+                title: 'لیست',
+                link: '/requests/list',
+                hasAccess: true,
+            },
+        ]
+    },
     // {
     //     title: 'Orders',
     //     link: '',

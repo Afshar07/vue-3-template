@@ -31,9 +31,8 @@
            </template>
            <template #actions="data">
              <div class="flex justify-center items-center">
-<!--              <TrashIcon class="fill-red-500 cursor-pointer"></TrashIcon>-->
               <router-link :to="{ name: 'user-edit', params: { id: data.items.userId } }">
-                <EditIcon title="ویرایش" class="dark:fill-white fill-sky-500 cursor-pointer"></EditIcon>
+                <i title="ویرایش" class="ri-pencil-line dark:text-white text-sky-500 cursor-pointer text-xl"></i>
               </router-link>
              </div>
            </template>

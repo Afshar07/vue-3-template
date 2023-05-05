@@ -12,23 +12,23 @@
       </div>
       <div class="md:col-span-4 col-span-12 ">
         <small class="text-gray-500 dark:text-white">نام</small>
-        <VInput :dataType="`text`" v-model="userInfo.name" :placeHolder="`example@gmail.com`" class="my-1"></VInput>
+        <VInput :dataType="`text`" v-model="userInfo.name" class="my-1"></VInput>
       </div>
       <div class="md:col-span-4 col-span-12 ">
         <small class="text-gray-500 dark:text-white">نام خانوادگی</small>
-        <VInput :dataType="`text`" v-model="userInfo.familyName" :placeHolder="`example`" class="my-1"></VInput>
+        <VInput :dataType="`text`" v-model="userInfo.familyName"  class="my-1"></VInput>
       </div>
       <div class="md:col-span-4 col-span-12 ">
-        <small class="text-gray-500 dark:text-white">ایمیل</small>
-        <VInput :dataType="`text`" v-model="userInfo.email" :placeHolder="`example`" class="my-1"></VInput>
+        <small class="text-gray-500 dark:text-white">نام کاربری</small>
+        <VInput :dataType="`text`" v-model="userInfo.userName"  class="my-1"></VInput>
       </div>
       <div class="md:col-span-4 col-span-12 ">
-        <small class="text-gray-500 dark:text-white">شناسه tax.gov</small>
-        <VInput :dataType="`text`" v-model="userInfo.userName" :placeHolder="`example`" class="my-1"></VInput>
+        <small class="text-gray-500 dark:text-white">موبایل</small>
+        <VInput :dataType="`text`" v-model="userInfo.mobile"  class="my-1"></VInput>
       </div>
       <div class="col-span-12 grid grid-cols-12">
         <div class="col-span-12 md:col-span-1">
-          <button @click="updateUser" type="button" class="btn w-full border-none bg-primary my-3 text-white">ثبت</button>
+          <button @click="updateUser" type="button" class="btn w-full border-none bg-primary my-3 text-white">ثبت ویرایش</button>
         </div>
       </div>
     </div>
