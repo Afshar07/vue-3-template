@@ -27,12 +27,7 @@
 
 <script setup lang="ts">
 import {computed, onMounted, reactive, ref, watch , inject} from "vue";
-import KeyIcon from "../icons/KeyIcon.vue";
-import TasksIcon from "../icons/TasksIcon.vue";
 import {useSideBarStore} from "@/stores/sideBar";
-import CircleIcon from "@/components/icons/CircleIcon.vue";
-import UserIcon from "@/components/icons/UserIcon.vue";
-import type {navItems} from "@/models/navigationItems";
 import NavItemCollapse from "@/components/utilities/NavItemCollapse.vue";
 import NavItem from "@/components/utilities/NavItem.vue";
 import DoorIcon from "@/components/icons/DoorIcon.vue";

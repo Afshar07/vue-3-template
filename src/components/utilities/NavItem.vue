@@ -13,22 +13,22 @@
 </template>
 
 <script setup>
-import KeyIcon from "@/components/icons/KeyIcon.vue";
-// import CircleIcon from "@/components/icons/CircleIcon.vue";
 import UserIcon from "@/components/icons/UserIcon.vue";
-import TasksIcon from "@/components/icons/TasksIcon.vue";
 import DashboardIcon from "@/components/icons/DashboardIcon.vue";
-
-import CircleIcon from "@/components/icons/CircleIcon.vue";
-
+import ServicesIcon from "@/components/icons/ServicesIcon.vue";
+import ReportsIcon from "@/components/icons/ReportsIcon.vue";
+import ChatIcon from "@/components/icons/ChatIcon.vue";
+import VIPIcon from "@/components/icons/VIPIcon.vue";
 const props = defineProps({
   item: Object
 })
 const icons = {
-  KeyIcon,
   UserIcon,
-  TasksIcon,
-  DashboardIcon
+  DashboardIcon,
+  ServicesIcon,
+  ReportsIcon,
+  ChatIcon,
+  VIPIcon
 }
 
 
