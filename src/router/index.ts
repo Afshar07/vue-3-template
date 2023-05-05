@@ -35,7 +35,7 @@ const router = createRouter({
     {
       path: "/dashboard/users/AllUsers",
       name: "AllUsers",
-      component: () => import("../views/user/AllUsers.vue"),
+      component: () => import("../views/admin/user/AllUsers.vue"),
       meta: {
         auth: true,
         title: "داشبورد | لیست کاربران",
@@ -44,10 +44,19 @@ const router = createRouter({
     {
       path: "/user/edit/:id",
       name: "user-edit",
-      component: () => import("../views/user/editProfile.vue"),
+      component: () => import("../views/admin/user/editProfile.vue"),
       meta: {
         auth: true,
         title: "داشبورد | حساب کاربری ",
+      },
+    },
+    {
+      path: "/requests/list",
+      name: "requests-list",
+      component: () => import("../views/admin/requests/RequestsList.vue"),
+      meta: {
+        auth: true,
+        title: "داشبورد | لیست درخواست ها",
       },
     },
     {
