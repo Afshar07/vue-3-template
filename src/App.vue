@@ -4,33 +4,31 @@
   >
     <Overlay></Overlay>
     <Toast></Toast>
-    <div class="col-span-12">
-      <div
-        v-if="!fullLayout"
-        :class="{
-          ' md:!block md:!relative   hidden ': !sideBarStore.showSideBar,
-        }"
-        class="md:col-span-2 fixed top-0 left-0 z-10 col-span-12"
-      >
-        <side-bar></side-bar>
-      </div>
-      <div
-        :class="[fullLayout ? '' : 'p-2']"
-        class="md:col-span-10 col-span-12 z-[1] h-full"
-      >
-        <Header v-if="!fullLayout"></Header>
-        <router-view v-slot="{ Component }">
-          <transition name="fade" mode="out-in">
-            <component :is="Component" />
-          </transition>
-        </router-view>
-      </div>
-      <div
-        v-if="showBottomNav"
-        class="col-span-12 md:hidden block sticky mt-2 bottom-0 left-0 z-50 flex items-end h-1"
-      >
-        <BottomNav></BottomNav>
-      </div>
+    <div
+      v-if="!fullLayout"
+      :class="{
+        ' md:!block md:!relative   hidden ': !sideBarStore.showSideBar,
+      }"
+      class="md:col-span-2 fixed top-0 left-0 z-10 col-span-12"
+    >
+      <side-bar></side-bar>
+    </div>
+    <div
+      :class="[fullLayout ? '' : 'p-2']"
+      class="md:col-span-10 col-span-12 z-[1] h-full"
+    >
+      <Header v-if="!fullLayout"></Header>
+      <router-view v-slot="{ Component }">
+        <transition name="fade" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
+    </div>
+    <div
+      v-if="showBottomNav"
+      class="col-span-12 md:hidden block sticky mt-2 bottom-0 left-0 z-50 flex items-end h-1"
+    >
+      <BottomNav></BottomNav>
     </div>
   </div>
 </template>
@@ -56,7 +54,7 @@ let fullLayout = computed(() => {
 });
 let showBottomNav = computed(() => {
   return (
-    (route.name !== undefined && route.name === "index") ||
+    (route.name !== undefined && route.name !== "index") ||
     route.name !== "conversation"
   );
 });
