@@ -45,7 +45,7 @@
                   :placeHolder="'ایمیل'"></VInput>
         </div>
         <div>
-          <VInput v-model="loginData.password" :placeHolder="'Password'" :dataType="'password'"></VInput>
+          <VInput v-model="loginData.password" :placeHolder="'رمز عبور'" :dataType="'password'"></VInput>
         </div>
       </div>
       <div class="flex items-center justify-center">
