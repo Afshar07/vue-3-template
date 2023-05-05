@@ -114,14 +114,14 @@ const router = createRouter({
       },
     },
     {
-        path: "/chat/:username",
-        name: "conversation",
-        component: () => import("../views/chat/SingleChat.vue"),
-        meta: {
-          auth: true,
-          title: "داشبورد | چت با کاربر",
-        },
+      path: "/chat/:username",
+      name: "conversation",
+      component: () => import("../views/chat/SingleChat.vue"),
+      meta: {
+        auth: true,
+        title: "داشبورد | چت با کاربر",
       },
+    },
     {
       path: "/vipService",
       name: "vipService",

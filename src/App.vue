@@ -54,13 +54,13 @@ let fullLayout = computed(() => {
 });
 let showBottomNav = computed(() => {
   return (
-    (route.name !== undefined && route.name !== "index") ||
+    route.name !== undefined &&
+    route.name !== "index" &&
     route.name !== "conversation"
   );
 });
 onMounted(() => {
   const body: any = document.querySelector("body");
-
   // Set theme
   if (appStore.getSiteTheme) {
     body.classList.add("dark");
