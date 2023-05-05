@@ -55,7 +55,10 @@ let fullLayout = computed(() => {
   );
 });
 let showBottomNav = computed(() => {
-  return route.name !== undefined && route.name !== "index";
+  return (
+    (route.name !== undefined && route.name === "index") ||
+    route.name !== "conversation"
+  );
 });
 onMounted(() => {
   const body: any = document.querySelector("body");
