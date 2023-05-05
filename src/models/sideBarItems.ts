@@ -1,17 +1,17 @@
 import {navItems} from "@/models/navigationItems";
 export const sideBarItems:navItems[] = [
-    {
-        title: 'داشبورد',
-        link: '/dashboard',
-        icon: 'DashboardIcon',
-        hasChildren: false,
-        hasAccess: true,
-        children: []
-    },
+        // {
+        //     title: 'داشبورد',
+        //     link: '/dashboard',
+        //     icon: 'DashboardIcon',
+        //     hasChildren: false,
+        //     hasAccess: true,
+        //     children: []
+        // },
     {
         title: 'گزارشات',
         link: '/reports',
-        icon: 'DashboardIcon',
+        icon: 'ReportsIcon',
         hasChildren: false,
         hasAccess: true,
         children: []
@@ -19,7 +19,7 @@ export const sideBarItems:navItems[] = [
     {
         title: 'خدمات',
         link: '/services',
-        icon: 'DashboardIcon',
+        icon: 'ServicesIcon',
         hasChildren: false,
         hasAccess: true,
         children: []
@@ -27,7 +27,7 @@ export const sideBarItems:navItems[] = [
     {
         title: 'چت',
         link: '/chat',
-        icon: 'DashboardIcon',
+        icon: 'ChatIcon',
         hasChildren: false,
         hasAccess: true,
         children: []
@@ -35,7 +35,7 @@ export const sideBarItems:navItems[] = [
     {
         title: 'VIP',
         link: '/vipService',
-        icon: 'DashboardIcon',
+        icon: 'VIPIcon',
         hasChildren: false,
         hasAccess: true,
         children: []
