@@ -23,16 +23,15 @@ const router = createRouter({
         title: "داشبورد | داشبورد",
       },
     },
-    {
-      path: "/user/profile",
-      name: "profile",
-      component: () => import("../views/user/editProfile.vue"),
-      meta: {
-        auth: true,
-        title: "داشبورد | حساب کاربری ",
-      },
-    },
-
+    // {
+    //   path: "/user/profile",
+    //   name: "profile",
+    //   component: () => import("../views/user/editProfile.vue"),
+    //   meta: {
+    //     auth: true,
+    //     title: "داشبورد | حساب کاربری ",
+    //   },
+    // },
     {
       path: "/dashboard/users/AllUsers",
       name: "AllUsers",
@@ -40,6 +39,15 @@ const router = createRouter({
       meta: {
         auth: true,
         title: "داشبورد | لیست کاربران",
+      },
+    },
+    {
+      path: "/user/edit/:id",
+      name: "user-edit",
+      component: () => import("../views/user/editProfile.vue"),
+      meta: {
+        auth: true,
+        title: "داشبورد | حساب کاربری ",
       },
     },
     {

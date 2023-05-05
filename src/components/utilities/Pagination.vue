@@ -17,7 +17,7 @@
         class="text-black border-none text-black rounded-full w-10 h-10 mx-2 "
         :class="
         props.activePage === 1
-          ? 'bg-stone-400 text-black border-none text-black rounded-full w-10 h-10 mx-2'
+          ? 'bg-primary text-black border-none text-black rounded-full w-10 h-10 mx-2'
           : 'bg-stone-200'
       "
     >
@@ -35,7 +35,7 @@
         :key="i"
         :class="
         props.activePage === i
-          ? 'bg-stone-400 p-2 rounded-full text-white cursor-pointer'
+          ? 'bg-primary p-2 rounded-full text-white cursor-pointer'
           : 'bg-stone-200'
       "
         @click="setNewPage(i)"
@@ -44,7 +44,7 @@
     </button>
     <span
         v-if="props.totalPages.length > 3 && props.activePage < props.totalPages.length - 3"
-        class="m-3 w-9 h-9 cursor-text"
+        class="m-3 w-8 h-8 cursor-text"
     >
       ...
     </span>
@@ -54,7 +54,7 @@
         class="text-black border-none text-black rounded-full w-8 h-8 mx-2"
         :class="
         props.activePage === props.totalPages.length
-          ? 'bg-stone-400 p-2 rounded-full text-white cursor-pointer'
+          ? 'bg-primary rounded-full text-white cursor-pointer'
           : 'bg-stone-200'
       "
     >
