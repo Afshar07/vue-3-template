@@ -12,9 +12,9 @@
              <span >{{ data.items.userId }}</span>
            </template>
            <template #actions="data">
-             <div class="flex items-center  space-x-2">
-              <TrashIcon class="fill-red-500 cursor-pointer  "></TrashIcon>
-             <EditIcon class="dark:fill-white fill-sky-500 cursor-pointer  "></EditIcon>
+             <div class="flex justify-center items-center">
+              <TrashIcon class="fill-red-500 cursor-pointer"></TrashIcon>
+              <EditIcon class="dark:fill-white fill-sky-500 cursor-pointer"></EditIcon>
              </div>
            </template>
          </Table>
@@ -45,27 +45,27 @@ let user = reactive({
 let userFields = ref([
   {
     key:'userId',
-    label: 'user Id'
+    label: 'شناسه کاربر'
   },
   {
     key:'name',
-    label: 'name'
+    label: 'نام'
   },
   {
     key:'familyName',
-    label: 'family Name'
+    label: 'نام خانوادگی'
   },
   {
     key:'userName',
-    label: 'username'
+    label: 'نام کاربری'
   },
   {
-    key:'email',
-    label: 'Email'
+    key:'mobile',
+    label: 'موبایل'
   },
   {
     key:'actions',
-    label: 'operations'
+    label: 'عملیات'
   },
 ])
 let selectedPageId = ref(1)

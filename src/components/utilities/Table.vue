@@ -1,40 +1,23 @@
 <template>
     <table class="w-full">
       <!-- head -->
-      <thead class="bg-gray-200 h-[3.5rem] ">
-      <tr >
-        <th v-for="(item,idx) in props.fields" :key="idx">{{ item['label'] }}</th>
+      <thead class="bg-gray-600 text-white h-[3.5rem] text-xs md:text-base">
+      <tr>
+        <th class="min-w-[5rem]" v-for="(item,idx) in props.fields" :key="idx">{{ item['label'] }}</th>
       </tr>
       </thead>
-      <tbody>
+      <tbody class="text-xs md:text-base">
       <!-- row 1 -->
-      <tr   v-for="(row,idx) in props.items" :key="idx" :class="computedColors(+idx)">
+      <tr v-for="(row,idx) in props.items" :key="idx" :class="computedColors(+idx)">
         <td v-for="(td,idx) in props.fields" :key="idx">
           <slot :items="row" :name="td?.key">
-            <span>{{ row[td?.key] }}</span>
+            <span v-if="row[td?.key]">{{ row[td?.key] }}</span>
+            <span v-else>-</span>
           </slot>
         </td>
-        <!--      <td >-->
-        <!--        <div class="flex items-center gap-2">-->
-        <!--          <img v-if="item['selfieFileData']!== ''" :src="helper.baseUrl + item['selfieFileData']" class="object-cover w-8 h-8 rounded-full" alt="">-->
-        <!--          <img v-else src="../../assets/image/no_image.png" class="object-cover w-8 h-8 rounded-full" alt="">-->
-        <!--          <small>{{item.name}}</small>-->
-        <!--        </div>-->
-        <!--      </td>-->
-        <!--      <td>-->
-        <!--        <small>{{item.familyName}}</small>-->
-        <!--      </td>-->
-        <!--      <td>-->
-        <!--        <small>{{ item.userName }}</small>-->
-        <!--      </td>-->
-        <!--      <td>-->
-        <!--        <small>{{ item.email }}</small>-->
-        <!--      </td>-->
-
       </tr>
       </tbody>
     </table>
-
 </template>
 
 <script setup lang="ts">
@@ -48,9 +31,9 @@ const props = defineProps({
 
 function  computedColors(idx:number){
   if(idx%2===0){
-    return '!bg-white  dark:!bg-gray-800 '
+    return '!bg-white  dark:!bg-gray-800'
   }else{
-    return '!bg-gray-100 dark:!bg-gray-700  '
+    return '!bg-gray-100 dark:!bg-gray-700'
   }
 
 }

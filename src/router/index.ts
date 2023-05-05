@@ -39,7 +39,7 @@ const router = createRouter({
             component: () => import('../views/user/AllUsers.vue'),
             meta: {
                 auth: true,
-                title: 'داشبورد | کاربران'
+                title: 'داشبورد | لیست کاربران'
             }
         },
         {
