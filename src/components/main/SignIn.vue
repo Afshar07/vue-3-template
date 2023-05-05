@@ -21,29 +21,31 @@
       به داشبورد {{ appName }} خوش آمدید
     </h1>
     <div class="w-full h-10 flex flex-row justify-between items-center">
-      <div class="w-full h-full rounded-xl bg-violet mx-2"></div>
-      <span>|</span>
-      <div class="w-full h-full rounded-xl bg-violet mx-2"></div>
+      <div @click="changeDTOtype(1)" :class="[loginData.type === 1 ? 'bg-violet' : 'bg-gray-600']" class="w-full h-full rounded-lg flex flex-row justify-center items-center transition-all cursor-pointer">
+        <span class="text-white">موبایل</span>
+      </div>
+      <span class="h-full w-[1px] border border-gray-200 mx-4"></span>
+      <div @click="changeDTOtype(2)" :class="[loginData.type === 2 ? 'bg-violet' : 'bg-gray-600']" class="w-full h-full rounded-lg flex flex-row justify-center items-center transition-all cursor-pointer">
+        <span class="text-white">ایمیل</span>
+      </div>
     </div>
     <form class="space-y-6" action="/" @submit.prevent method="POST">
       <input type="hidden" name="remember" value="true">
       <div class="space-y-4 rounded-md shadow-sm">
         <div>
-          <VInput v-model="loginData.mail" :dataType="'text'"
+          <VInput v-if="loginData.type === 1" v-model="loginData.mobile" :dataType="'text'"
+                  :error="mobileNotValid"
+                  :errorMessage="'شماره تلفن وارد شده معتبر نیست'"
+                  :placeHolder="'موبایل'"></VInput>
+          <VInput v-else-if="loginData.type === 2" v-model="loginData.mail" :dataType="'email'"
                   :error="emailNotValid"
                   :errorMessage="'ایمیل وارد شده معتبر نیست'"
-                  :placeHolder="'Email'"></VInput>
+                  :placeHolder="'ایمیل'"></VInput>
         </div>
         <div>
           <VInput v-model="loginData.password" :placeHolder="'Password'" :dataType="'password'"></VInput>
         </div>
       </div>
-      <!--      <div class="flex items-center justify-center">-->
-      <!--        <div class="text-sm">-->
-      <!--          <span class=" text-center dark:text-white text-xs  font-bold tracking-tight cursor-pointer ">New To Trader ?</span>-->
-      <!--          <span @click="changeActiveComponent" class=" text-center dark:text-white  text-xs font-bold tracking-tight cursor-pointer !text-primary">Register</span>-->
-      <!--        </div>-->
-      <!--      </div>-->
       <div class="flex items-center justify-center">
         <div class="text-sm">
           <span class=" text-center dark:text-white text-xs text-white  font-bold tracking-tight cursor-pointer ">رمز عبور خود را فراموش کرده اید؟</span>
@@ -58,7 +60,7 @@
         <button @click="login" type="submit"
                 class="group bg-violet relative flex w-full justify-center rounded-md  py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
           <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-            <LockIcon v-if="emailNotValid !==false" class="fill-white"></LockIcon>
+<!--            <LockIcon v-if="emailNotValid !==false" class="fill-white"></LockIcon>-->
           </span>
           ورود
         </button>
@@ -98,32 +100,80 @@ let loginData = reactive<signDto>({
   password: '',
   verifyCode: '',
   encryptedMail: "string",
-  type: 2,
+  type: 1,
   userName: ''
 })
 const emailNotValid: any = computed(() => {
   let resolve = null
-  if (loginData.mail === '') {
-    resolve = null
-  } else if (loginData.mail.includes('@')) {
-    resolve = false
-  } else if (!loginData.mail.includes('@')) {
-    resolve = true
+  if (loginData.mail !== undefined){
+    if (loginData.mail === '') {
+      resolve = null
+    } else if (loginData.mail.includes('@')) {
+      resolve = false
+    } else if (!loginData.mail.includes('@')) {
+      resolve = true
+    }
   }
   return resolve
 })
+const mobileNotValid: any = computed( () =>{
+  let resolve = null;
+  if (loginData.mobile !== undefined && loginData.type === 1){
+    if (loginData.mobile === '') {
+      resolve = null;
+    } else if (loginData.mobile.length < 11){
+      resolve = true;
+    }
+    return resolve
+  }
+})
+
+function changeDTOtype(t:number){
+  switch (t){
+    case 1 : loginData.type = 1
+          break;
+    case 2 : loginData.type = 2
+          break
+  }
+}
+async function login() {
+  if (loginData.type === 2 && emailNotValid.value === true) {
+    return toast.error({content:'ایمیل وارد شده معتبر نیست'})
+  }
+  if (loginData.type === 1 && mobileNotValid.value === true) {
+    return toast.error({content:'شماره تلفن وارد شده معتبر نیست'})
+  }
+  try {
+    appStore.showOverlay = true
+    const res = await api.signIn.setPayload(loginData)
+    if (res.data.data.data === "") {
+      errorHandler(res.data.data.status)
+    } else {
+      if (res.data.status === 7){
+        authStore.setUser(res.data.data);
+        await router.push('/dashBoard')
+      }else {
+        return errorHandler(res.data.status);
+      }
+    }
+  } catch (e) {
+    console.log(e)
+  } finally {
+    appStore.showOverlay = false
+  }
+  appStore.showOverlay = false
+}
 
 async function forgetPassword() {
-  if (emailNotValid.value === false) {
+  if (mobileNotValid.value === false) {
     try {
       appStore.showOverlay = true
       const res = await api.forgetPassword.setParams({
-        type: 2,
-        PhoneOrEmail: loginData.mail
+        type: 1,
+        PhoneOrEmail: loginData.mobile
       })
       if (res.data.data.status === 7) {
-        toast.success({content:'Your Password Has Been Sent To Your Email'})
-
+        toast.success({content:'پسوورد شما به شماره موبایل شما ارسال شد'})
       } else {
         errorHandler(res.data.data.status)
       }
@@ -132,37 +182,10 @@ async function forgetPassword() {
       console.log(e)
     } finally {
       appStore.showOverlay = false
-
     }
   } else {
-    toast.error({content:'Email is not valid'})
+    toast.error({content:'شماره تلفن وارد شده معتبر نیست'})
   }
-}
-
-async function login() {
-  if (emailNotValid.value === false) {
-    try {
-      appStore.showOverlay = true
-      const res = await api.signIn.setPayload(loginData)
-      if (res.data.data.data === "") {
-        errorHandler(res.data.data.status)
-      } else {
-        if (res.data.status === 7){
-          authStore.setUser(res.data.data);
-          await router.push('/dashBoard')
-        }else {
-          return errorHandler(res.data.status);
-        }
-      }
-    } catch (e) {
-      console.log(e)
-    } finally {
-      appStore.showOverlay = false
-    }
-  } else {
-    toast.error({content:'Email  is not valid'})
-  }
-  appStore.showOverlay = false
 }
 
 const emits = defineEmits(['changeActiveSlug'])
