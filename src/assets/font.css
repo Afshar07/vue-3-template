@@ -1,14 +1,24 @@
 /* Font Family Region */
 @font-face {
-    font-family: PELAK-Economic;
-    font-style: normal;
-    font-weight: normal;
-    src: url("fonts/PELAK-Economic/Pelak FontFamily/webfonts/eot/Pelak-light.eot") format("eot"), url("fonts/PELAK-Economic/Pelak FontFamily/webfonts/woff/Pelak-light.woff") format("woff"), url("fonts/PELAK-Economic/Pelak FontFamily/webfonts/woff2/Pelak-light.woff2") format("woff2");
+  font-family: PELAK-Economic;
+  font-style: normal;
+  font-weight: normal;
+  src: url("fonts/PELAK-Economic/Pelak FontFamily/webfonts/eot/Pelak-light.eot")
+      format("eot"),
+    url("fonts/PELAK-Economic/Pelak FontFamily/webfonts/woff/Pelak-light.woff")
+      format("woff"),
+    url("fonts/PELAK-Economic/Pelak FontFamily/webfonts/woff2/Pelak-light.woff2")
+      format("woff2");
 }
 @font-face {
-    font-family: PELAK-Economic;
-    font-style: normal;
-    font-weight: bold;
-    src: url("fonts/PELAK-Economic/Pelak FontFamily/webfonts/eot/Pelak-bold.eot") format("eot"), url("fonts/PELAK-Economic/Pelak FontFamily/webfonts/woff/Pelak-bold.woff") format("woff"), url("fonts/PELAK-Economic/Pelak FontFamily/webfonts/woff2/Pelak-bold.woff2") format("woff2");
+  font-family: PELAK-Economic;
+  font-style: normal;
+  font-weight: bold;
+  src: url("fonts/PELAK-Economic/Pelak FontFamily/webfonts/eot/Pelak-Bold.eot")
+      format("eot"),
+    url("fonts/PELAK-Economic/Pelak FontFamily/webfonts/woff/Pelak-bold.woff")
+      format("woff"),
+    url("fonts/PELAK-Economic/Pelak FontFamily/webfonts/woff2/Pelak-bold.woff2")
+      format("woff2");
 }
 /* Font Family Region End */
