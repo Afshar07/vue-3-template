@@ -62,7 +62,7 @@
         <button @click="login" type="submit"
                 class="group bg-violet relative flex w-full justify-center rounded-md  py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
           <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-<!--            <LockIcon v-if="emailNotValid !==false" class="fill-white"></LockIcon>-->
+            <LockIcon v-if="loginData.type === 1 && mobileNotValid !== false || loginData.type === 2 && emailNotValid !== false" class="fill-white"></LockIcon>
           </span>
           ورود
         </button>
@@ -105,6 +105,15 @@ let loginData = reactive<signDto>({
   type: 1,
   userName: ''
 })
+const mobileNotValid: any = computed( () =>{
+  let resolve = null;
+  if (loginData.mobile !== undefined){
+    if (loginData.mobile === '') {
+      resolve = null;
+    } else resolve = loginData.mobile.length < 11;
+    return resolve
+  }
+})
 const emailNotValid: any = computed(() => {
   let resolve = null
   if (loginData.mail !== undefined){
@@ -117,17 +126,6 @@ const emailNotValid: any = computed(() => {
     }
   }
   return resolve
-})
-const mobileNotValid: any = computed( () =>{
-  let resolve = null;
-  if (loginData.mobile !== undefined && loginData.type === 1){
-    if (loginData.mobile === '') {
-      resolve = null;
-    } else if (loginData.mobile.length < 11){
-      resolve = true;
-    }
-    return resolve
-  }
 })
 
 function changeDTOtype(t:number){
