@@ -10,7 +10,7 @@ const router = createRouter({
             path: '/',
             name: 'index',
             meta: {
-                title: 'Dashboard | Login'
+                title: 'داشبورد | ورود'
             },
             component: () => import('../views/index.vue')
         },
@@ -20,7 +20,7 @@ const router = createRouter({
             component: () => import('../views/dashboard.vue'),
             meta: {
                 auth: true,
-                title: 'Dashboard | Dashboard'
+                title: 'داشبورد | داشبورد'
             }
         },
         {
@@ -29,7 +29,7 @@ const router = createRouter({
             component: () => import('../views/user/editProfile.vue'),
             meta: {
                 auth: true,
-                title: 'Dashboard | My Account'
+                title: 'داشبورد | حساب کاربری '
             }
         },
 
@@ -39,16 +39,7 @@ const router = createRouter({
             component: () => import('../views/user/AllUsers.vue'),
             meta: {
                 auth: true,
-                title: 'Dashboard | All Users'
-            }
-        },
-        {
-            path: '/user/apiKeys',
-            name: 'apiKeys',
-            component: () => import('../views/user/apiKeys.vue'),
-            meta: {
-                auth: true,
-                title: 'Dashboard | api Keys'
+                title: 'داشبورد | کاربران'
             }
         },
         {
@@ -57,7 +48,16 @@ const router = createRouter({
             component: () => import('../views/test.vue'),
             meta: {
                 auth: true,
-                title: 'Dashboard | test'
+                title: 'داشبورد | تست'
+            }
+        },
+        {
+            path: '/reports',
+            name: 'reports',
+            component: () => import('../views/reports/index.vue'),
+            meta: {
+                auth: true,
+                title: 'داشبورد | گزارشات'
             }
         },
     ]

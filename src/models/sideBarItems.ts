@@ -1,7 +1,7 @@
 import {navItems} from "@/models/navigationItems";
 export const sideBarItems:navItems[] = [
     {
-        title: 'DashBoard',
+        title: 'داشبورد',
         link: '/dashboard',
         icon: 'DashboardIcon',
         hasChildren: false,
@@ -9,60 +9,92 @@ export const sideBarItems:navItems[] = [
         children: []
     },
     {
-        title: 'Profile',
-        link: '',
-        icon: 'UserIcon',
-        hasChildren: true,
+        title: 'گزارشات',
+        link: '/reports',
+        icon: 'DashboardIcon',
+        hasChildren: false,
         hasAccess: true,
-        children: [
-            {
-                title: 'edit Profile',
-                link: '/user/profile',
-                hasAccess: true,
-            },
-            {
-                title: 'Api Keys',
-                link: '/user/apiKeys',
-                hasAccess: true,
-            },
-        ]
+        children: []
     },
     {
-        title: 'Users',
-        link: '',
-        icon: 'UsersIcon',
-        hasChildren: true,
+        title: 'خدمات',
+        link: '/services',
+        icon: 'DashboardIcon',
+        hasChildren: false,
         hasAccess: true,
-        children: [
-            {
-                title: 'All Users',
-                link: '/dashboard/users/AllUsers',
-                hasAccess: true,
-            },
-        ]
+        children: []
     },
     {
-        title: 'Orders',
-        link: '',
-        icon: 'OrderIcon',
-        hasChildren: true,
+        title: 'چت',
+        link: '/chat',
+        icon: 'DashboardIcon',
+        hasChildren: false,
         hasAccess: true,
-        children: [
-            {
-                title: 'All Orders',
-                link: '/dashboard/AllOrders',
-                hasAccess: true,
-            },
-            {
-                title: 'My Orders',
-                link: '/dashboard/MyOrders',
-                hasAccess: true,
-            },
-            {
-                title: 'Create Order',
-                link: '/dashboard/CreateOrder',
-                hasAccess: true,
-            },
-        ]
+        children: []
     },
+    {
+        title: 'VIP',
+        link: '/vipService',
+        icon: 'DashboardIcon',
+        hasChildren: false,
+        hasAccess: true,
+        children: []
+    },
+    // {
+    //     title: 'Profile',
+    //     link: '',
+    //     icon: 'UserIcon',
+    //     hasChildren: true,
+    //     hasAccess: true,
+    //     children: [
+    //         {
+    //             title: 'edit Profile',
+    //             link: '/user/profile',
+    //             hasAccess: true,
+    //         },
+    //         {
+    //             title: 'Api Keys',
+    //             link: '/user/apiKeys',
+    //             hasAccess: true,
+    //         },
+    //     ]
+    // },
+    // {
+    //     title: 'Users',
+    //     link: '',
+    //     icon: 'UsersIcon',
+    //     hasChildren: true,
+    //     hasAccess: true,
+    //     children: [
+    //         {
+    //             title: 'All Users',
+    //             link: '/dashboard/users/AllUsers',
+    //             hasAccess: true,
+    //         },
+    //     ]
+    // },
+    // {
+    //     title: 'Orders',
+    //     link: '',
+    //     icon: 'OrderIcon',
+    //     hasChildren: true,
+    //     hasAccess: true,
+    //     children: [
+    //         {
+    //             title: 'All Orders',
+    //             link: '/dashboard/AllOrders',
+    //             hasAccess: true,
+    //         },
+    //         {
+    //             title: 'My Orders',
+    //             link: '/dashboard/MyOrders',
+    //             hasAccess: true,
+    //         },
+    //         {
+    //             title: 'Create Order',
+    //             link: '/dashboard/CreateOrder',
+    //             hasAccess: true,
+    //         },
+    //     ]
+    // },
 ]

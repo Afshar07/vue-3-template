@@ -6,7 +6,7 @@ export const useAppStore = defineStore('app', {
     state: () => ({
         theme: true,
         showOverlay: false,
-        isRTL:false,
+        isRTL:true,
     }),
     getters: {
         getSiteTheme(): Boolean {

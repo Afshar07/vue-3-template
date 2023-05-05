@@ -1,14 +1,16 @@
 <template>
-  <div class="col-span-12 md:col-span-5 xl:col-span-3 bg-dark-muted p-10 space-y-8 flex flex-col justify-center">
-    <Modal :id="'optionsModal'" @ok="forgetPassword" :closeModalTitle="'Close'" :okModalTitle="'Send'"
-           :title="'Forgot Password'">
+  <div class="col-span-12 md:col-span-5 xl:col-span-4 bg-dark-muted p-10 space-y-8 flex flex-col justify-center">
+    <Modal :id="'optionsModal'" @ok="forgetPassword" :closeModalTitle="'بستن'" :okModalTitle="'ارسال'"
+           :title="'فراموشی رمز عبور'">
       <template #modalBody>
         <div class="w-full p-3">
           <div>
-            <label for="email-address" class=" text-black dark:text-white">Enter Your Account Email Address</label>
-            <VInput v-model="loginData.mail" :dataType="'text'"
+            <div class="mb-2 ">
+            <label for="email-address" class=" text-black  dark:text-white ">آدرس ایمیل یا شماره تلفن خود را وارد کنید</label>
+            </div>
+            <VInput v-model="loginData.mail" class="" :dataType="'text'"
                     :error="emailNotValid"
-                    :errorMessage="'Email is not valid'"
+                    :errorMessage="'ایمیل وارد شده معتبر نیست'"
                     :placeHolder="'example@example.com'"></VInput>
           </div>
         </div>
@@ -16,7 +18,7 @@
     </Modal>
 
     <h1 class="text-white text-[2rem] sm:text-[3rem] mb-3">
-      Welcome to {{ appName }} 👋
+      به داشبورد {{ appName }} خوش آمدید
     </h1>
     <form class="mt-8 space-y-6" action="/" @submit.prevent method="POST">
       <input type="hidden" name="remember" value="true">
@@ -24,7 +26,7 @@
         <div>
           <VInput v-model="loginData.mail" :dataType="'text'"
                   :error="emailNotValid"
-                  :errorMessage="'Email Not Valid'"
+                  :errorMessage="'ایمیل وارد شده معتبر نیست'"
                   :placeHolder="'Email'"></VInput>
         </div>
         <div>
@@ -39,12 +41,11 @@
       <!--      </div>-->
       <div class="flex items-center justify-center">
         <div class="text-sm">
-          <span class=" text-center dark:text-white text-xs text-white  font-bold tracking-tight cursor-pointer ">You have lost your password ?</span>
+          <span class=" text-center dark:text-white text-xs text-white  font-bold tracking-tight cursor-pointer ">رمز عبور خود را فراموش کرده اید؟</span>
 
           <label for="optionsModal"
                  class="font-medium cursor-pointer text-xs text-indigo-600 dark:text-white transition-all  hover:!text-primary">
-            Forget Password
-
+            فراموشی رمز عبور
           </label>
         </div>
       </div>
@@ -54,7 +55,7 @@
           <span class="absolute inset-y-0 left-0 flex items-center pl-3">
             <LockIcon v-if="emailNotValid !==false" class="fill-white"></LockIcon>
           </span>
-          Login
+          ورود
         </button>
       </div>
     </form>

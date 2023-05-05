@@ -11,7 +11,7 @@ export default {
                     fr.readAsDataURL(data);
                 });
             },
-            appName:'Dashboard',
+            appName:'داشبورد',
             baseUrl :'https://api.1minex.com/'
         }
         app.provide('helper', helper)

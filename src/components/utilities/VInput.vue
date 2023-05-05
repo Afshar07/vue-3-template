@@ -1,12 +1,12 @@
 
 <template>
   <div class="relative rounded-lg border border-white hover:border hover:border-primary bg-white">
-    <div @click="modelValue=null" v-if="modelValue" class="absolute top-1 right-2">
+    <div @click="modelValue=null" v-if="modelValue" class="absolute top-1 left-2">
       <CloseIcon class="fill-gray-400"></CloseIcon>
     </div>
     <div class="rounded-lg border rounded border-gray-300" :class="{'!border-red-500':error,'!border-achareh-green':error === false}">
       <input
-          class="w-full rounded-lg bg-gray-50 leading-8 ring-0 text-[11px] pr-2 placeholder:text-[11px] outline-0 px-2"
+          class="w-full rounded-lg text-right bg-gray-50 leading-8 ring-0 text-[11px] pr-2 placeholder:text-[11px] outline-0 px-2"
           :placeholder="placeHolder"
           :type="dataType"
           :value="modelValue"
@@ -15,7 +15,7 @@
       />
     </div>
   </div>
-    <span v-if="error" class="text-red-500 text-[10px]">{{ errorMessage }}</span>
+    <span v-if="error" class="text-red-500  text-[10px]">{{ errorMessage }}</span>
 </template>
 
 

@@ -16,7 +16,7 @@
               class=" flex items-center gap-2 hover:fill-white rounded-xl px-3.5 py-3 cursor-pointer hover:bg-primary hover:text-white text-md font-medium">
             <DoorIcon></DoorIcon>
             <span class="mt-1">
-            Logout
+            خروج
             </span>
           </div>
         </div>

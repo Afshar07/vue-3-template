@@ -3,7 +3,7 @@
 
     <component :is="componentInstance" @changeActiveSlug="changeActiveComponent"></component>
 
-    <div class="md:col-span-7 xl:col-span-9 hidden md:flex justify-center items-center">
+    <div class="md:col-span-7 xl:col-span-8 hidden md:flex justify-center items-center">
       <login-pic2></login-pic2>
     </div>
   </div>
