@@ -12,7 +12,7 @@ export default {
                 });
             },
             appName:'داشبورد',
-            baseUrl :'https://api.1minex.com/'
+            baseUrl :'https://api.tambord.com/'
         }
         app.provide('helper', helper)
     }

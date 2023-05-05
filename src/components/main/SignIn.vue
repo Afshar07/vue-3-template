@@ -20,7 +20,12 @@
     <h1 class="text-white text-[2rem] sm:text-[3rem] mb-3">
       به داشبورد {{ appName }} خوش آمدید
     </h1>
-    <form class="mt-8 space-y-6" action="/" @submit.prevent method="POST">
+    <div class="w-full h-10 flex flex-row justify-between items-center">
+      <div class="w-full h-full rounded-xl bg-violet mx-2"></div>
+      <span>|</span>
+      <div class="w-full h-full rounded-xl bg-violet mx-2"></div>
+    </div>
+    <form class="space-y-6" action="/" @submit.prevent method="POST">
       <input type="hidden" name="remember" value="true">
       <div class="space-y-4 rounded-md shadow-sm">
         <div>
