@@ -9,14 +9,6 @@ export const sideBarItems:navItems[] = [
         //     children: []
         // },
     {
-        title: 'گزارشات',
-        link: '/reports',
-        icon: 'ReportsIcon',
-        hasChildren: false,
-        hasAccess: true,
-        children: []
-    },
-    {
         title: 'خدمات',
         link: '/services',
         icon: 'ServicesIcon',
@@ -24,6 +16,15 @@ export const sideBarItems:navItems[] = [
         hasAccess: true,
         children: []
     },
+    {
+        title: 'گزارشات',
+        link: '/reports',
+        icon: 'ReportsIcon',
+        hasChildren: false,
+        hasAccess: true,
+        children: []
+    },
+
     {
         title: 'چت',
         link: '/chat',
@@ -36,6 +37,14 @@ export const sideBarItems:navItems[] = [
         title: 'VIP',
         link: '/vipService',
         icon: 'VIPIcon',
+        hasChildren: false,
+        hasAccess: true,
+        children: []
+    },
+    {
+        title: ' اکانت',
+        link: '/user/profile',
+        icon: 'UserIcon',
         hasChildren: false,
         hasAccess: true,
         children: []

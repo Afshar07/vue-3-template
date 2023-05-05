@@ -1,36 +1,15 @@
 <template>
   <div
-      class="w-full flex items-center justify-around   h-16 bg-white dark:bg-dark-muted shadow-xl border-t border-t-gray-200 dark:border-t-gray-800  ">
+      class="w-full flex items-center justify-around dark:text-white   h-16 bg-white dark:bg-dark-muted shadow-xl border-t border-t-gray-200 dark:border-t-gray-800  ">
 
-    <div v-for="(item,idx) in navigationItems" class="dropdown dropdown-top">
+    <router-link active-class="bottom-link-active-class" exact-active-class="bottom-link-active-class"   :to="item['link']" v-for="(item,idx) in navigationItems" class="dropdown  dropdown-top">
       <div class=" p-2  flex flex-col items-center justify-center">
-        <component class="w-5 h-5" :is="icons[item.icon]"></component>
-        <small>{{ item.title }}</small>
+        <component class="w-5 h-5 dark:fill-white " :is="icons[item.icon]"></component>
+        <small>{{ item['title'] }}</small>
       </div>
-    </div>
-
-<!--    <div class="p-2  flex flex-col items-center justify-center">-->
-<!--      <BankCardIcon style="width: 30px;height: 30px"></BankCardIcon>-->
-
-<!--      <small>کارت ها</small>-->
+    </router-link>
 
 
-<!--    </div>-->
-
-<!--    <div class="p-2  flex flex-col items-center justify-center">-->
-<!--      <LayoutIcon style="width: 32px;height: 32px"></LayoutIcon>-->
-
-<!--      <small> خدمات</small>-->
-
-<!--    </div>-->
-
-<!--    <div class="p-2  gap-1 flex flex-col items-center justify-center">-->
-<!--      <UserIcon style="width: 30px;height: 30px"></UserIcon>-->
-
-<!--      <small> حساب کاربری</small>-->
-
-
-<!--    </div>-->
 
   </div>
 </template>
