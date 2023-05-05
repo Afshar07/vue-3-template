@@ -9,6 +9,7 @@ import App from './App.vue'
 import router from './router'
 import './assets/main.css'
 import "vue-select/dist/vue-select.css";
+import "remixicon/fonts/remixicon.css";
 import repositories from './plugins/repositories.js'
 import helper from "@/plugins/helper";
 // @ts-ignore

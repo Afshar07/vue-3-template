@@ -22,10 +22,12 @@
     </h1>
     <div class="w-full h-10 flex flex-row justify-between items-center">
       <div @click="changeDTOtype(1)" :class="[loginData.type === 1 ? 'bg-violet' : 'bg-gray-600']" class="w-full h-full rounded-lg flex flex-row justify-center items-center transition-all cursor-pointer">
+        <i class="ri-smartphone-line ml-2 text-white"></i>
         <span class="text-white">موبایل</span>
       </div>
       <span class="h-full w-[1px] border border-gray-200 mx-4"></span>
       <div @click="changeDTOtype(2)" :class="[loginData.type === 2 ? 'bg-violet' : 'bg-gray-600']" class="w-full h-full rounded-lg flex flex-row justify-center items-center transition-all cursor-pointer">
+        <i class="ri-mail-send-line ml-2 text-white"></i>
         <span class="text-white">ایمیل</span>
       </div>
     </div>
