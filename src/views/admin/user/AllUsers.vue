@@ -52,7 +52,7 @@ import SideBar from "@/components/main/sideBar.vue";
 import Header from "@/components/main/Header.vue";
 import {inject, onMounted, reactive, ref ,watch} from "vue";
 import {useAppStore} from "@/stores/app";
-import Pagination from "../../components/utilities/Pagination.vue";
+import Pagination from "../../../components/utilities/Pagination.vue";
 import Table from "@/components/utilities/Table.vue";
 import TrashIcon from "@/components/icons/TrashIcon.vue";
 import EditIcon from "@/components/icons/EditIcon.vue";

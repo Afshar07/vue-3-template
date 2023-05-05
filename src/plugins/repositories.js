@@ -12,6 +12,7 @@ export default {
             getUserById:createRequestsRepository(app,'Users/Get',authStore),
             updateUser:createRequestsRepository(app,'User/Update',authStore),
             getAllOrders:createRequestsRepository(app,'Order/GetAll',authStore),
+            getAllRequests:createRequestsRepository(app,'Order/GetAll',authStore),
             getAllOrderByUserId:createRequestsRepository(app,'Order/GetByUserId',authStore),
             createOrder:createRequestsRepository(app,'Order/Create',authStore),
             getAllUsers:createRequestsRepository(app,'Users/GetAll',authStore),
@@ -20,7 +21,6 @@ export default {
             createCryptoAccount:createRequestsRepository(app,'CryptoAccount/Create',authStore),
             updateCryptoAccount:createRequestsRepository(app,'CryptoAccount/Update',authStore),
             deleteCryptoAccount:createRequestsRepository(app,'CryptoAccount/Delete',authStore)
-
         }
         app.provide('repositories', repositories)
     }

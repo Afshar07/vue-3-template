@@ -36,8 +36,8 @@
 </template>
 
 <script setup>
-import PlusIcon from "../../components/icons/PlusIcon.vue";
-import VInput from "../../components/utilities/VInput.vue";
+import PlusIcon from "../../../components/icons/PlusIcon.vue";
+import VInput from "../../../components/utilities/VInput.vue";
 import {computed, inject, onMounted, reactive, ref} from "vue";
 import {useAppStore} from "@/stores/app";
 import {SignErrors} from "@/models/signErrors";
