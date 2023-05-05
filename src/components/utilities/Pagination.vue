@@ -1,16 +1,15 @@
 <template>
   <div
-      style="direction: ltr!important"
-      class=" w-full flex flex-wrap items-center  justify-start"
+
+      class="flex flex-wrap items-center justify-start"
       v-if="props.totalPages && props.totalPages.length > 1"
   >
-
     <button
         :disabled="props.activePage === 1"
         @click="setNewPage(props.activePage - 1)"
         class="p-1 rounded-full dark:bg-slate-600 bg-stone-200"
     >
-      <ChevronLeft class="stroke-black  w-6 h-6  dark:stroke-white"></ChevronLeft>
+      <ChevronLeft class="stroke-black w-6 h-6 dark:stroke-white rotate-180"></ChevronLeft>
     </button>
     <button
         v-if="props.totalPages.length > 3 && props.activePage > 3"
@@ -36,7 +35,7 @@
         :key="i"
         :class="
         props.activePage === i
-          ? 'bg-stone-400  p-2 rounded-full text-white cursor-pointer'
+          ? 'bg-stone-400 p-2 rounded-full text-white cursor-pointer'
           : 'bg-stone-200'
       "
         @click="setNewPage(i)"
@@ -55,8 +54,8 @@
         class="text-black border-none text-black rounded-full w-8 h-8 mx-2"
         :class="
         props.activePage === props.totalPages.length
-          ? 'bg-stone-400  p-2 rounded-full text-white cursor-pointer'
-          : 'bg-stone-200 '
+          ? 'bg-stone-400 p-2 rounded-full text-white cursor-pointer'
+          : 'bg-stone-200'
       "
     >
       {{ props.totalPages.length }}
@@ -66,7 +65,7 @@
         @click="setNewPage(props.activePage + 1)"
         class="p-1 rounded-full dark:bg-slate-600 bg-stone-200"
     >
-      <ChevronLeft class="transform stroke-black  w-6 h-6  dark:stroke-white rotate-180"></ChevronLeft>
+      <ChevronLeft class="transform stroke-black w-6 h-6 dark:stroke-white"></ChevronLeft>
     </button>
   </div>
 </template>

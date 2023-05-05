@@ -19,7 +19,7 @@
             :clearable="false">
         </v-select>
       </div>
-      <div class="grid grid-cols-12 col-span-12 rounded-xl border border-gray-200 dark:border-gray-500 gap-3">
+      <div class="grid grid-cols-12 col-span-12 rounded-xl border border-gray-200 dark:border-gray-500 gap-3 mb-5">
         <div class="overflow-x-auto w-full rounded-xl col-span-12">
          <Table
          :items="user.users"
@@ -37,9 +37,9 @@
            </template>
          </Table>
         </div>
-        <div v-if="totalPages.length>1"  class="col-span-12 mt-3">
-          <Pagination :activePage="selectedPageId" :totalPages="totalPages" @PageChanged="changePage($event)"></Pagination>
-        </div>
+      </div>
+      <div v-if="totalPages.value?.length > 1"  class="col-span-12 flex flex-row justify-center items-center">
+        <Pagination :activePage="selectedPageId" :totalPages="totalPages.value" @PageChanged="changePage($event)"></Pagination>
       </div>
     </div>
   </div>
@@ -115,7 +115,7 @@ async function getAllUsers(){
       searchCommand:searchCommand
     })
     totalPages.value = []
-    const result = Math.ceil(res.data.usersCount / 10)
+    const result = Math.ceil(res.data.usersCount / pageCount.value)
     for (let i = 1; i <= result; i++) {
       totalPages.value.push(i);
     }
