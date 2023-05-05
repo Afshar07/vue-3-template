@@ -7,42 +7,25 @@
         <div class="avatar placeholder online">
           <div class="w-10 rounded-full">
             <img
-              src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+              src="https://static.wikia.nocookie.net/starwars/images/6/6f/Anakin_Skywalker_RotS.png/"
             />
           </div>
         </div>
-        <h2 class="mr-2 font-semibold">کاربر</h2>
+        <h2 class="mr-2 font-semibold">آناکین اسکای واکر</h2>
       </div>
       <router-link to="/chat">
         <ChevronLeft class="w-5 h-5"></ChevronLeft>
       </router-link>
     </header>
-    <main class="h-screen space-y-2 mt-1" dir="ltr">
-      <div class="chat chat-start">
-        <div class="chat-bubble">What kind of nonsense is this</div>
-      </div>
-      <div class="chat chat-start">
-        <div class="chat-bubble">
-          Put me on the Council and not make me a Master!??
-        </div>
-      </div>
-      <div class="chat chat-start">
-        <div class="chat-bubble">
-          That's never been done in the history of the Jedi. It's insulting!
-        </div>
-      </div>
-      <div class="chat chat-end">
-        <div class="chat-bubble">Calm down, Anakin.</div>
-      </div>
-      <div class="chat chat-end">
-        <div class="chat-bubble">You have been given a great honor.</div>
-      </div>
-      <div class="chat chat-end">
-        <div class="chat-bubble">To be on the Council at your age.</div>
-      </div>
-      <div class="chat chat-end">
-        <div class="chat-bubble">It's never happened before.</div>
-      </div>
+    <main class="h-full space-y-2 mt-1" dir="ltr">
+      <chat-bubble
+        v-for="item in chatMessages"
+        :chatDirection="item.position"
+        :chatMessage="item.message"
+        :isRead="item.isRead"
+        :isDelivered="item.isDelivered"
+        :createDate="item.createDate"
+      ></chat-bubble>
     </main>
     <footer
       class="sticky w-full bottom-0 h-14 shadow border-t p-2 flex items-center bg-white"
@@ -108,10 +91,60 @@
     </footer>
   </div>
 </template>
-<script>
+<script setup>
+import { ref } from "vue";
 import ChevronLeft from "@/components/icons/ChevronLeft.vue";
-export default {
-  name: "conversation",
-  components: { ChevronLeft },
-};
+import ChatBubble from "@/components/utilities/chat/mini/ChatBubble.vue";
+const chatMessages = ref([
+  {
+    message: "What kind of nonsense is this",
+    createDate: new Date("2023-05-04T17:53:26.000Z"),
+    position: "start",
+    isRead: null,
+    isDelivered: null,
+  },
+  {
+    message: "Put me on the Council and not make me a Master!??",
+    createDate: new Date(Date.now()),
+    position: "start",
+    isRead: null,
+    isDelivered: null,
+  },
+  {
+    message:
+      "That's never been done in the history of the Jedi. It's insulting!",
+    createDate: new Date(Date.now()),
+    position: "start",
+    isRead: null,
+    isDelivered: null,
+  },
+  {
+    message: "Calm down, Anakin.",
+    createDate: new Date(Date.now()),
+    position: "end",
+    isRead: true,
+    isDelivered: true,
+  },
+  {
+    message: "You have been given a great honor..",
+    createDate: new Date(Date.now()),
+    position: "end",
+    isRead: true,
+    isDelivered: true,
+  },
+  {
+    message: "To be on the Council at your age.",
+    createDate: new Date(Date.now()),
+    position: "end",
+    isDelivered: true,
+    isRead: false,
+  },
+  {
+    message: "It's never happened before.",
+    createDate: new Date(Date.now()),
+    position: "end",
+    isRead: false,
+    isDelivered: false,
+  },
+]);
 </script>
