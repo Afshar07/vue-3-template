@@ -3,6 +3,6 @@ export interface navItems {
     link?:string,
     icon:string,
     hasChildren?:Boolean,
-    hasAccess?:boolean,
+    hasAccess?:boolean|string[],
     children?:Object[]|[]
 }

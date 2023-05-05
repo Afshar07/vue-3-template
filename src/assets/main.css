@@ -12,6 +12,12 @@
     @apply text-white !important;
     
 }
+.bottom-link-active-class{
+    @apply text-primary
+}
+.bottom-link-active-class svg{
+    @apply fill-primary !important;
+}
 body {
     font-family: PELAK-Economic, serif !important;
     direction: ltr;

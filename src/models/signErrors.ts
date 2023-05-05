@@ -1,13 +1,13 @@
 enum SignErrors {
     MobileAuth = 1,
     EmailAuth,
-    WrongUserPass,
-    CodeExpire,
-    WrongCode,
-    NoUserFound,
+    'شماره موبایل یاایمیل یا رمز عبور اشتباه است',
+    'کد وارد شده منقضی شده است',
+    'کد وارد شده اشتباه است',
+    'کاربری یافت نشد',
     Success,
-    UserExists,
-    PassFormatNotMatched,
+    'کاربری با این شماره موبایل یا ایمیل وجود دارد',
+    'فرمت رمز عبور اشتباه است',
     TokenFailed
 }
 

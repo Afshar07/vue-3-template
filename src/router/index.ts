@@ -51,10 +51,64 @@ const router = createRouter({
                 title: 'داشبورد | تست'
             }
         },
+        // reports start
+
         {
             path: '/reports',
             name: 'reports',
             component: () => import('../views/reports/index.vue'),
+            meta: {
+                auth: true,
+                title: 'داشبورد | گزارشات'
+            }
+        },
+        {
+            path: '/reports/seasonalReports',
+            name: 'seasonalReports',
+            component: () => import('../views/reports/seasonalReports.vue'),
+            meta: {
+                auth: true,
+                title: 'داشبورد | گزارشات فصلی'
+            }
+        },
+        // reports end
+
+        // services start
+        {
+            path: '/services',
+            name: 'services',
+            //@ts-ignore
+            component: () => import('../views/services/index.vue'),
+            meta: {
+                auth: true,
+                title: 'داشبورد | خدمات'
+            }
+        },
+        {
+            path: '/services/statement',
+            name: 'statement',
+            //@ts-ignore
+            component: () => import('../views/services/statement.vue'),
+            meta: {
+                auth: true,
+                title: 'داشبورد | اظهار‌نامه'
+            }
+        },
+        // services end
+
+        {
+            path: '/chat',
+            name: 'chat',
+            component: () => import('../views/chat/index.vue'),
+            meta: {
+                auth: true,
+                title: 'داشبورد | گزارشات'
+            }
+        },
+        {
+            path: '/vipService',
+            name: 'vipService',
+            component: () => import('../views/VIP/index.vue'),
             meta: {
                 auth: true,
                 title: 'داشبورد | گزارشات'

@@ -1,7 +1,7 @@
 <template>
   <transition name="slide-right" appear>
     <div v-if="showToast"
-         class="fixed top-10 flex justify-end w-full z-[9999] py-4 md:px-10 px-5">
+         class="fixed top-10 flex  justify-start w-full z-[9999] py-4 md:px-10 px-5">
 
       <div :class="{'!bg-green-500':toastData.variant==='success','!bg-red-500 ':toastData.variant==='error'}"
            class=" relative overflow-x-hidden shadow-lg dark:bg-slate-500 rounded-xl shadow p-3 ">
@@ -9,7 +9,7 @@
           <div class="p-2 rounded-full">
             <component class="mr-2 fill-white" :is="dynamicIconInstance"></component>
           </div>
-          <p class="dark:text-white mt-1" style="overflow-wrap: anywhere">
+          <p class="text-white mt-1" style="overflow-wrap: anywhere">
             {{ toastData.content }}
           </p>
           <div @click="closeToast">
