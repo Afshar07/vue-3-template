@@ -30,40 +30,6 @@
       <button @click="updateUser" type="button" class="btn border-none bg-primary my-3 text-white">ثبت</button>
       </div>
     </div>
-    <!--      <div v-if="userInfo" class="bg-white dark:bg-dark-muted rounded-xl shadow grid grid-cols-12  gap-3 p-5 my-3">-->
-    <!--        <div class="col-span-12 flex items-center gap-3 mb-3">-->
-    <!--          <KuCoinIcon></KuCoinIcon>-->
-    <!--          <strong class="text-xl text-black dark:text-white mt-1">KuCoin </strong>-->
-    <!--        </div>-->
-    <!--        <div class="md:col-span-6 col-span-12">-->
-    <!--          <small class="text-gray-500 dark:text-white">api Key</small>-->
-    <!--          <VInput :dataType="`text`" v-model="userInfo.kucoinApiKey" :placeHolder="`example`" class="my-1"></VInput>-->
-    <!--        </div>-->
-    <!--        <div class="md:col-span-6 col-span-12">-->
-    <!--          <small class="text-gray-500 dark:text-white">secret Key</small>-->
-    <!--          <VInput :dataType="`text`" v-model="userInfo.kucoinSecretKey" :placeHolder="`example`" class="my-1"></VInput>-->
-    <!--        </div>-->
-    <!--        <div class=" col-span-12">-->
-    <!--          <small class="text-gray-500 dark:text-white">Pass Phrase</small>-->
-    <!--          <VInput :dataType="`password`" v-model="userInfo.kucoinPassPhrase" :placeHolder="`example`"-->
-    <!--                  class="my-1"></VInput>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--      <div v-if="userInfo" class="bg-white dark:bg-dark-muted rounded-xl shadow grid grid-cols-12  gap-3 p-5 my-3">-->
-    <!--        <div class="col-span-12 flex items-center gap-3 mb-3">-->
-    <!--          <CoinexIcon></CoinexIcon>-->
-    <!--          <strong class="text-xl text-black dark:text-white mt-1">Coinex </strong>-->
-    <!--        </div>-->
-    <!--        <div class="col-span-6">-->
-    <!--          <small class="text-gray-500 dark:text-white">Access Id</small>-->
-    <!--          <VInput :dataType="`text`" v-model="userInfo.coinexAccessId" :placeHolder="`example`" class="my-1"></VInput>-->
-    <!--        </div>-->
-    <!--        <div class="col-span-6">-->
-    <!--          <small class="text-gray-500 dark:text-white">secret Key</small>-->
-    <!--          <VInput :dataType="`text`" v-model="userInfo.coinexSecretKey" :placeHolder="`example`" class="my-1"></VInput>-->
-    <!--        </div>-->
-    <!--      </div>-->
-
   </div>
 </template>
 
@@ -75,10 +41,11 @@ import {computed, inject, onMounted, reactive, ref} from "vue";
 import Header from "../../components/main/Header.vue";
 import KuCoinIcon from "../../components/icons/KuCoinIcon.vue";
 import CoinexIcon from "../../components/icons/CoinexIcon.vue";
-import {useAppStore} from "../../stores/app";
-import {useToastStore} from "../../stores/toast";
-import {SignErrors} from "../../models/signErrors";
+import {useAppStore} from "@/stores/app";
+import {useToastStore} from "@/stores/toast";
+import {SignErrors} from "@/models/signErrors";
 import {useAuthStore} from "@/stores/auth";
+import {useRoute} from "vue-router";
 
 const api = inject("repositories")
 const appStore = useAppStore()
@@ -86,6 +53,8 @@ const toastStore = useToastStore()
 const fileInput = ref(null)
 const authStore = useAuthStore()
 const helper = inject('helper')
+const route = useRoute();
+const userId = route.params.id;
 onMounted(() => {
   getUserById()
 })
@@ -102,7 +71,7 @@ async function getUserById() {
   try {
     appStore.showOverlay = true
     const res = await api.getUserById.setParams({
-      id: authStore.user.userId
+      id: userId
     })
     userInfo.value = res.data
   } catch (e) {
