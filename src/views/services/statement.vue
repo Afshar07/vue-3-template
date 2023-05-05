@@ -13,6 +13,7 @@
         </div>
       </template>
     </Modal>
+
     <div  class=" md:col-span-3 col-span-6  h-28    flex flex-col  justify-between    ">
       <div class="h-2/3 flex items-center justify-center rounded-t shadow bg-white dark:bg-dark-muted">
         <PaperIcon class="w-8 h-8 dark:fill-white"></PaperIcon>

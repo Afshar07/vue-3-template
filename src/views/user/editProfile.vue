@@ -11,22 +11,24 @@
         </div>
       </div>
       <div class="md:col-span-6 col-span-12 ">
-        <small class="text-gray-500 dark:text-white">first Name</small>
+        <small class="text-gray-500 dark:text-white">نام</small>
         <VInput :dataType="`text`" v-model="userInfo.name" :placeHolder="`example@gmail.com`" class="my-1"></VInput>
       </div>
       <div class="md:col-span-6 col-span-12 ">
-        <small class="text-gray-500 dark:text-white">last Name</small>
+        <small class="text-gray-500 dark:text-white">نام خانوادگی</small>
         <VInput :dataType="`text`" v-model="userInfo.familyName" :placeHolder="`example`" class="my-1"></VInput>
       </div>
       <div class="md:col-span-6 col-span-12 ">
-        <small class="text-gray-500 dark:text-white">Email Address</small>
+        <small class="text-gray-500 dark:text-white">ایمیل</small>
         <VInput :dataType="`text`" v-model="userInfo.email" :placeHolder="`example`" class="my-1"></VInput>
       </div>
       <div class="md:col-span-6 col-span-12 ">
-        <small class="text-gray-500 dark:text-white">userName</small>
+        <small class="text-gray-500 dark:text-white">شناسه tax.gov</small>
         <VInput :dataType="`text`" v-model="userInfo.userName" :placeHolder="`example`" class="my-1"></VInput>
       </div>
-
+      <div class="col-span-2">
+      <button @click="updateUser" type="button" class="btn border-none bg-primary my-3 text-white">ثبت</button>
+      </div>
     </div>
     <!--      <div v-if="userInfo" class="bg-white dark:bg-dark-muted rounded-xl shadow grid grid-cols-12  gap-3 p-5 my-3">-->
     <!--        <div class="col-span-12 flex items-center gap-3 mb-3">-->
@@ -61,7 +63,7 @@
     <!--          <VInput :dataType="`text`" v-model="userInfo.coinexSecretKey" :placeHolder="`example`" class="my-1"></VInput>-->
     <!--        </div>-->
     <!--      </div>-->
-    <button @click="updateUser" type="button" class="btn border-none bg-primary my-3 text-white">submit</button>
+
   </div>
 </template>
 

@@ -1,14 +1,14 @@
 <template>
   <div class="md:main-card  grid gap-2 grid-cols-12">
-    <div  class=" md:col-span-3 col-span-4  h-28    flex flex-col  justify-between    ">
+    <router-link to="/reports/seasonalReports"  class=" md:col-span-3 col-span-4  h-28    flex flex-col  justify-between    ">
       <div class="h-2/3 flex items-center justify-center rounded-t shadow bg-white dark:bg-dark-muted">
         <ListIcon class="w-8 h-8 dark:fill-white"></ListIcon>
       </div>
-      <router-link to="/reports/seasonalReports"
+      <div
                    class="w-full  flex bg-[#22c55e]  rounded-b shadow text-white items-center justify-center h-1/3">
         <small>گزارشات فصلی</small>
-      </router-link>
-    </div>
+      </div>
+    </router-link>
     <div  class=" md:col-span-3 col-span-4  h-28    flex flex-col  justify-between    ">
       <div class="h-2/3 flex items-center justify-center rounded-t shadow bg-white dark:bg-dark-muted">
         <CoinIcon class="w-8 h-8 dark:fill-white"></CoinIcon>
