@@ -4,9 +4,9 @@
       <div
           class="flex items-center gap-2">
         <DynamicIcon :icon="props.item.icon"></DynamicIcon>
-        <span class="mt-1 ">
+        <span class="mt-1 text-black dark:text-white">
             {{ props.item.title }}
-            </span>
+        </span>
       </div>
     </template>
     <template v-slot:content>
@@ -16,7 +16,7 @@
                        exact-active-class="link-active-class">
             <div class="flex items-center gap-2">
               <CircleIcon class="w-3 h-3"></CircleIcon>
-              <span class="mt-1 text-black dark:text-white">
+              <span class="mt-1 text-gray-700 dark:text-gray-300">
               {{ el.title }}
               </span>
             </div>
