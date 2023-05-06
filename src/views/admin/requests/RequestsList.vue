@@ -25,10 +25,16 @@
               :items="requests"
               :fields="requestFields"
               emptyText="Nothing Found"
+              class="text-gray-700 dark:text-gray-300"
           >
             <template #createDate="data">
               <span>
-              {{ data.items.createDate.slice(11, 16) }}
+              {{
+                  new Date(data.items.createDate).toLocaleTimeString('fa-IR', {
+                    hour: "2-digit",
+                    minute: "2-digit"
+                  })
+                }}
               -
               {{ createJalaliDate(data.items.createDate.slice(0, 10)) }}
               </span>
