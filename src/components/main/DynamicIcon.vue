@@ -3,22 +3,18 @@
 </template>
 
 <script setup>
-import {computed, defineAsyncComponent, onMounted} from "vue";
+import { defineAsyncComponent } from "vue";
 
 const props = defineProps({
   icon: {
     type: String,
-    required: false
-  }
-})
+    required: false,
+  },
+});
 // importing icons dynamically from sidebarItems by icon property
-
 const dynamicIconComponent = defineAsyncComponent({
-  loader: () => import(`@/components/icons/${props.icon}.vue`)
-
-})
+  loader: () => import(`../icons/${props.icon}.vue`),
+});
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
