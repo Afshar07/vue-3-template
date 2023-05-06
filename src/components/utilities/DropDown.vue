@@ -37,14 +37,14 @@
 </template>
 <script>
 export default {
-  props:{
-    paddingX:{
-      type:String,
-      required:false,
-      default:'px-1'
+  props: {
+    paddingX: {
+      type: String,
+      required: false,
+      default: 'px-1'
     }
   },
-  name:'Dropdown',
+  name: 'Dropdown',
   data() {
     return {
       isOpen: false,
@@ -74,6 +74,7 @@ export default {
 .arrow {
   transition: all 0.2s !important;
 }
+
 .arrowUp {
   transform: rotate(180deg) !important;
 }
@@ -82,10 +83,12 @@ export default {
   animation: slide-down 2s ease-out;
   overflow: hidden;
 }
+
 .slide-leave-active {
   animation: slide-up 0.3s ease-out;
   overflow: hidden;
 }
+
 @keyframes slide-down {
   0% {
     display: hidden;
@@ -96,6 +99,7 @@ export default {
     max-height: 400px;
   }
 }
+
 @keyframes slide-up {
   0% {
     display: block;

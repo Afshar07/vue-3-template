@@ -1,13 +1,6 @@
 import { navItems } from "@/models/navigationItems";
 import { useAuthStore } from "@/stores/auth";
 
-const hasAccess = function (accessRoles: string[]): boolean {
-  const authStore = useAuthStore();
-  if (!accessRoles || accessRoles.includes(authStore.getUser!.role)) {
-    return true;
-  }
-  return false;
-};
 
 export const sideBarItems: navItems[] = [
   // {
@@ -23,7 +16,7 @@ export const sideBarItems: navItems[] = [
     link: "/services",
     icon: "ServicesIcon",
     hasChildren: false,
-    hasAccess: true,
+    hasAccess: ['vendor'],
     children: [],
   },
   {
@@ -31,7 +24,7 @@ export const sideBarItems: navItems[] = [
     link: "/reports",
     icon: "ReportsIcon",
     hasChildren: false,
-    hasAccess: true,
+    hasAccess: ['vendor'],
     children: [],
   },
 
@@ -40,7 +33,7 @@ export const sideBarItems: navItems[] = [
     link: "/chat",
     icon: "ChatIcon",
     hasChildren: false,
-    hasAccess: true,
+    hasAccess: ['vendor'],
     children: [],
   },
   {
@@ -48,7 +41,7 @@ export const sideBarItems: navItems[] = [
     link: "/vipService",
     icon: "VIPIcon",
     hasChildren: false,
-    hasAccess: true,
+    hasAccess: ['vendor'],
     children: [],
   },
   {
@@ -56,7 +49,7 @@ export const sideBarItems: navItems[] = [
     link: "/user/profile",
     icon: "UserIcon",
     hasChildren: false,
-    hasAccess: true,
+    hasAccess: ['vendor'],
     children: [],
   },
   // {
@@ -83,12 +76,12 @@ export const sideBarItems: navItems[] = [
     link: "",
     icon: "UsersIcon",
     hasChildren: true,
-    hasAccess: true,
+    hasAccess: ['admin'],
     children: [
       {
         title: "لیست",
         link: "/dashboard/users/AllUsers",
-        hasAccess: true,
+        hasAccess:  ['admin'],
       },
     ],
   },
@@ -97,12 +90,12 @@ export const sideBarItems: navItems[] = [
     link: "",
     icon: "ListIcon",
     hasChildren: true,
-    hasAccess: ["vendor"],
+    hasAccess: ['admin'],
     children: [
       {
         title: "لیست",
         link: "/requests/list",
-        hasAccess: true,
+        hasAccess:  ['admin'],
       },
     ],
   },

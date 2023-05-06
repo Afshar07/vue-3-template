@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import {computed, onMounted, reactive, ref, watch , inject} from "vue";
+import {computed, onMounted, reactive, ref, watch, inject, onBeforeMount} from "vue";
 import {useSideBarStore} from "@/stores/sideBar";
 import NavItemCollapse from "@/components/utilities/NavItemCollapse.vue";
 import NavItem from "@/components/utilities/NavItem.vue";
@@ -47,6 +47,7 @@ let getSideBarStatus = computed(() => {
 
 const helper:any = inject('helper');
 const appName = helper.appName;
+
 
 function isSelectedItem(item: any): Boolean {
   //@ts-ignore
