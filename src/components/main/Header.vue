@@ -4,6 +4,7 @@
     <div @click="openSideBar" class="hidden block hover:fill-primary">
       <MenuIcon class="fill-black dark:fill-white "></MenuIcon>
     </div>
+
     <div class="flex cursor-pointer items-center">
       <div class="relative flex ">
         <small class="opacity-0">asd</small>

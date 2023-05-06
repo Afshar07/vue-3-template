@@ -13,7 +13,10 @@ const props = defineProps({
 })
 // importing icons dynamically from sidebarItems by icon property
 
-const dynamicIconComponent = defineAsyncComponent(() => import(`/src/components/icons/${props.icon}.vue`))
+const dynamicIconComponent = defineAsyncComponent({
+  loader: () => import(`@/components/icons/${props.icon}.vue`)
+
+})
 </script>
 
 <style scoped>

@@ -23,7 +23,7 @@ const props = defineProps({
   item: Object
 })
 const hasAccess = function (accessRoles) {
-  if (accessRoles.includes('All') || accessRoles.includes(authStore.getUser.role.toLowerCase())) {
+  if (accessRoles.includes('All') || accessRoles.includes(authStore?.getUser?.role?.toLowerCase())) {
     return true;
   }
   return false;

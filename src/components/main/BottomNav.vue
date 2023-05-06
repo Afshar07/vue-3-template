@@ -24,7 +24,7 @@ import DynamicIcon from "@/components/main/DynamicIcon.vue";
 const navigationItems = sideBarItems;
 const authStore = useAuthStore()
 const hasAccess = function (accessRoles) {
-  if (accessRoles.includes('All') || accessRoles.includes(authStore.getUser.role.toLowerCase())) {
+  if (accessRoles.includes('All') || accessRoles.includes(authStore?.getUser?.role?.toLowerCase())) {
     return true;
   }
   return false;
