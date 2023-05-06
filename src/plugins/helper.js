@@ -56,7 +56,7 @@ export default {
                     minute: "numeric",
                 });
             },
-            appName: "داشبورد",
+            appName: "مالی ایران",
             baseUrl: "https://api.tambord.com/",
         };
         app.provide("helper", helper);

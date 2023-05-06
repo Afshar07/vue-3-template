@@ -31,7 +31,7 @@
     </Modal>
 
     <h1 class="text-white text-[2rem] sm:text-[3rem] mb-3">
-      به داشبورد {{ appName }} خوش آمدید
+      به  {{ appName }} خوش آمدید
     </h1>
     <div class="w-full h-10 flex flex-row justify-between items-center">
       <div
@@ -199,7 +199,11 @@ async function login() {
     } else {
       if (res.data.status === 7) {
         authStore.setUser(res.data.data);
-        await router.push("/dashBoard");
+        if(res.data.data.user.role ==='Admin'){
+        await router.push("/dashboard/users/AllUsers");
+        }else{
+          await router.push("/services");
+        }
       } else {
         return errorHandler(res.data.status);
       }
