@@ -82,7 +82,7 @@
 <script setup>
 import CloseIcon from "@/components/icons/CloseIcon.vue";
 import PaperIcon from "@/components/icons/PaperIcon.vue";
-import ListIcon from "@/components/icons/listIcon.vue";
+import ListIcon from "@/components/icons/ListIcon.vue";
 import CoinIcon from "@/components/icons/CoinIcon.vue";
 import BillIcon from "@/components/icons/BillIcon.vue";
 

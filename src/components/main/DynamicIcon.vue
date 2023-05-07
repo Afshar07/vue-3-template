@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import { defineAsyncComponent } from "vue";
+import {defineAsyncComponent, watch} from "vue";
 
 const props = defineProps({
   icon: {
@@ -12,9 +12,10 @@ const props = defineProps({
   },
 });
 // importing icons dynamically from sidebarItems by icon property
-const dynamicIconComponent = defineAsyncComponent({
+let dynamicIconComponent = defineAsyncComponent({
   loader: () => import(`../icons/${props.icon}.vue`),
 });
+
 </script>
 
 <style scoped></style>

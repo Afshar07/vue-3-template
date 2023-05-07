@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import ListIcon from "@/components/icons/listIcon.vue";
+import ListIcon from "@/components/icons/ListIcon.vue";
 import EyeIcon from "@/components/icons/EyeIcon.vue";
 import Modal from "@/components/utilities/Modal.vue";
 import ReportCard from "@/components/main/ReportCard.vue";

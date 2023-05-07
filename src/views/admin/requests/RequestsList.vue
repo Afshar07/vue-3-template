@@ -9,7 +9,7 @@
                 :placeHolder="'جستجو...'"></VInput>
       </div>
       <div class="col-span-12 md:col-span-6 mb-5 flex justify-start md:justify-end items-center">
-        <span class="text-md ml-1"> تعداد در هر صفحه :</span>
+        <span class="text-md dark:text-white ml-1"> تعداد در هر صفحه :</span>
         <v-select
             class="md:w-1/3 min-w-[8rem]"
             :options="pageCountItems"
