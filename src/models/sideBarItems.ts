@@ -30,10 +30,18 @@ export const sideBarItems: navItems[] = [
 
   {
     title: "چت",
-    link: "/chat",
+    link: "/chat/userName",
     icon: "ChatIcon",
     hasChildren: false,
     hasAccess: ['vendor'],
+    children: [],
+  },
+  {
+    title: "چت",
+    link: "/chat",
+    icon: "ChatIcon",
+    hasChildren: false,
+    hasAccess: ['admin'],
     children: [],
   },
   {

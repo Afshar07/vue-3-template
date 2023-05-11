@@ -98,6 +98,7 @@
       </div>
       <div>
         <button
+            v-if="loginData.type!==1"
           @click="login"
           type="submit"
           class="group bg-violet relative flex w-full justify-center rounded-md py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
@@ -111,7 +112,26 @@
               class="fill-white"
             ></LockIcon>
           </span>
+
           ورود
+        </button>
+        <button
+            v-else
+            @click="login"
+            type="submit"
+            class="group bg-gray-400   relative flex w-full justify-center rounded-md py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+            <LockIcon
+                v-if="
+                (loginData.type === 1 && mobileNotValid !== false) ||
+                (loginData.type === 2 && emailNotValid !== false)
+              "
+                class="fill-white"
+            ></LockIcon>
+          </span>
+
+          غیر فعال
         </button>
       </div>
     </form>
@@ -148,7 +168,7 @@ let loginData = reactive<signDto>({
   password: "",
   verifyCode: "",
   encryptedMail: "string",
-  type: 1,
+  type: 2,
   userName: "",
 });
 const mobileNotValid: any = computed(() => {

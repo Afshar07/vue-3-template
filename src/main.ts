@@ -13,6 +13,8 @@ import "remixicon/fonts/remixicon.css";
 import repositories from './plugins/repositories.js'
 import helper from "@/plugins/helper";
 // @ts-ignore
+import signalR from "@/plugins/vue-signalR.js";
+// @ts-ignore
 import { LMap, LTileLayer, LMarker } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import toast from "@/plugins/toast";
@@ -24,6 +26,7 @@ app.component('v-select',VueSelect)
 app.use(pinia)
 app.use(router)
 app.use(repositories)
+app.use(signalR)
 app.use(helper)
 app.use(toast)
 
