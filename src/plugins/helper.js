@@ -15,7 +15,10 @@ export default {
                     const fr = new FileReader();
                     fr.onerror = reject;
                     fr.onload = () => {
-                        resolve(fr.result.split(",")[1]);
+                        resolve({
+                            base64:fr.result.split(",")[1],
+                            pictureUrl:URL.createObjectURL(data)
+                        });
                     };
                     fr.readAsDataURL(data);
                 });

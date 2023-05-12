@@ -1,5 +1,5 @@
 <template>
-  <div class="chat" :class="`chat-${props.chatDirection}`">
+  <div class="chat  " :class="`chat-${props.chatDirection}`">
     <div class="chat-header">
       <time class="text-xs opacity-80">{{
         helper.detailedParsedDate(props.createDate)

@@ -20,7 +20,11 @@ export default {
             getCryptoAccountsByUserId:createRequestsRepository(app,'CryptoAccount/GetByUserId',authStore),
             createCryptoAccount:createRequestsRepository(app,'CryptoAccount/Create',authStore),
             updateCryptoAccount:createRequestsRepository(app,'CryptoAccount/Update',authStore),
-            deleteCryptoAccount:createRequestsRepository(app,'CryptoAccount/Delete',authStore)
+            deleteCryptoAccount:createRequestsRepository(app,'CryptoAccount/Delete',authStore),
+            getMenu:createRequestsRepository(app,'Message/GetMenu',authStore),
+            getConversation:createRequestsRepository(app,'Message/GetConversation',authStore),
+            readMessage:createRequestsRepository(app,'Message/ReadMessage',authStore),
+            sendMessage:createRequestsRepository(app,'Message/SendMessage',authStore)
         }
         app.provide('repositories', repositories)
     }

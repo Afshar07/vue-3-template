@@ -1,13 +1,13 @@
 <template>
   <div class="w-full min-h-full h-full bg-white relative">
     <header
-      class="h-14 shadow-md flex items-center justify-between p-4 sticky top-0 right-0 bg-white !z-10"
+        class="h-14 shadow-md flex items-center justify-between p-4 sticky top-0 right-0 bg-white !z-10"
     >
       <div class="avatar-name-section flex items-center">
         <div class="avatar placeholder online">
           <div class="w-10 rounded-full">
             <img
-              src="https://static.wikia.nocookie.net/starwars/images/6/6f/Anakin_Skywalker_RotS.png/"
+                src="https://static.wikia.nocookie.net/starwars/images/6/6f/Anakin_Skywalker_RotS.png/"
             />
           </div>
         </div>
@@ -19,82 +19,85 @@
     </header>
     <main class="h-full space-y-2 mt-1" dir="ltr">
       <chat-bubble
-        v-for="item in chatMessages"
-        :chatDirection="item.position"
-        :chatMessage="item.message"
-        :isRead="item.isRead"
-        :isDelivered="item.isDelivered"
-        :createDate="item.createDate"
+          v-for="item in chatMessages"
+          :chatDirection="item.position"
+          :chatMessage="item.message"
+          :isRead="item.isRead"
+          :isDelivered="item.isDelivered"
+          :createDate="item.createDate"
       ></chat-bubble>
     </main>
     <footer
-      class="sticky w-full bottom-0 h-14 shadow border-t p-2 flex items-center bg-white"
+        class="sticky w-full bottom-0 h-14 shadow border-t p-2 flex items-center bg-white"
     >
       <div class="w-full flex items-center justify-between">
         <!-- Send Button -->
-        <button type="button">
+        <button @click="sendMessage" type="button">
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-5 h-5"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-5 h-5"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
             />
           </svg>
         </button>
         <!-- Mic Button -->
         <button type="button">
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-5 h-5"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-5 h-5"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"
             />
           </svg>
         </button>
+        <input type="file" ref="mediaInput" class="hidden" @input="handleFileUpload">
         <!-- Attachment Button -->
-        <button type="button">
+        <button @click="mediaInput.click()" type="button">
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-5 h-5"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-5 h-5"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13"
             />
           </svg>
         </button>
         <input
-          type="text"
-          placeholder="متن پیام را وارد کنید"
-          class="input input-bordered input-sm w-2/3"
+            type="text"
+            placeholder="متن پیام را وارد کنید"
+            class="input input-bordered input-sm w-2/3"
         />
       </div>
     </footer>
   </div>
 </template>
 <script setup>
-import { ref } from "vue";
+import {inject, onMounted, reactive, ref} from "vue";
 import ChevronLeft from "@/components/icons/ChevronLeft.vue";
 import ChatBubble from "@/components/utilities/chat/mini/ChatBubble.vue";
+import {useAppStore} from "@/stores/app";
+import {useRoute, useRouter} from "vue-router";
 const chatMessages = ref([
   {
     // message: "What kind of nonsense is this",
@@ -147,4 +150,60 @@ const chatMessages = ref([
     isDelivered: false,
   },
 ]);
+const repositories = inject('repositories')
+const helper = inject('helper')
+const appStore = useAppStore()
+const route = useRoute()
+onMounted(async ()=>{
+  await Promise.all([
+      readMessage(),
+    getConversation()
+  ])
+})
+let selectedMessageId = ref(0)
+let newMessage = reactive({
+})
+let mediaInput = ref(null)
+async function getConversation(){
+  try {
+    appStore.showOverlay = true
+    const res = await  repositories.getConversation.setParams({
+      userId:route.params.id,
+      messageId:selectedMessageId.value,
+      count:20,
+    })
+  }catch (e) {
+    console.log(e)
+  }finally {
+    appStore.showOverlay = false
+
+  }
+}
+async function readMessage(){
+  try {
+    appStore.showOverlay = true
+    const res = await  repositories.readMessage.setParams({
+      userId:route.params.id,
+    })
+  }catch (e) {
+    console.log(e)
+  }finally {
+    appStore.showOverlay = false
+
+  }
+}
+async function sendMessage(){
+  try {
+    appStore.showOverlay = true
+    const res = await  repositories.sendMessage.setPayload(newMessage)
+  }catch (e) {
+    console.log(e)
+  }finally {
+    appStore.showOverlay = false
+
+  }
+}
+async function handleFileUpload(){
+      console.log( await helper.fileToBase64(mediaInput.value.files[0]))
+}
 </script>
