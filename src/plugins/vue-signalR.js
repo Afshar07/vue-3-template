@@ -1,7 +1,7 @@
 import {HubConnectionBuilder, LogLevel} from "@microsoft/signalr";
 import {useAuthStore} from "@/stores/auth";
         const hub = new HubConnectionBuilder()
-            .withUrl("https://api.tambord.com/chatHub", {
+            .withUrl("https://api.maliehiran.ir/chatHub", {
                 accessTokenFactory: function () {
                     // console.log("Getting token for hub");
                 },
