@@ -60,7 +60,7 @@ export default {
                 });
             },
             appName: "مالی ایران",
-            baseUrl: "https://api.tambord.com/",
+            baseUrl: "https://api.maliehiran.ir/",
         };
         app.provide("helper", helper);
     },
