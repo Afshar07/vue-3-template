@@ -7,6 +7,6 @@ export interface signDto {
     verifyCode: string,
     encryptedMail?: string,
     type: number,
-    userName:string,
+    userName:string|null,
     userRole?:number
 }

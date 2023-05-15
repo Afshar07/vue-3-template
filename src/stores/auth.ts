@@ -30,5 +30,10 @@ export const useAuthStore = defineStore("auth", {
       this.token = authenticationData.token;
       this.user = authenticationData.user;
     },
+    setUserFormSignIn(User: any,token:any) {
+      this.loggedIn = true;
+      this.token = token;
+      this.user = User;
+    },
   },
 });

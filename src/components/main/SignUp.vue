@@ -52,6 +52,11 @@
               :errorMessage="'ایمیل وارد شده معتبر نیست'"
               :placeHolder="'ایمیل'"
           ></VInput>
+          <VInput
+              v-model="loginData.userName"
+              :dataType="'text'"
+              :placeHolder="'نام کاربری'"
+          ></VInput>
         </div>
         <div class="space-y-10">
           <VInput
@@ -160,13 +165,13 @@ let verificationSent = ref(false)
 let loginData = reactive<signDto>({
   mobile: "",
   mail: "",
-  firstName: "string",
-  lastName: "string",
+  firstName: "",
+  lastName: "",
   password: "",
-  verifyCode: "string",
-  encryptedMail: "string",
+  verifyCode: "",
+  encryptedMail: "",
   type: 2,
-  userName: "string",
+  userName: "",
   userRole : 0
 });
 const mobileNotValid: any = computed(() => {
@@ -213,18 +218,18 @@ async function signUp() {
     appStore.showOverlay = true;
     const res = await api.signUp.setPayload(loginData);
     console.log(res.data)
-    if (res.data.data.data === "") {
-      errorHandler(res.data.data.status);
+    if (!res.data.isSuccess) {
+      errorHandler(res.data.data);
     } else {
-      if (res.data.status === 7) {
-        authStore.setUser(res.data.data);
+      if (res.data.data.token) {
+        authStore.setUserFormSignIn(res.data.data.user,res.data.data.token);
         if(res.data.data.user.role ==='Admin'){
           await router.push("/dashboard/users/AllUsers");
         }else{
           await router.push("/services");
         }
       } else {
-        return errorHandler(res.data.status);
+        return errorHandler(res.data.data);
       }
     }
   } catch (e) {
@@ -242,11 +247,11 @@ async function sendConfirmationCodeToEmail() {
       const res = await api.sendConfirmationCode.setParams({
         Email: loginData.mail,
       });
-      if (res.message === "Confirmation code has not expired") {
+      if (res.data.message   === "Confirmation code has not expired") {
         toast.error( {content:'کد ارسال شده منقضی نشده است.'});
-      } else if (res.hasUser === 1) {
+      } else if (res.data.hasUser === 1) {
         toast.error( {content:"کاربری با این اطلاعات موجود است."});
-      } else if (res.message === 'network problem') {
+      } else if (res.data.message === 'network problem') {
         toast.error( {content:"مشکلی در سرور رخ داده است."});
       } else {
         verificationSent.value = true;
