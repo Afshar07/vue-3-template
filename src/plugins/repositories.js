@@ -1,7 +1,6 @@
 import createRequestsRepository from './requests'
 import {useAuthStore} from "@/stores/auth";
 export default {
-
     install: (app) => {
         let authStore = useAuthStore()
         const repositories = {

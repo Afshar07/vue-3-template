@@ -1,52 +1,24 @@
 <template>
   <div
-    class="col-span-12 md:col-span-5 xl:col-span-4 bg-dark-muted p-10 space-y-8 flex flex-col justify-center"
+      class="col-span-12 md:col-span-5 xl:col-span-4 bg-dark-muted p-10 space-y-8 flex flex-col justify-center"
   >
-    <Modal
-      :id="'optionsModal'"
-      @ok="forgetPassword"
-      :closeModalTitle="'بستن'"
-      :okModalTitle="'ارسال'"
-      :title="'فراموشی رمز عبور'"
-    >
-      <template #modalBody>
-        <div class="w-full p-3">
-          <div>
-            <div class="mb-2">
-              <label for="email-address" class="text-black dark:text-white"
-                >آدرس ایمیل یا شماره تلفن خود را وارد کنید</label
-              >
-            </div>
-            <VInput
-              v-model="loginData.mail"
-              class=""
-              :dataType="'text'"
-              :error="emailNotValid"
-              :errorMessage="'ایمیل وارد شده معتبر نیست'"
-              :placeHolder="'example@example.com'"
-            ></VInput>
-          </div>
-        </div>
-      </template>
-    </Modal>
-
     <h1 class="text-white text-[2rem] sm:text-[3rem] mb-3">
-      به  {{ appName }} خوش آمدید
+      ثبت نام در  {{ appName }}
     </h1>
     <div class="w-full h-10 flex flex-row justify-between items-center">
       <div
-        @click="changeDTOtype(1)"
-        :class="[loginData.type === 1 ? 'bg-violet' : 'bg-gray-600']"
-        class="w-full h-full rounded-lg flex flex-row justify-center items-center transition-all cursor-pointer"
+          @click="changeDTOtype(1)"
+          :class="[loginData.type === 1 ? 'bg-violet' : 'bg-gray-600']"
+          class="w-full h-full rounded-lg flex flex-row justify-center items-center transition-all cursor-pointer"
       >
         <i class="ri-smartphone-line ml-2 text-white"></i>
         <span class="text-white">موبایل</span>
       </div>
       <span class="h-full w-[1px] border border-gray-200 mx-4"></span>
       <div
-        @click="changeDTOtype(2)"
-        :class="[loginData.type === 2 ? 'bg-violet' : 'bg-gray-600']"
-        class="w-full h-full rounded-lg flex flex-row justify-center items-center transition-all cursor-pointer"
+          @click="changeDTOtype(2)"
+          :class="[loginData.type === 2 ? 'bg-violet' : 'bg-gray-600']"
+          class="w-full h-full rounded-lg flex flex-row justify-center items-center transition-all cursor-pointer"
       >
         <i class="ri-mail-send-line ml-2 text-white"></i>
         <span class="text-white">ایمیل</span>
@@ -55,54 +27,79 @@
     <form class="space-y-6" action="/" @submit.prevent method="POST">
       <input type="hidden" name="remember" value="true" />
       <div class="space-y-4 rounded-md shadow-sm">
-        <div>
+        <div class="space-y-4">
           <VInput
-            v-if="loginData.type === 1"
-            v-model="loginData.mobile"
-            :dataType="'text'"
-            :error="mobileNotValid"
-            :errorMessage="'شماره تلفن وارد شده معتبر نیست'"
-            :placeHolder="'موبایل'"
+              v-model="loginData.firstName"
+              :dataType="'text'"
+              :placeHolder="'نام'"
           ></VInput>
           <VInput
-            v-else-if="loginData.type === 2"
-            v-model="loginData.mail"
-            :dataType="'email'"
-            :error="emailNotValid"
-            :errorMessage="'ایمیل وارد شده معتبر نیست'"
-            :placeHolder="'ایمیل'"
+              v-model="loginData.lastName"
+              :dataType="'text'"
+              :placeHolder="'نام خانوادگی'"
+          ></VInput>
+          <VInput
+              v-model="loginData.mobile"
+              :dataType="'text'"
+              :error="mobileNotValid"
+              :errorMessage="'شماره تلفن وارد شده معتبر نیست'"
+              :placeHolder="'موبایل'"
+          ></VInput>
+          <VInput
+              v-model="loginData.mail"
+              :dataType="'email'"
+              :error="emailNotValid"
+              :errorMessage="'ایمیل وارد شده معتبر نیست'"
+              :placeHolder="'ایمیل'"
           ></VInput>
         </div>
-        <div>
+        <div class="space-y-10">
           <VInput
-            v-model="loginData.password"
-            :placeHolder="'رمز عبور'"
-            :dataType="'password'"
+              v-model="loginData.password"
+              :placeHolder="'رمز عبور'"
+              :dataType="'password'"
+          ></VInput>
+          <VInput
+              v-if="verificationSent"
+              v-model="loginData.verifyCode"
+              :placeHolder="'کد تایید'"
+              :dataType="'password'"
           ></VInput>
         </div>
       </div>
       <div>
         <button
-            v-if="loginData.type!==1"
-          @click="login"
-          type="submit"
-          class="group bg-violet relative flex w-full justify-center rounded-md py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            v-if="!verificationSent"
+            @click="sendConfirmationCodeToEmail"
+            type="button"
+            class="group bg-violet relative flex w-full justify-center rounded-md py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+            <LockIcon v-if="(loginData.type === 1 && mobileNotValid !== false) || (loginData.type === 2 && emailNotValid !== false)" class="fill-white"></LockIcon>
+          </span>
+          ارسال کد تایید
+        </button>
+        <button
+            v-if="loginData.type!==1 && verificationSent"
+            @click="signUp"
+            type="submit"
+            class="group bg-violet relative flex w-full justify-center rounded-md py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           <span class="absolute inset-y-0 left-0 flex items-center pl-3">
             <LockIcon
-              v-if="
+                v-if="
                 (loginData.type === 1 && mobileNotValid !== false) ||
                 (loginData.type === 2 && emailNotValid !== false)
               "
-              class="fill-white"
+                class="fill-white"
             ></LockIcon>
           </span>
 
           ورود
         </button>
         <button
-            v-else
-            @click="login"
+            v-if="loginData.type!==2 && verificationSent"
+            @click="signUp"
             type="submit"
             class="group bg-gray-400   relative flex w-full justify-center rounded-md py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
@@ -123,29 +120,13 @@
         <div class="text-sm">
           <span
               class="text-center dark:text-white text-xs text-white font-bold tracking-tight cursor-pointer"
-          >آیا حساب کاربری ندارید ؟</span
+          >آیا حساب کاربری دارید ؟</span
           >
 
           <label @click="changeActiveComponent"
-              class="font-medium cursor-pointer text-xs text-indigo-600 dark:text-white transition-all hover:!text-primary"
+                 class="font-medium cursor-pointer text-xs text-indigo-600 dark:text-white transition-all hover:!text-primary"
           >
-            ثبت نام
-          </label>
-          <span>کنید</span>
-        </div>
-      </div>
-      <div class="flex items-center justify-center">
-        <div class="text-sm">
-          <span
-              class="text-center dark:text-white text-xs text-white font-bold tracking-tight cursor-pointer"
-          >رمز عبور خود را فراموش کرده اید؟</span
-          >
-
-          <label
-              for="optionsModal"
-              class="font-medium cursor-pointer text-xs text-indigo-600 dark:text-white transition-all hover:!text-primary"
-          >
-            فراموشی رمز عبور
+            ورود
           </label>
         </div>
       </div>
@@ -174,6 +155,7 @@ const api: any = inject("repositories");
 
 const helper: any = inject("helper");
 const appName = helper.appName;
+let verificationSent = ref(false)
 
 let loginData = reactive<signDto>({
   mobile: "",
@@ -182,7 +164,7 @@ let loginData = reactive<signDto>({
   lastName: "",
   password: "",
   verifyCode: "",
-  encryptedMail: "string",
+  encryptedMail: "",
   type: 2,
   userName: "",
 });
@@ -219,7 +201,7 @@ function changeDTOtype(t: number) {
       break;
   }
 }
-async function login() {
+async function signUp() {
   if (loginData.type === 2 && emailNotValid.value === true) {
     return toast.error({ content: "ایمیل وارد شده معتبر نیست" });
   }
@@ -228,14 +210,14 @@ async function login() {
   }
   try {
     appStore.showOverlay = true;
-    const res = await api.signIn.setPayload(loginData);
+    const res = await api.signUp.setPayload(loginData);
     if (res.data.data.data === "") {
       errorHandler(res.data.data.status);
     } else {
       if (res.data.status === 7) {
         authStore.setUser(res.data.data);
         if(res.data.data.user.role ==='Admin'){
-        await router.push("/dashboard/users/AllUsers");
+          await router.push("/dashboard/users/AllUsers");
         }else{
           await router.push("/services");
         }
@@ -251,34 +233,37 @@ async function login() {
   appStore.showOverlay = false;
 }
 
-async function forgetPassword() {
+async function sendConfirmationCodeToEmail() {
   if (mobileNotValid.value === false) {
     try {
       appStore.showOverlay = true;
-      const res = await api.forgetPassword.setParams({
-        type: 1,
-        PhoneOrEmail: loginData.mobile,
+      const res = await api.sendConfirmationCode.setParams({
+        Email: loginData.mail,
       });
-      if (res.data.data.status === 7) {
-        toast.success({ content: "پسوورد شما به شماره موبایل شما ارسال شد" });
+      if (res.message === "Confirmation code has not expired") {
+        toast.error("کد ارسال شده منقضی نشده است.");
+      } else if (res.hasUser === 1) {
+        toast.error("کاربری با این اطلاعات موجود است.");
+      } else if (res.message === 'network problem') {
+        toast.error("مشکلی در سرور رخ داده است.");
       } else {
-        errorHandler(res.data.data.status);
+        verificationSent.value = true;
+        toast.success("کد تایید برای شما ارسال شد.");
       }
-      loginData.mail = "";
     } catch (e) {
       console.log(e);
     } finally {
       appStore.showOverlay = false;
     }
   } else {
-    toast.error({ content: "شماره تلفن وارد شده معتبر نیست" });
+    toast.error({ content: "ایمیل وارد شده معتبر نیست" });
   }
 }
 
 const emits = defineEmits(["changeActiveSlug"]);
 
 function changeActiveComponent() {
-  emits("changeActiveSlug", "SignUp");
+  emits("changeActiveSlug", "SignIn");
 }
 </script>
 
