@@ -160,13 +160,14 @@ let verificationSent = ref(false)
 let loginData = reactive<signDto>({
   mobile: "",
   mail: "",
-  firstName: "",
-  lastName: "",
+  firstName: "string",
+  lastName: "string",
   password: "",
-  verifyCode: "",
-  encryptedMail: "",
+  verifyCode: "string",
+  encryptedMail: "string",
   type: 2,
-  userName: "",
+  userName: "string",
+  userRole : 0
 });
 const mobileNotValid: any = computed(() => {
   let resolve = null;
@@ -211,6 +212,7 @@ async function signUp() {
   try {
     appStore.showOverlay = true;
     const res = await api.signUp.setPayload(loginData);
+    console.log(res.data)
     if (res.data.data.data === "") {
       errorHandler(res.data.data.status);
     } else {
@@ -241,14 +243,14 @@ async function sendConfirmationCodeToEmail() {
         Email: loginData.mail,
       });
       if (res.message === "Confirmation code has not expired") {
-        toast.error("کد ارسال شده منقضی نشده است.");
+        toast.error( {content:'کد ارسال شده منقضی نشده است.'});
       } else if (res.hasUser === 1) {
-        toast.error("کاربری با این اطلاعات موجود است.");
+        toast.error( {content:"کاربری با این اطلاعات موجود است."});
       } else if (res.message === 'network problem') {
-        toast.error("مشکلی در سرور رخ داده است.");
+        toast.error( {content:"مشکلی در سرور رخ داده است."});
       } else {
         verificationSent.value = true;
-        toast.success("کد تایید برای شما ارسال شد.");
+        toast.success({content:"کد تایید برای شما ارسال شد."});
       }
     } catch (e) {
       console.log(e);

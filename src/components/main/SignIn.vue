@@ -102,7 +102,6 @@
         </button>
         <button
             v-else
-            @click="login"
             type="submit"
             class="group bg-gray-400   relative flex w-full justify-center rounded-md py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >

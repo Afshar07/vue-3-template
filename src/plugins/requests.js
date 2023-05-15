@@ -7,6 +7,7 @@ axios.defaults.baseURL = "https://api.maliehiran.ir/api/";
 axios.interceptors.response.use(
   (res) => res,
   (err) => {
+    console.log(err)
     //you can have custom user frindly errors
     if (err.response.status === 401 || err.response.status === 403) {
       const authStore = useAuthStore();
@@ -20,7 +21,7 @@ export default (context, resources, auth) => ({
   async setTag() {
     const response = await axios.post(resources, null, {
       headers: {
-        Authorization: auth.isLogged ? auth.token : "",
+        Authorization: auth.isLogged ? auth.token : null,
       },
     });
     return response;
@@ -29,7 +30,7 @@ export default (context, resources, auth) => ({
   async setParams(params) {
     const response = await axios.post(resources, null, {
       headers: {
-        Authorization: auth.isLogged ? auth.token : "",
+        Authorization: auth.isLogged ? auth.token :null,
       },
       params,
     });
@@ -39,7 +40,7 @@ export default (context, resources, auth) => ({
   async setPayload(payload) {
     const response = await axios.post(resources, payload, {
       headers: {
-        Authorization: auth.isLogged ? auth.token : "",
+        Authorization: auth.isLogged ? auth.token : null,
       },
     });
     return response;
