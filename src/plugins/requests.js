@@ -7,7 +7,6 @@ axios.defaults.baseURL = "https://api.maliehiran.ir/api/";
 axios.interceptors.response.use(
   (res) => res,
   (err) => {
-    console.log(err)
     //you can have custom user frindly errors
     if (err.response.status === 401 || err.response.status === 403) {
       const authStore = useAuthStore();
