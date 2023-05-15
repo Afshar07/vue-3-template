@@ -26,6 +26,10 @@
         <small class="text-gray-500 dark:text-white">موبایل</small>
         <VInput :dataType="`text`" v-model="userInfo.mobile"  class="my-1"></VInput>
       </div>
+      <div class="md:col-span-4 col-span-12 ">
+        <small class="text-gray-500 dark:text-white">ایمیل</small>
+        <VInput :dataType="`email`" v-model="userInfo.email"  class="my-1"></VInput>
+      </div>
       <div class="col-span-12 grid grid-cols-12">
         <div class="col-span-12 md:col-span-1">
           <button @click="updateUser" type="button" class="btn w-full border-none bg-primary my-3 text-white">ثبت ویرایش</button>

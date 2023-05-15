@@ -89,6 +89,10 @@ let userFields = ref([
     label: 'موبایل'
   },
   {
+    key:'email',
+    label: 'ایمیل'
+  },
+  {
     key:'actions',
     label: 'عملیات'
   },
