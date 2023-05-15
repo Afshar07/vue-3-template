@@ -16,7 +16,7 @@ export const sideBarItems: navItems[] = [
     link: "/services",
     icon: "ServicesIcon",
     hasChildren: false,
-    hasAccess: ['vendor'],
+    hasAccess: ['subscriber'],
     children: [],
   },
   {
@@ -24,7 +24,7 @@ export const sideBarItems: navItems[] = [
     link: "/reports",
     icon: "ReportsIcon",
     hasChildren: false,
-    hasAccess: ['vendor'],
+    hasAccess: ['subscriber'],
     children: [],
   },
 
@@ -33,7 +33,7 @@ export const sideBarItems: navItems[] = [
     link: "/chat/userName",
     icon: "ChatIcon",
     hasChildren: false,
-    hasAccess: ['vendor'],
+    hasAccess: ['subscriber'],
     children: [],
   },
   {
@@ -49,7 +49,7 @@ export const sideBarItems: navItems[] = [
     link: "/vipService",
     icon: "VIPIcon",
     hasChildren: false,
-    hasAccess: ['vendor'],
+    hasAccess: ['subscriber'],
     children: [],
   },
   {
@@ -57,7 +57,7 @@ export const sideBarItems: navItems[] = [
     link: "/user/profile",
     icon: "UserIcon",
     hasChildren: false,
-    hasAccess: ['vendor'],
+    hasAccess: ['subscriber'],
     children: [],
   },
   // {

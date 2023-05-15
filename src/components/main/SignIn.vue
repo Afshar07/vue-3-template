@@ -231,15 +231,15 @@ async function login() {
     if (res.data.data.data === "") {
       errorHandler(res.data.data.status);
     } else {
-      if (res.data.status === 7) {
-        authStore.setUser(res.data.data);
-        if(res.data.data.user.role ==='Admin'){
+      if (res.data.data.status === 7) {
+        authStore.setUser(res.data.data.data);
+        if(res.data.data.data.role ==='Admin'){
         await router.push("/dashboard/users/AllUsers");
         }else{
           await router.push("/services");
         }
       } else {
-        return errorHandler(res.data.status);
+        return errorHandler(res.data.data.status);
       }
     }
   } catch (e) {
