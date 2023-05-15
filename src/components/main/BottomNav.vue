@@ -28,7 +28,7 @@
     </transition>
 
     <template v-for="(item,idx) in navigationItems">
-      <div v-if="hasAccess(item.hasAccess)" class=" z-50 relative  ">
+      <div v-if="hasAccess(item.hasAccess)" class=" z-50 relative  " :class="{'bottom-active-class':route.path === item.link}">
         <div @click="openBottomModal(item)" class=" flex flex-col items-center justify-center">
           <DynamicIcon class="dark:fill-white" :icon="item.icon"></DynamicIcon>
           <small>{{ item['title'] }}</small>
@@ -51,10 +51,11 @@ import {sideBarItems} from "@/models/sideBarItems";
 import {useAuthStore} from "@/stores/auth";
 import DynamicIcon from "@/components/main/DynamicIcon.vue";
 import {ref} from "vue"
-import {useRouter} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import CircleIcon from "@/components/icons/CircleIcon.vue";
 
 const router = useRouter()
+const route = useRoute()
 const navigationItems = sideBarItems;
 let tmpSubItems = ref(null)
 const authStore = useAuthStore()
@@ -81,5 +82,7 @@ const
 </script>
 
 <style scoped>
-
+.bottom-active-class{
+  @apply text-primary fill-primary !important;
+}
 </style>

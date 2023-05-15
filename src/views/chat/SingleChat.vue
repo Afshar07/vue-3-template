@@ -13,9 +13,9 @@
         </div>
         <h2 class="mr-2 font-semibold">آناکین اسکای واکر</h2>
       </div>
-      <router-link to="/chat">
+      <span @click="routeBack">
         <ChevronLeft class="w-5 h-5"></ChevronLeft>
-      </router-link>
+      </span>
     </header>
     <main class="h-full space-y-2 mt-1" dir="ltr">
       <chat-bubble
@@ -98,6 +98,7 @@ import ChevronLeft from "@/components/icons/ChevronLeft.vue";
 import ChatBubble from "@/components/utilities/chat/mini/ChatBubble.vue";
 import {useAppStore} from "@/stores/app";
 import {useRoute, useRouter} from "vue-router";
+import {useAuthStore} from "@/stores/auth";
 const chatMessages = ref([
   {
     // message: "What kind of nonsense is this",
@@ -153,7 +154,9 @@ const chatMessages = ref([
 const repositories = inject('repositories')
 const helper = inject('helper')
 const appStore = useAppStore()
+const authStore = useAuthStore()
 const route = useRoute()
+const router = useRouter()
 onMounted(async ()=>{
   await Promise.all([
       readMessage(),
@@ -164,6 +167,13 @@ let selectedMessageId = ref(0)
 let newMessage = reactive({
 })
 let mediaInput = ref(null)
+function routeBack(){
+  if(authStore.getUser.role === 'Subscriber'){
+    router.push('/services')
+  }else{
+    router.push('/chat')
+  }
+}
 async function getConversation(){
   try {
     appStore.showOverlay = true
