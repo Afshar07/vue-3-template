@@ -3,7 +3,7 @@
     <div class="chat-header">
 
       <time class="text-xs opacity-50">
-        {{ helper.detailedParsedDate(props.message['createDate'] + 'z') }}
+        {{ helper.detailedParsedDate(props.message['createDate']) }}
       </time>
     </div>
     <div class="chat-bubble text-white"
@@ -14,7 +14,6 @@
     <div v-if="props.message['creatorUserId']===authStore.getUser.userId" class="chat-footer  opacity-50">
       <i v-if="props.message.isDelivered" class="ri-check-fill relative left-2.5"></i>
       <i v-if="props.message.isRead" class="ri-check-fill "></i>
-
     </div>
   </div>
 
