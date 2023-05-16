@@ -6,8 +6,8 @@
         {{ helper.detailedParsedDate(props.message['createDate'] + 'z') }}
       </time>
     </div>
-    <div class="chat-bubble  "
-         :class="{'!bg-primary !rounded-xl':props.message['creatorUserId']===authStore.getUser.userId}">
+    <div class="chat-bubble text-white"
+         :class="{'!bg-violet !rounded-xl':props.message['creatorUserId']===authStore.getUser.userId}">
       <img @click="emitSelectedMedia(props.message['chatMedia'])" v-if="props.message['chatMedia']" class="w-full h-40" :src="helper.baseUrl+ 'media/gallery/ChatMedia/'+props.message['chatMedia']" alt="">
       {{ message['messageBody'] }}
     </div>
