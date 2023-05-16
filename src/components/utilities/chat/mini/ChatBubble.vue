@@ -1,20 +1,19 @@
 <template>
   <div class="chat chat-start  " :class="{'!chat-end':props.message['creatorUserId']===authStore.getUser.userId}">
-    <div class="chat-header">
-
-      <time class="text-xs opacity-50">
-        {{ helper.detailedParsedDate(props.message['createDate']) }}
-      </time>
-    </div>
-    <div class="chat-bubble  "
-         :class="{'!bg-primary !rounded-xl':props.message['creatorUserId']===authStore.getUser.userId}">
+    <div class="chat-header"></div>
+    <div class="chat-bubble text-white"
+         :class="{'!bg-violet !rounded-xl':props.message['creatorUserId']===authStore.getUser.userId}">
       <img @click="emitSelectedMedia(props.message['chatMedia'])" v-if="props.message['chatMedia']" class="w-full h-40" :src="helper.baseUrl+ 'media/gallery/ChatMedia/'+props.message['chatMedia']" alt="">
       {{ message['messageBody'] }}
     </div>
-    <div v-if="props.message['creatorUserId']===authStore.getUser.userId" class="chat-footer  opacity-50">
-      <i v-if="props.message.isDelivered" class="ri-check-fill relative left-2.5"></i>
-      <i v-if="props.message.isRead" class="ri-check-fill "></i>
-
+    <div class="chat-footer mt-1">
+      <time class="text-xs">
+        {{ helper.detailedParsedDate(props.message['createDate']) }}
+      </time>
+     <template v-if="props.message['creatorUserId']===authStore.getUser.userId">
+       <i v-if="props.message.isDelivered" class="ri-check-fill relative left-2.5"></i>
+       <i v-if="props.message.isRead" class="ri-check-fill "></i>
+     </template>
     </div>
   </div>
 

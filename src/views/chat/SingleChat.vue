@@ -31,7 +31,7 @@
   </Modal>
   <div ref="chatContainer" class="w-full min-h-full h-full bg-white relative">
     <header
-        class="h-14 shadow-md flex items-center justify-between p-4 sticky top-0 right-0 bg-white !z-10"
+        class="h-14 shadow-md w-full flex items-center justify-between p-4 fixed top-0 right-0 bg-white !z-10"
     >
       <div v-if="userData" class="avatar-name-section flex items-center">
         <div class="avatar placeholder ">
@@ -54,7 +54,7 @@
         <ChevronLeft class="w-5 h-5"></ChevronLeft>
       </span>
     </header>
-    <main  @scroll="scrollToTop"  class="h-full space-y-2  mt-1" dir="ltr">
+    <main  @scroll="scrollToTop"  class="h-full space-y-2 mt-1 pt-14 pb-10" dir="ltr">
       <chat-bubble
           @emitSelectedMedia="setSelectedMedia"
           v-for="item in conversation"
@@ -67,7 +67,7 @@
       ></chat-bubble>
     </main>
     <footer
-        class="sticky w-full bottom-0 h-14 shadow border-t p-2 flex items-center bg-white"
+        class="fixed w-full bottom-0 h-14 shadow border-t p-2 flex items-center bg-white"
     >
       <div class="w-full flex items-center justify-between">
         <!-- Send Button -->
@@ -89,7 +89,7 @@
             v-model="newMessage.messageBody"
             type="text"
             placeholder="متن پیام را وارد کنید"
-            class="input input-bordered input-sm w-2/3"
+            class="input input-bordered input-sm w-2/3 bg-gray-200 text-gray-800"
         />
       </div>
     </footer>
