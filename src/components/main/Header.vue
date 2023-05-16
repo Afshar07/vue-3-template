@@ -5,7 +5,7 @@
       <MenuIcon class="fill-black dark:fill-white "></MenuIcon>
     </div>
     <div class="flex items-center z-50 relative justify-center">
-      <div @click="logout" class=" text-black dark:text-white fill-black dark:fill-white">
+      <div @click="logout" class=" text-black md:hidden dark:text-white fill-black dark:fill-white">
         <div class=" flex btn bg-red-500 border-none btn-sm items-center gap-2 hover:fill-white rounded-xl px-3.5  cursor-pointer hover:bg-primary hover:text-white text-md font-medium">
           <PowerIcon class=" w-5 h-5 fill-white"></PowerIcon>
           <span class="">

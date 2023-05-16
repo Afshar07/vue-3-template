@@ -23,14 +23,20 @@
 
 <script setup lang="ts">
 import ConversationCard from "@/components/utilities/chat/ConversationCard.vue";
-import {computed, inject, onMounted, ref, watch} from "vue";
+import {computed, inject, onBeforeMount, onMounted, ref, watch} from "vue";
 import {useAppStore} from "@/stores/app";
 import VInput from "@/components/utilities/VInput.vue";
 import {useChatStore} from "@/stores/chat";
+import {onBeforeRouteUpdate} from "vue-router";
 
 const repositories: any = inject("repositories");
 const appStore = useAppStore();
 const chatStore: any = useChatStore();
+onBeforeRouteUpdate(async ()=>{
+  await Promise.all([
+    deliverMessage(),
+    getMenu()]);
+})
 onMounted(async () => {
   await Promise.all([
       deliverMessage(),

@@ -3,7 +3,7 @@
     <div class="chat-header">
 
       <time class="text-xs opacity-50">
-        {{ helper.detailedParsedDate(props.message['createDate'] + 'z') }}
+        {{ helper.detailedParsedDate(props.message['createDate']) }}
       </time>
     </div>
     <div class="chat-bubble  "
