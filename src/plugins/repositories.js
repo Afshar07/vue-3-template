@@ -23,7 +23,8 @@ export default {
             getMenu:createRequestsRepository(app,'Message/GetMenu',authStore),
             getConversation:createRequestsRepository(app,'Message/GetConversation',authStore),
             readMessage:createRequestsRepository(app,'Message/ReadMessage',authStore),
-            sendMessage:createRequestsRepository(app,'Message/SendMessage',authStore)
+            sendMessage:createRequestsRepository(app,'Message/SendMessage',authStore),
+            deliverMessage:createRequestsRepository(app,'Message/DeliverMessage',authStore)
         }
         app.provide('repositories', repositories)
     }

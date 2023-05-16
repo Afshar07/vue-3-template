@@ -34,6 +34,9 @@
               <router-link :to="{ name: 'user-edit', params: { id: data.items.userId } }">
                 <i title="ویرایش" class="ri-pencil-line dark:text-white text-sky-500 cursor-pointer text-xl"></i>
               </router-link>
+               <router-link :to="{ name: 'conversation', params: { username: data.items.userId } }">
+                 <i title="ویرایش" class="ri-chat-1-line dark:text-white text-violet cursor-pointer text-xl"></i>
+               </router-link>
              </div>
            </template>
          </Table>

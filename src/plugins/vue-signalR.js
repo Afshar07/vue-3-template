@@ -1,6 +1,7 @@
 import {HubConnectionBuilder, LogLevel} from "@microsoft/signalr";
 import {useAuthStore} from "@/stores/auth";
-import {userChatStore} from "@/stores/chat";
+import {useChatStore} from "@/stores/chat";
+
 const hub = new HubConnectionBuilder()
     .withUrl("https://api.maliehiran.ir/chatHub", {
         accessTokenFactory: function () {
@@ -8,14 +9,15 @@ const hub = new HubConnectionBuilder()
         },
     })
     .configureLogging(LogLevel.Information)
+    .withAutomaticReconnect()
     .build();
 hub.on("SendMessage", (res) => {
-    const chatStore = userChatStore()
+    const chatStore = useChatStore()
 
     chatStore.sendMessage(res);
 });
 hub.on("ReadMessage", (res) => {
-    const chatStore = userChatStore()
+    const chatStore = useChatStore()
 
     chatStore.sendMessage(res);
 
@@ -35,9 +37,7 @@ async function start() {
     }
 }
 
-hub.onclose(async () => {
-    await start();
-});
+
 start()
 export default {
     install: (app) => {
@@ -45,19 +45,5 @@ export default {
     }
 }
 
-
-// sample sending of message
-/*
-hub
-  .invoke('SendMessageToOthers', {
-    action: action,
-    data: Object.assign(
-      { user: get(store, 'getters.loggedUser.name') },
-      message
-    )
-  })
-  .catch(err => console.error(err.toString()))
-*/
-// }
 
 
