@@ -10,7 +10,7 @@ const router = createRouter({
       path: "/",
       name: "index",
       meta: {
-        title: "داشبورد | ورود",
+        title: "مالی ایران | ورود",
       },
       component: () => import("../views/index.vue"),
     },
@@ -20,7 +20,7 @@ const router = createRouter({
       component: () => import("../views/dashboard.vue"),
       meta: {
         auth: true,
-        title: "داشبورد | داشبورد",
+        title: "مالی ایران | مالی ایران",
       },
     },
     // {
@@ -29,7 +29,7 @@ const router = createRouter({
     //   component: () => import("../views/user/editProfile.vue"),
     //   meta: {
     //     auth: true,
-    //     title: "داشبورد | حساب کاربری ",
+    //     title: "مالی ایران | حساب کاربری ",
     //   },
     // },
     {
@@ -38,7 +38,7 @@ const router = createRouter({
       component: () => import("../views/admin/user/AllUsers.vue"),
       meta: {
         auth: true,
-        title: "داشبورد | لیست کاربران",
+        title: "مالی ایران | لیست کاربران",
       },
     },
     {
@@ -47,7 +47,7 @@ const router = createRouter({
       component: () => import("../views/admin/user/editProfile.vue"),
       meta: {
         auth: true,
-        title: "داشبورد | حساب کاربری ",
+        title: "مالی ایران | حساب کاربری ",
       },
     },
     {
@@ -56,7 +56,7 @@ const router = createRouter({
       component: () => import("../views/admin/requests/RequestsList.vue"),
       meta: {
         auth: true,
-        title: "داشبورد | لیست درخواست ها",
+        title: "مالی ایران | لیست درخواست ها",
       },
     },
     {
@@ -65,7 +65,7 @@ const router = createRouter({
       component: () => import("../views/test.vue"),
       meta: {
         auth: true,
-        title: "داشبورد | تست",
+        title: "مالی ایران | تست",
       },
     },
     // reports start
@@ -76,7 +76,7 @@ const router = createRouter({
       component: () => import("../views/reports/index.vue"),
       meta: {
         auth: true,
-        title: "داشبورد | گزارشات",
+        title: "مالی ایران | گزارشات",
       },
     },
     {
@@ -85,7 +85,7 @@ const router = createRouter({
       component: () => import("../views/reports/seasonalReports.vue"),
       meta: {
         auth: true,
-        title: "داشبورد | گزارشات فصلی",
+        title: "مالی ایران | گزارشات فصلی",
       },
     },
     // reports end
@@ -98,7 +98,7 @@ const router = createRouter({
       component: () => import("../views/services/index.vue"),
       meta: {
         auth: true,
-        title: "داشبورد | خدمات",
+        title: "مالی ایران | خدمات",
       },
     },
     {
@@ -108,7 +108,7 @@ const router = createRouter({
       component: () => import("../views/services/statement.vue"),
       meta: {
         auth: true,
-        title: "داشبورد | اظهار‌نامه",
+        title: "مالی ایران | اظهار‌نامه",
       },
     },
     // services end
@@ -119,7 +119,7 @@ const router = createRouter({
       component: () => import("../views/chat/index.vue"),
       meta: {
         auth: true,
-        title: "داشبورد | چت",
+        title: "مالی ایران | چت",
       },
     },
     {
@@ -128,7 +128,7 @@ const router = createRouter({
       component: () => import("../views/chat/SingleChat.vue"),
       meta: {
         auth: true,
-        title: "داشبورد | چت با کاربر",
+        title: "مالی ایران | چت با کاربر",
       },
     },
     {
@@ -137,7 +137,7 @@ const router = createRouter({
       component: () => import("../views/VIP/index.vue"),
       meta: {
         auth: true,
-        title: "داشبورد | گزارشات",
+        title: "مالی ایران | گزارشات",
       },
     },
   ],
