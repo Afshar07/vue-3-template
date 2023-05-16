@@ -32,7 +32,9 @@ const repositories: any = inject("repositories");
 const appStore = useAppStore();
 const chatStore: any = useChatStore();
 onMounted(async () => {
-  await Promise.all([getMenu()]);
+  await Promise.all([
+      deliverMessage(),
+      getMenu()]);
 });
 let chats = ref(null)
 
@@ -71,7 +73,7 @@ watch(chatStore.getSocketId, async (val) => {
     await getMenu()
     chatStore.setDefaultSocketId();
   }
-})
+},{immediate:true})
 let debouncedSearch = computed({
   get() {
     return search.value;

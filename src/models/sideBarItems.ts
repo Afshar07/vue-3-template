@@ -30,7 +30,7 @@ export const sideBarItems: navItems[] = [
 
   {
     title: "چت",
-    link: "/chat/userName",
+    link: "/chat/1",
     icon: "ChatIcon",
     hasChildren: false,
     hasAccess: ['subscriber'],

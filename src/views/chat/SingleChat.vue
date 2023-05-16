@@ -1,25 +1,64 @@
 <template>
-  <div class="w-full min-h-full h-full bg-white relative">
+  <Modal
+      :id="'chatMediaModal'"
+      @ok="sendMessage"
+      :closeModalTitle="'بستن'"
+      :okModalTitle="'ارسال'"
+      :title="'اپلود عکس'"
+  >
+    <template #modalBody>
+      <div class="w-full p-3">
+      <div v-if="convertedMedia.pictureUrl===''" @click="mediaInput.click()" class="rounded-xl bg-gray-500 h-40 flex items-center justify-center">
+        <i class="ri-cloud-fill text-white text-5xl"></i>
+      </div>
+        <div v-if="convertedMedia.pictureUrl!==''" @click="mediaInput.click()" class="rounded-xl  h-40 flex items-center justify-center">
+          <img :src="convertedMedia.pictureUrl" class="w-full h-full object-contain" alt="">
+        </div>
+      </div>
+    </template>
+  </Modal>
+
+  <Modal
+      :id="'showChatMediaModal'"
+      :closeModalTitle="'بستن'"
+  >
+    <template #modalBody>
+
+      <div class="w-full overflow-scroll p-3">
+        <img :src="helper.baseUrl+ 'media/gallery/ChatMedia/'+selectedMedia" class="w-full h-full object-contain" alt="">
+      </div>
+    </template>
+  </Modal>
+  <div ref="chatContainer" class="w-full min-h-full h-full bg-white relative">
     <header
         class="h-14 shadow-md flex items-center justify-between p-4 sticky top-0 right-0 bg-white !z-10"
     >
-      <div class="avatar-name-section flex items-center">
-        <div class="avatar placeholder online">
-          <div class="w-10 rounded-full">
+      <div v-if="userData" class="avatar-name-section flex items-center">
+        <div class="avatar placeholder ">
+          <div class="w-10 h-10 rounded-full">
             <img
+                v-if="userData.profileImage"
                 src="https://static.wikia.nocookie.net/starwars/images/6/6f/Anakin_Skywalker_RotS.png/"
             />
+            <div
+                v-else
+                class="bg-neutral-focus flex items-center justify-center text-neutral-content rounded-full h-10 w-10"
+            >
+              <span class="text-3xl">{{ userData['name'].substring(0, 1) }}</span>
+            </div>
           </div>
         </div>
-        <h2 class="mr-2 font-semibold">آناکین اسکای واکر</h2>
+        <h2   class="mr-2 font-semibold">{{ userData['name'] + ' ' +userData['familyName']  }}</h2>
       </div>
       <span @click="routeBack">
         <ChevronLeft class="w-5 h-5"></ChevronLeft>
       </span>
     </header>
-    <main class="h-full space-y-2 mt-1" dir="ltr">
+    <main  @scroll="scrollToTop"  class="h-full space-y-2  mt-1" dir="ltr">
       <chat-bubble
-          v-for="item in chatMessages"
+          @emitSelectedMedia="setSelectedMedia"
+          v-for="item in conversation"
+          :message="item"
           :chatDirection="item.position"
           :chatMessage="item.message"
           :isRead="item.isRead"
@@ -33,57 +72,21 @@
       <div class="w-full flex items-center justify-between">
         <!-- Send Button -->
         <button @click="sendMessage" type="button">
-          <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-5 h-5"
-          >
-            <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
-            />
-          </svg>
+          <SendIcon></SendIcon>
         </button>
         <!-- Mic Button -->
         <button type="button">
-          <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-5 h-5"
-          >
-            <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"
-            />
-          </svg>
+         <MicIcon></MicIcon>
         </button>
-        <input type="file" ref="mediaInput" class="hidden" @input="handleFileUpload">
+        <input type="file" ref="mediaInput" accept="image/png,image/jpeg" class="hidden" @input="handleFileUpload">
         <!-- Attachment Button -->
-        <button @click="mediaInput.click()" type="button">
-          <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-5 h-5"
-          >
-            <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13"
-            />
-          </svg>
-        </button>
+        <label for="chatMediaModal"  type="button">
+          <label for="showChatMediaModal" ref="showChatMediaBtn"></label>
+         <AttachmentIcon></AttachmentIcon>
+        </label>
         <input
+            @keydown.enter="sendMessage"
+            v-model="newMessage.messageBody"
             type="text"
             placeholder="متن پیام را وارد کنید"
             class="input input-bordered input-sm w-2/3"
@@ -92,128 +95,167 @@
     </footer>
   </div>
 </template>
-<script setup>
-import {inject, onMounted, reactive, ref} from "vue";
+<script setup lang="ts">
+import {useAppStore} from "@/stores/app";
+import {computed, inject, onMounted, reactive, ref, watch} from "vue";
 import ChevronLeft from "@/components/icons/ChevronLeft.vue";
 import ChatBubble from "@/components/utilities/chat/mini/ChatBubble.vue";
-import {useAppStore} from "@/stores/app";
 import {useRoute, useRouter} from "vue-router";
 import {useAuthStore} from "@/stores/auth";
-const chatMessages = ref([
-  {
-    // message: "What kind of nonsense is this",
-    message: "این دیگه چه مزخرفیه",
-    createDate: new Date("2023-05-04T17:53:26.000Z"),
-    position: "start",
-    isRead: null,
-    isDelivered: null,
-  },
-  {
-    message: "من رو توی شورا قرار بدید، اما به یه مستر تبدیلم نکنید!؟؟",
-    createDate: new Date(Date.now()),
-    position: "start",
-    isRead: null,
-    isDelivered: null,
-  },
-  {
-    message: "این قضیه هیچوقت توی تاریخ جدای ها اتفاق نیوفتاده و تحقیر آمیزه!!",
-    createDate: new Date(Date.now()),
-    position: "start",
-    isRead: null,
-    isDelivered: null,
-  },
-  {
-    message: "آروم باش، آناکین",
-    createDate: new Date(Date.now()),
-    position: "end",
-    isRead: true,
-    isDelivered: true,
-  },
-  {
-    message: "تو افتخار بزرگی به دست آوردی...",
-    createDate: new Date(Date.now()),
-    position: "end",
-    isRead: true,
-    isDelivered: true,
-  },
-  {
-    message: "در این سن، حزوی از شورا بودن",
-    createDate: new Date(Date.now()),
-    position: "end",
-    isDelivered: true,
-    isRead: false,
-  },
-  {
-    message: "تا به حال سابقه نداشته.",
-    createDate: new Date(Date.now()),
-    position: "end",
-    isRead: false,
-    isDelivered: false,
-  },
-]);
-const repositories = inject('repositories')
-const helper = inject('helper')
-const appStore = useAppStore()
-const authStore = useAuthStore()
-const route = useRoute()
-const router = useRouter()
-onMounted(async ()=>{
+import AttachmentIcon from "@/components/icons/AttachmentIcon.vue";
+import MicIcon from "@/components/icons/MicIcon.vue";
+import SendIcon from "@/components/icons/SendIcon.vue";
+import {messageModel} from "@/models/messageModel";
+import {useChatStore} from "@/stores/chat";
+import Modal from "@/components/utilities/Modal.vue";
+const chatStore:any = useChatStore();
+const repositories:any = inject('repositories')
+const helper:any = inject('helper')
+const authStore:any = useAuthStore()
+const route:any = useRoute()
+const router:any = useRouter()
+let conversation = ref<any>([])
+onMounted(async () => {
   await Promise.all([
-      readMessage(),
+    getUser(),
+    readMessage(),
     getConversation()
   ])
 })
 let selectedMessageId = ref(0)
-let newMessage = reactive({
+let newMessage = reactive<messageModel>({
+  subject: "",
+  userId: authStore.getUser.userId,
+  messageBody: "",
+  createDate: new Date(Date.now()),
+  parentMessageId: 0,
+  isForwarded: false,
+  recipientUserId: parseInt(route.params.username),
+  recipientGroupId: 0,
+  fileData:null
 })
-let mediaInput = ref(null)
-function routeBack(){
-  if(authStore.getUser.role === 'Subscriber'){
-    router.push('/services')
-  }else{
-    router.push('/chat')
+let  selectedMedia = ref('')
+let showChatMediaBtn:any = ref(null)
+let chatContainer:any = ref(null)
+
+
+function setSelectedMedia (media:any){
+ selectedMedia.value = media
+  console.log(showChatMediaBtn)
+  showChatMediaBtn.value.click()
+}
+let convertedMedia = reactive({
+  pictureUrl:'',
+  base64:''
+})
+let mediaInput = ref<any>(null)
+let userData = ref(null)
+function routeBack() {
+  if (authStore.getUser.role === 'Subscriber') {
+    router.replace('/services')
+  } else {
+    router.replace('/chat')
   }
 }
-async function getConversation(){
+
+async function getUser() {
   try {
-    appStore.showOverlay = true
-    const res = await  repositories.getConversation.setParams({
-      userId:route.params.id,
-      messageId:selectedMessageId.value,
-      count:20,
+    const res = await repositories.getUserById.setParams({
+      id: route.params.username
     })
-  }catch (e) {
+    userData.value = res.data
+  } catch (e) {
     console.log(e)
-  }finally {
-    appStore.showOverlay = false
-
   }
 }
-async function readMessage(){
+let getSocketId = computed(()=>{
+  return chatStore.SocketUserId
+})
+watch(getSocketId, async (val) => {
+  if (val!==undefined) {
+    deliverMessage();
+    readMessage();
+    getConversation();
+  }
+    chatStore.setDefaultSocketId();
+},)
+
+function scrollToTop(){
+  // this.$refs.chatContainerRef.$el.scrollTop = this.$refs.chatContainerRef.$el.scrollHeight
+
+}
+function  scrollBottom(){
+
+ chatContainer.value.scrollTop = chatContainer.value.scrollHeight
+  console.log(chatContainer.value.scrollTop)
+
+}
+async function deliverMessage() {
   try {
-    appStore.showOverlay = true
-    const res = await  repositories.readMessage.setParams({
-      userId:route.params.id,
+    const res = await repositories.deliverMessage.setTag()
+  } catch (e) {
+    console.log(e)
+  }
+}
+async function getConversation() {
+  try {
+    const res = await repositories.getConversation.setParams({
+      userId: route.params.username,
+      messageId: selectedMessageId.value,
+      count: 20,
     })
-  }catch (e) {
+    res.data.forEach((item:any)=>{
+      const idx = conversation.value.findIndex((e: { messageId: any; })=> e.messageId === item.messageId)
+      if (idx > -1) {
+        conversation.value[idx] = item
+      } else {
+         conversation?.value?.push(item)
+      }
+    })
+
+    conversation.value.reverse()
+    scrollBottom()
+  } catch (e) {
     console.log(e)
-  }finally {
-    appStore.showOverlay = false
+  } finally {
 
   }
 }
-async function sendMessage(){
+
+async function readMessage() {
   try {
-    appStore.showOverlay = true
-    const res = await  repositories.sendMessage.setPayload(newMessage)
-  }catch (e) {
+    const res = await repositories.readMessage.setParams({
+      userId: route.params.username,
+    })
+  } catch (e) {
     console.log(e)
-  }finally {
-    appStore.showOverlay = false
+  } finally {
 
   }
 }
-async function handleFileUpload(){
-      console.log( await helper.fileToBase64(mediaInput.value.files[0]))
+
+async function sendMessage() {
+  if(convertedMedia.base64!==''){
+    newMessage.fileData = {
+      base64:convertedMedia.base64,
+      priority:1
+    }
+  }
+  try {
+    const res = await repositories.sendMessage.setPayload(newMessage)
+    newMessage.messageBody = ''
+    newMessage.fileData = null
+  } catch (e) {
+    console.log(e)
+  } finally {
+
+  }
+}
+
+async function handleFileUpload() {
+  let media = await helper.fileToBase64(mediaInput.value.files[0])
+  convertedMedia.base64 = media.base64
+  convertedMedia.pictureUrl = media.pictureUrl
+
 }
 </script>

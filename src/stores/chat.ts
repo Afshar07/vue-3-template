@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 import { useRouter } from "vue-router";
 export const useChatStore = defineStore("chat", {
     state: () => ({
-        SocketUserId: 2,
+        SocketUserId: 0,
     }),
     getters: {
         getSocketId():number {
@@ -16,6 +16,7 @@ export const useChatStore = defineStore("chat", {
         },
         sendMessage(resultId:number) {
             this.SocketUserId = resultId;
+
         },
     },
 });

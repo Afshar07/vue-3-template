@@ -60,6 +60,7 @@ const closeModalRef: any = ref(null)
 
 function ok(): void {
   emits('ok')
+  closeModal()
 }
 
 function closeModal(): void {

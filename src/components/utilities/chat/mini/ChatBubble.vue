@@ -1,48 +1,34 @@
 <template>
-  <div class="chat  " :class="`chat-${props.chatDirection}`">
+  <div class="chat chat-start  " :class="{'!chat-end':props.message['creatorUserId']===authStore.getUser.userId}">
     <div class="chat-header">
-      <time class="text-xs opacity-80">{{
-        helper.detailedParsedDate(props.createDate)
-      }}</time>
+
+      <time class="text-xs opacity-50">
+        {{ helper.detailedParsedDate(props.message['createDate'] + 'z') }}
+      </time>
     </div>
-    <div class="chat-bubble text-sm">{{ props.chatMessage }}</div>
-    <div
-      v-if="props.chatDirection != 'start'"
-      class="chat-footer opacity-50 flex items-center relative mt-1"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-        class="w-4 h-4"
-        :class="props.isRead ? 'text-blue-700' : ''"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-          clip-rule="evenodd"
-        />
-      </svg>
-      <svg
-        v-if="props.isDelivered"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-        class="w-4 h-4 absolute left-[0.3rem]"
-        :class="props.isRead ? 'text-blue-700' : ''"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-          clip-rule="evenodd"
-        />
-      </svg>
+    <div class="chat-bubble  "
+         :class="{'!bg-primary !rounded-xl':props.message['creatorUserId']===authStore.getUser.userId}">
+      <img @click="emitSelectedMedia(props.message['chatMedia'])" v-if="props.message['chatMedia']" class="w-full h-40" :src="helper.baseUrl+ 'media/gallery/ChatMedia/'+props.message['chatMedia']" alt="">
+      {{ message['messageBody'] }}
+    </div>
+    <div v-if="props.message['creatorUserId']===authStore.getUser.userId" class="chat-footer  opacity-50">
+      <i v-if="props.message.isDelivered" class="ri-check-fill relative left-2.5"></i>
+      <i v-if="props.message.isRead" class="ri-check-fill "></i>
+
     </div>
   </div>
+
 </template>
 <script setup>
-import { inject } from "vue";
+import {inject} from "vue";
+import CheckIcon from "@/components/icons/CheckIcon.vue";
+import {useAuthStore} from "@/stores/auth";
+const emits = defineEmits(['emitSelectedMedia'])
 const helper = inject("helper");
+const authStore = useAuthStore()
+function  emitSelectedMedia(media){
+  emits('emitSelectedMedia',media)
+}
 const props = defineProps({
   chatDirection: {
     type: String,
@@ -50,6 +36,9 @@ const props = defineProps({
     validator(value) {
       return ["start", "end"].includes(value);
     },
+  },
+  message: {
+    type: Object,
   },
   chatMessage: {
     type: String,

@@ -13,18 +13,16 @@ const hub = new HubConnectionBuilder()
     .build();
 hub.on("SendMessage", (res) => {
     const chatStore = useChatStore()
-
     chatStore.sendMessage(res);
 });
 hub.on("ReadMessage", (res) => {
     const chatStore = useChatStore()
-
     chatStore.sendMessage(res);
-
 });
 hub.on("DeliverMessage", (res) => {
-    // store.commit("sendMessage", res);
-
+    const chatStore = useChatStore()
+    console.log('DeliverMessage')
+    chatStore.sendMessage(res);
 });
 
 async function start() {
