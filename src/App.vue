@@ -14,6 +14,7 @@
       <side-bar></side-bar>
     </div>
     <div
+        @scroll="test"
       :class="[fullLayout ? '' : 'p-2']"
       class="lg:col-span-9 2xl:col-span-10 z-50 min-h-screen md:mb-0 mb-10 col-span-12 z-[1] h-full"
     >
@@ -46,6 +47,7 @@ import BottomNav from "@/components/main/BottomNav.vue";
 const appStore = useAppStore();
 const sideBarStore = useSideBarStore();
 const route: any = useRoute();
+
 let fullLayout = computed(() => {
   return (
     (route.name !== undefined && route.name === "index") ||
