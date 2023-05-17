@@ -9,13 +9,13 @@
       :class="{
         ' md:!block md:!relative   hidden ': !sideBarStore.showSideBar,
       }"
-      class="md:col-span-2 min-h-screen max-h-full  fixed top-0 left-0 z-10 col-span-12"
+      class="lg:col-span-3 2xl:col-span-2 2md:hidden  min-h-screen max-h-full  fixed top-0 left-0 z-10 col-span-12"
     >
       <side-bar></side-bar>
     </div>
     <div
       :class="[fullLayout ? '' : 'p-2']"
-      class="md:col-span-10 z-50 min-h-screen md:mb-0 mb-10 col-span-12 z-[1] h-full"
+      class="lg:col-span-9 2xl:col-span-10 z-50 min-h-screen md:mb-0 mb-10 col-span-12 z-[1] h-full"
     >
       <Header v-if="!fullLayout"></Header>
       <router-view v-slot="{ Component }">
@@ -62,7 +62,7 @@ let showBottomNav = computed(() => {
 onMounted(() => {
   const body: any = document.querySelector("body");
   // Set theme
-  if (appStore.getSiteTheme) {
+ if (appStore.getSiteTheme) {
     body.classList.add("dark");
   } else {
     body.classList.remove("dark");

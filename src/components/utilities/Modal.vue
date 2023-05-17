@@ -7,7 +7,7 @@
       <label for="" style="direction: ltr!important;" class="modal-box m-2 p-0 bg-white dark:bg-dark-muted">
         <div v-if="props.title"
              class=" flex items-center justify-center pb-2  my-3 border-b dark:border-gray-400 border-gray-200">
-          <strong class="dark:text-white text-black  text-lg">{{ props.title }}</strong>
+          <strong class="dark:text-white text-gray-700  text-sm md:text-lg">{{ props.title }}</strong>
         </div>
         <slot v-if="hasBody" name="modalBody"></slot>
         <div :class="{'border-t pt-3' : hasBody}"
