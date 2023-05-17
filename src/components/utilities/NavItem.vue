@@ -3,9 +3,9 @@
                :to="props.item.link" exact-active-class="link-active-class">
     <div
         v-show="!props.item?.hasChildren"
-        class="flex items-center gap-1 hover:fill-white hover:!rounded-xl !rounded-xl px-3.5 py-3 cursor-pointer hover:bg-primary hover:text-white text-md font-medium">
+        class=" transform transition-all hover:scale-105 flex items-center gap-1 hover:fill-white hover:!rounded-xl !rounded-xl px-3.5 py-3 cursor-pointer hover:bg-primary hover:text-white text-md font-medium">
       <DynamicIcon :icon="props.item.icon"></DynamicIcon>
-      <span class="mt-1">
+      <span class="mt-1 ">
             {{ props.item.title }}
       </span>
     </div>

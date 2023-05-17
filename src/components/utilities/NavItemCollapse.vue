@@ -1,8 +1,8 @@
 <template>
-  <Dropdown v-if="props.item.hasChildren && hasAccess(props.item.hasAccess)">
+  <Dropdown class="transform transition-all hover:scale-105" v-if="props.item.hasChildren && hasAccess(props.item.hasAccess)">
     <template v-slot:title>
       <div
-          class="flex items-center  hover:text-white  gap-2">
+          class="flex  items-center  hover:text-white  gap-2">
         <DynamicIcon :icon="props.item.icon"></DynamicIcon>
         <span class="mt-1  dark:text-white">
             {{ props.item.title }}
@@ -11,8 +11,8 @@
     </template>
     <template v-slot:content>
       <div v-if="props.item?.children.length>0" class="p-0 dark:bg-dark-muted">
-        <li v-for="(el,idx) in props.item.children">
-          <router-link :to="el.link" v-if="el.hasAccess" class="my-0.5 hover:!fill-white fill-gray-400"
+        <li v-for="(el,idx) in props.item.children" >
+          <router-link :to="el.link" v-if="el.hasAccess" class="my-0.5 transform transition-all hover:scale-105 hover:!fill-white fill-gray-400"
                        exact-active-class="link-active-class">
             <div class="flex items-center gap-2">
               <CircleIcon class="w-3 h-3"></CircleIcon>

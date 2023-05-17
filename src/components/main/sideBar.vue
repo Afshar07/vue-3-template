@@ -5,7 +5,10 @@
     <div class="drawer-side   shadow-2xl w-full  ">
       <label ref="sideBarLabel" @click="countTouch" for="my-drawer-2" class="drawer-overlay fixed h-full  "></label>
       <ul class="menu h-full p-4 w-[16rem] bg-white dark:bg-dark-muted  text-base-content">
+        <div class="flex items-center gap-1">
+          <img src="/logo.png" class="w-8 h-8" alt="">
         <h1 class="font-bold text-gray-800 dark:text-white text-2xl p-2">{{ appName }}</h1>
+        </div>
         <!-- Sidebar content here -->
         <NavItem :class="{'collapse-open':isSelectedItem(item)}" @click="setSelectedNavItem(item)"
                  v-for="(item,idx) in navigationItems" :key="idx" :item="item"></NavItem>
