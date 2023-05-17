@@ -31,7 +31,7 @@
     <main
       ref="chatContainer"
       @scroll="scrollToTop"
-      class="h-full space-y-2 mt-1 pt-14 pb-10"
+      class="h-full space-y-2 mt-1 pt-14 pb-10 bg-[url('/chatbg.svg')] bg-[#f2f0f7] bg-repeat bg-[length:210px_210px] bg-fixed"
       dir="ltr"
     >
       <chat-bubble
