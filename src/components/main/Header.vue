@@ -5,33 +5,34 @@
       <MenuIcon class="fill-black dark:fill-white "></MenuIcon>
     </div>
     <div class="flex items-center z-50 relative justify-center">
-      <div @click="logout" class=" text-black md:hidden dark:text-white fill-black dark:fill-white">
-        <div class=" flex btn bg-red-500 border-none btn-sm items-center gap-2 hover:fill-white rounded-xl px-3.5  cursor-pointer hover:bg-primary hover:text-white text-md font-medium">
-          <PowerIcon class=" w-5 h-5 fill-white"></PowerIcon>
-          <span class="">
-            خروج
-            </span>
-        </div>
-      </div>
+      <small>{{authStore.getUser.name + ' '+ authStore.getUser.familyName}}</small>
     </div>
-    <div class="flex cursor-pointer items-center">
-      <div class="relative flex ">
-        <small class="opacity-0">asd</small>
+    <div class="flex items-center z-50 relative justify-center">
+      <label for="logoutModal" class=" text-black md:hidden dark:text-white fill-black dark:fill-white">
+          <PowerIcon class=" w-5 h-5 fill-red-500"></PowerIcon>
+      </label>
+    </div>
+<!--    <div class="flex cursor-pointer items-center">-->
+<!--      <div class="relative flex ">-->
+<!--        <small class="opacity-0">asd</small>-->
 
-        <transition name="rotate">
-          <!-- moon icon -->
-          <MoonIcon v-if="appStore.getSiteTheme"
-                    :class="{'!block ': appStore.getSiteTheme,'absolute':appStore.getSiteTheme}"
-                    @click="toggleSiteTheme" class="fill-black  left-0   dark:fill-white "></MoonIcon>
-        </transition>
-        <transition name="rotate">
-          <!-- sun icon -->
-          <SunIcon v-if="!appStore.getSiteTheme"
-                   :class="{'!block ':!appStore.getSiteTheme,'absolute':!appStore.getSiteTheme}"
-                   @click="toggleSiteTheme" class="fill-black  left-0   dark:fill-white "></SunIcon>
-        </transition>
-      </div>
-    </div>
+<!--        <transition name="rotate">-->
+<!--          &lt;!&ndash; moon icon &ndash;&gt;-->
+<!--          <MoonIcon v-if="appStore.getSiteTheme"-->
+<!--                    :class="{'!block ': appStore.getSiteTheme,'absolute':appStore.getSiteTheme}"-->
+<!--                    @click="toggleSiteTheme" class="fill-black  left-0   dark:fill-white "></MoonIcon>-->
+<!--        </transition>-->
+<!--        <transition name="rotate">-->
+<!--          &lt;!&ndash; sun icon &ndash;&gt;-->
+<!--          <SunIcon v-if="!appStore.getSiteTheme"-->
+<!--                   :class="{'!block ':!appStore.getSiteTheme,'absolute':!appStore.getSiteTheme}"-->
+<!--                   @click="toggleSiteTheme" class="fill-black  left-0   dark:fill-white "></SunIcon>-->
+<!--        </transition>-->
+<!--      </div>-->
+<!--    </div>-->
+    <!--  Delete Modal  -->
+    <Modal :id="'logoutModal'" @ok="logout" :closeModalTitle="'خیر'" :okModalTitle="'بله'" :has-body="false"
+           :title="'آیا میخواهید از حساب کاربری خود خارج شوید'"></Modal>
   </div>
 </template>
 
@@ -46,6 +47,7 @@ import {useAuthStore} from "@/stores/auth";
 import router from "@/router";
 import DoorIcon from "@/components/icons/DoorIcon.vue";
 import PowerIcon from "@/components/icons/PowerIcon.vue";
+import Modal from "@/components/utilities/Modal.vue";
 
 const sideBar = useSideBarStore()
 const appStore = useAppStore()
