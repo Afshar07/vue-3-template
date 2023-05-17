@@ -34,7 +34,7 @@
       "purpose": "any maskable"
     },
     {
-      "src": "/img/icons/favicon.png",
+      "src": "/img/icons/favicon-32x32.png",
       "sizes": "32x32",
       "type": "image/png",
       "purpose": "any maskable"
