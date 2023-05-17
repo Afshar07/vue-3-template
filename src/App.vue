@@ -9,7 +9,7 @@
       :class="{
         ' md:!block md:!relative   hidden ': !sideBarStore.showSideBar,
       }"
-      class="md:col-span-2 min-h-screen max-h-full  fixed top-0 left-0 z-10 col-span-12"
+      class="md:col-span-2 min-h-screen max-h-full fixed top-0 left-0 z-10 col-span-12"
     >
       <side-bar></side-bar>
     </div>
@@ -19,7 +19,7 @@
     >
       <Header v-if="!fullLayout"></Header>
       <router-view v-slot="{ Component }">
-        <transition name="fade" mode="out-in">
+        <transition name="fade" appear mode="out-in">
           <component :is="Component" />
         </transition>
       </router-view>

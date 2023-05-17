@@ -141,7 +141,7 @@
 
 <script setup lang="ts">
 import type { signDto } from "@/models/signModel";
-import { computed, defineEmits, inject, onMounted, reactive, ref } from "vue";
+import { computed, inject, reactive, ref } from "vue";
 import LockIcon from "@/components/icons/LockIcon.vue";
 import VInput from "@/components/utilities/VInput.vue";
 import { useAppStore } from "@/stores/app";
