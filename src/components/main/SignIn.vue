@@ -31,7 +31,7 @@
     </Modal>
 
     <h1 class="text-white text-[2rem] sm:text-[3rem] mb-3">
-      به  {{ appName }} خوش آمدید
+      به {{ appName }} خوش آمدید
     </h1>
     <div class="w-full h-10 flex flex-row justify-between items-center">
       <div
@@ -83,7 +83,7 @@
       </div>
       <div>
         <button
-            v-if="loginData.type!==1"
+          v-if="loginData.type !== 1"
           @click="login"
           type="submit"
           class="group bg-violet relative flex w-full justify-center rounded-md py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
@@ -101,17 +101,17 @@
           ورود
         </button>
         <button
-            v-else
-            type="submit"
-            class="group bg-gray-400   relative flex w-full justify-center rounded-md py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          v-else
+          type="submit"
+          class="group bg-gray-400 relative flex w-full justify-center rounded-md py-2 px-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           <span class="absolute inset-y-0 left-0 flex items-center pl-3">
             <LockIcon
-                v-if="
+              v-if="
                 (loginData.type === 1 && mobileNotValid !== false) ||
                 (loginData.type === 2 && emailNotValid !== false)
               "
-                class="fill-white"
+              class="fill-white"
             ></LockIcon>
           </span>
 
@@ -121,12 +121,13 @@
       <div class="flex items-center justify-center">
         <div class="text-sm">
           <span
-              class="text-center dark:text-white text-xs text-white font-bold tracking-tight cursor-pointer"
-          >آیا حساب کاربری ندارید ؟</span
+            class="text-center dark:text-white text-xs text-white font-bold tracking-tight cursor-pointer"
+            >آیا حساب کاربری ندارید ؟</span
           >
 
-          <label @click="changeActiveComponent"
-              class="font-medium cursor-pointer text-xs text-indigo-600 dark:text-white transition-all hover:!text-primary"
+          <label
+            @click="changeActiveComponent"
+            class="font-medium cursor-pointer text-xs text-indigo-600 dark:text-white transition-all hover:!text-primary"
           >
             ثبت نام
           </label>
@@ -136,13 +137,13 @@
       <div class="flex items-center justify-center">
         <div class="text-sm">
           <span
-              class="text-center dark:text-white text-xs text-white font-bold tracking-tight cursor-pointer"
-          >رمز عبور خود را فراموش کرده اید؟</span
+            class="text-center dark:text-white text-xs text-white font-bold tracking-tight cursor-pointer"
+            >رمز عبور خود را فراموش کرده اید؟</span
           >
 
           <label
-              for="optionsModal"
-              class="font-medium cursor-pointer text-xs text-indigo-600 dark:text-white transition-all hover:!text-primary"
+            for="optionsModal"
+            class="font-medium cursor-pointer text-xs text-indigo-600 dark:text-white transition-all hover:!text-primary"
           >
             فراموشی رمز عبور
           </label>
@@ -233,9 +234,12 @@ async function login() {
     } else {
       if (res.data.data.status === 7) {
         authStore.setUser(res.data.data.data);
-        if(res.data.data.data.user.role ==='Admin'){
-        await router.push("/dashboard/users/AllUsers");
-        }else{
+        if (
+          res.data.data.data.user.role &&
+          res.data.data.data.user.role.toLowerCase() === "admin"
+        ) {
+          await router.push("/dashboard/users/AllUsers");
+        } else {
           await router.push("/services");
         }
       } else {
