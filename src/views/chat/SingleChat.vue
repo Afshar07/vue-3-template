@@ -1,22 +1,22 @@
 <template>
   <div class="w-full min-h-full h-full bg-white relative">
     <header
-        class="h-14 shadow-md w-full flex items-center justify-between p-4 fixed top-0 right-0 bg-white !z-10"
+      class="h-14 shadow-md w-full flex items-center justify-between p-4 fixed top-0 right-0 bg-white !z-10"
     >
       <div v-if="userData" class="avatar-name-section flex items-center">
         <div class="avatar placeholder">
           <div class="w-10 h-10 rounded-full">
             <img
-                v-if="userData.profileImage"
-                src="https://static.wikia.nocookie.net/starwars/images/6/6f/Anakin_Skywalker_RotS.png/"
+              v-if="userData.profileImage"
+              src="https://static.wikia.nocookie.net/starwars/images/6/6f/Anakin_Skywalker_RotS.png/"
             />
             <div
-                v-else
-                class="bg-neutral-focus flex items-center justify-center text-neutral-content rounded-full h-10 w-10"
+              v-else
+              class="bg-neutral-focus flex items-center justify-center text-neutral-content rounded-full h-10 w-10"
             >
               <span class="text-3xl">{{
-                  userData["name"].substring(0, 1)
-                }}</span>
+                userData["name"].substring(0, 1)
+              }}</span>
             </div>
           </div>
         </div>
@@ -29,81 +29,86 @@
       </span>
     </header>
     <main
-        ref="chatContainer"
-        class="h-full overflow-scroll space-y-2 mt-1 pt-14 pb-10 bg-[url('/chatbg.svg')] bg-[#f2f0f7] bg-repeat bg-[length:210px_210px] bg-fixed"
-        dir="ltr"
+      ref="chatContainer"
+      class="h-full overflow-scroll space-y-2 mt-1 pt-14 pb-10 md:pb-14 bg-[url('/chatbg.svg')] px-2 bg-[#f2f0f7] bg-repeat bg-[length:210px_210px] md:bg-full bg-fixed"
+      dir="ltr"
     >
       <chat-bubble
-          @emitSelectedMedia="setSelectedMedia"
-          v-for="(item, idx) in conversation"
-          :ref="(el) => (chatItems[idx] = el)"
-          :message="item"
-          :id="`bubble${idx}`"
-          :chatDirection="item.position"
-          :chatMessage="item.message"
-          :isRead="item.isRead"
-          :isDelivered="item.isDelivered"
-          :createDate="item.createDate"
+        @emitSelectedMedia="setSelectedMedia"
+        v-for="(item, idx) in conversation"
+        :ref="(el) => (chatItems[idx] = el)"
+        :message="item"
+        :id="`bubble${idx}`"
+        :chatDirection="item.position"
+        :chatMessage="item.message"
+        :isRead="item.isRead"
+        :isDelivered="item.isDelivered"
+        :createDate="item.createDate"
       ></chat-bubble>
     </main>
     <footer
-        class="fixed w-full bottom-0 h-14 shadow border-t p-2 flex items-center bg-white"
+      class="fixed w-full bottom-0 h-14 shadow border-t p-2 flex items-center bg-white"
     >
       <div class="w-full flex items-center justify-between">
-        <!-- Send Button -->
-        <button @click="sendMessage" type="button">
-          <SendIcon></SendIcon>
-        </button>
-        <!-- Mic Button -->
-        <button type="button">
-          <MicIcon></MicIcon>
-        </button>
-        <input
+        <div
+          class="w-auto flex items-center justify-around md:justify-start md:gap-x-5 md:mx-4"
+        >
+          <!-- Send Button -->
+          <button @click="sendMessage" type="button">
+            <SendIcon></SendIcon>
+          </button>
+          <!-- Mic Button -->
+          <button type="button">
+            <MicIcon></MicIcon>
+          </button>
+          <input
             type="file"
             ref="mediaInput"
             accept="image/png,image/jpeg"
             class="hidden"
             @input="handleFileUpload"
-        />
-        <!-- Attachment Button -->
-        <label for="chatMediaModal" type="button">
-          <label for="showChatMediaModal" ref="showChatMediaBtn"></label>
-          <AttachmentIcon></AttachmentIcon>
-        </label>
+          />
+          <!-- Attachment Button -->
+          <label for="chatMediaModal" type="button">
+            <label for="showChatMediaModal" ref="showChatMediaBtn"></label>
+            <AttachmentIcon></AttachmentIcon>
+          </label>
+        </div>
+
         <input
-            @keydown.enter="sendMessage"
-            v-model.trim="newMessage.messageBody"
-            type="text"
-            placeholder="متن پیام را وارد کنید"
-            class="input input-bordered input-sm w-2/3 bg-gray-200 text-gray-800"
+          @keydown.enter="sendMessage"
+          v-model.trim="newMessage.messageBody"
+          type="text"
+          placeholder="متن پیام را وارد کنید"
+          class="input input-bordered input-sm w-full bg-gray-200 text-gray-800"
         />
       </div>
     </footer>
     <Modal
-        :id="'chatMediaModal'"
-        @ok="sendMessage"
-        :closeModalTitle="'بستن'"
-        :okModalTitle="'ارسال'"
-        :title="'اپلود عکس'"
+      :id="'chatMediaModal'"
+      @ok="sendMessage"
+      :closeModalTitle="'بستن'"
+      :okModalTitle="'ارسال'"
+      :title="'اپلود عکس'"
     >
       <template #modalBody>
         <div class="w-full p-3">
           <div
-              v-if="convertedMedia.pictureUrl === ''"
-              @click="mediaInput.click()"
-              class="rounded-xl bg-gray-500 h-40 flex items-center justify-center"
+            v-if="convertedMedia.pictureUrl === ''"
+            @click="mediaInput.click()"
+            class="rounded-xl bg-gray-500 h-40 flex items-center justify-center"
           >
             <i class="ri-cloud-fill text-white text-5xl"></i>
           </div>
           <div
-              v-if="convertedMedia.pictureUrl !== ''"
-              @click="mediaInput.click()"
-              class="rounded-xl h-40 flex items-center justify-center"
+            v-if="convertedMedia.pictureUrl !== ''"
+            @click="mediaInput.click()"
+            class="rounded-xl h-40 flex items-center justify-center"
           >
             <img
-                :src="convertedMedia.pictureUrl"
-                class="w-full h-full object-contain"
-                alt=""
+              :src="convertedMedia.pictureUrl"
+              class="w-full h-full object-contain"
+              alt=""
             />
           </div>
         </div>
@@ -114,9 +119,9 @@
       <template #modalBody>
         <div class="w-full overflow-scroll p-3">
           <img
-              :src="helper.baseUrl + 'media/gallery/ChatMedia/' + selectedMedia"
-              class="w-full h-full object-contain"
-              alt=""
+            :src="helper.baseUrl + 'media/gallery/ChatMedia/' + selectedMedia"
+            class="w-full h-full object-contain"
+            alt=""
           />
         </div>
       </template>
@@ -124,17 +129,17 @@
   </div>
 </template>
 <script setup lang="ts">
-import {useAppStore} from "@/stores/app";
-import {computed, inject, onMounted, reactive, ref, watch} from "vue";
+import { useAppStore } from "@/stores/app";
+import { computed, inject, onMounted, reactive, ref, watch } from "vue";
 import ChevronLeft from "@/components/icons/ChevronLeft.vue";
 import ChatBubble from "@/components/utilities/chat/mini/ChatBubble.vue";
-import {useRoute, useRouter} from "vue-router";
-import {useAuthStore} from "@/stores/auth";
+import { useRoute, useRouter } from "vue-router";
+import { useAuthStore } from "@/stores/auth";
 import AttachmentIcon from "@/components/icons/AttachmentIcon.vue";
 import MicIcon from "@/components/icons/MicIcon.vue";
 import SendIcon from "@/components/icons/SendIcon.vue";
-import {messageModel} from "@/models/messageModel";
-import {useChatStore} from "@/stores/chat";
+import { messageModel } from "@/models/messageModel";
+import { useChatStore } from "@/stores/chat";
 import Modal from "@/components/utilities/Modal.vue";
 
 const chatStore: any = useChatStore();
@@ -206,7 +211,7 @@ watch(isMessageDelivered, async (val) => {
 });
 
 function checkObserverView(entries: any, observer: any) {
-  entries.forEach(async ({target, isIntersecting}: any) => {
+  entries.forEach(async ({ target, isIntersecting }: any) => {
     if (isIntersecting) {
       selectedMessageId.value = conversation.value[0].messageId;
       await getConversation(true);
@@ -244,7 +249,7 @@ async function getUser() {
 
 function scrollBottom() {
   let lastItem: any = document.getElementById(
-      `bubble${conversation.value.length - 1}`
+    `bubble${conversation.value.length - 1}`
   );
   lastItem?.scrollIntoView();
 }
@@ -266,7 +271,7 @@ async function getConversation(loadingHistory: boolean) {
     });
     res.data.forEach((item: any) => {
       const idx = conversation.value.findIndex(
-          (e: { messageId: any }) => e.messageId === item.messageId
+        (e: { messageId: any }) => e.messageId === item.messageId
       );
       if (idx > -1) {
         conversation.value[idx] = item;
@@ -291,7 +296,7 @@ async function getConversation(loadingHistory: boolean) {
     console.log(e);
   }
   if (loadingHistory) {
-    return
+    return;
   } else {
     setTimeout(() => {
       scrollBottom();
