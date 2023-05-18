@@ -51,7 +51,7 @@
     >
       <div class="w-full flex items-center justify-between">
         <div
-          class="w-auto flex items-center justify-around md:justify-start md:gap-x-5 ml-2 md:ml-0 md:mx-4"
+          class="w-auto flex items-center justify-around md:justify-start gap-x-3 md:gap-x-5 ml-2 md:ml-0 md:mx-4"
         >
           <!-- Send Button -->
           <button @click="sendMessage" type="button">
