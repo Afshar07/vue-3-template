@@ -48,7 +48,7 @@
       >
         <div
           @click="openBottomModal(item)"
-          class="flex flex-col items-center justify-center !text-gray-400 fill-gray-400"
+          class="flex flex-col items-center justify-center text-gray-600 fill-gray-600"
         >
           <DynamicIcon class="dark:fill-white" :icon="item.icon"></DynamicIcon>
           <small>{{ item["title"] }}</small>
