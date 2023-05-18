@@ -233,7 +233,7 @@ async function login() {
     } else {
       if (res.data.data.status === 7) {
         authStore.setUser(res.data.data.data);
-        if(res.data.data.data.role ==='Admin'){
+        if(res.data.data.data.user.role ==='Admin'){
         await router.push("/dashboard/users/AllUsers");
         }else{
           await router.push("/services");
