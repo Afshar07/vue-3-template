@@ -24,17 +24,15 @@
           <transition name="rotate">
             <MoonIcon
               v-if="appStore.getSiteTheme"
-              
               @click="toggleSiteTheme"
-              class="fill-black left-0 dark:fill-white absolute -top-3 left-7"
+              class="fill-black dark:fill-white absolute -top-3 left-10"
             ></MoonIcon>
           </transition>
           <transition name="rotate">
             <SunIcon
               v-if="!appStore.getSiteTheme"
-              
               @click="toggleSiteTheme"
-              class="fill-black left-0 dark:fill-white absolute -top-3 left-7"
+              class="fill-black dark:fill-white absolute -top-3 left-10"
             ></SunIcon>
           </transition>
         </div>

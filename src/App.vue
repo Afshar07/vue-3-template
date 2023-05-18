@@ -15,7 +15,7 @@
     </div>
     <div
       :class="[fullLayout ? '' : 'p-2']"
-      class="lg:col-span-12 2xl:col-span-10 z-50 min-h-screen md:mb-0 mb-10 col-span-12 h-full"
+      class="lg:col-span-9 2xl:col-span-10 z-50 min-h-screen md:mb-0 mb-10 col-span-12 h-full"
     >
       <Header v-if="!fullLayout"></Header>
       <router-view v-slot="{ Component }">
