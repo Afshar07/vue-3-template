@@ -1,6 +1,6 @@
 <template>
   <div
-    class="drawer drawer-mobile z-0"
+    class="drawer fixed drawer-mobile z-0"
     :class="{
       '!z-[99] ': sideBarStore.showSideBar,
       '!z-[1]': !sideBarStore.showSideBar,
@@ -25,7 +25,6 @@
         </div>
         <!-- Sidebar content here -->
         <NavItem
-          :class="{ 'collapse-open': isSelectedItem(item) }"
           @click="setSelectedNavItem(item)"
           v-for="(item, idx) in navigationItems"
           :key="idx"
@@ -105,6 +104,7 @@ function countTouch() {
 }
 
 function setSelectedNavItem(item: any) {
+
   if (item === selectedNavItem.value) {
     selectedNavItem.value = null;
   } else {

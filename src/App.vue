@@ -14,7 +14,7 @@
       <side-bar></side-bar>
     </div>
     <div
-      :class="[fullLayout ? '' : 'p-2']"
+      :class="[fullLayout ? '' : 'p-2', route.name==='conversation' ? '!p-0' : '']"
       class="lg:col-span-9 2xl:col-span-10 z-50 min-h-screen md:mb-0 mb-10 col-span-12 h-full"
     >
       <Header v-if="!fullLayout"></Header>
@@ -49,15 +49,13 @@ const route: any = useRoute();
 
 let fullLayout = computed(() => {
   return (
-    (route.name !== undefined && route.name === "index") ||
-    route.name === "conversation"
+    (route.name !== undefined && route.name === "index")
   );
 });
 let showBottomNav = computed(() => {
   return (
     route.name !== undefined &&
-    route.name !== "index" &&
-    route.name !== "conversation"
+    route.name !== "index"
   );
 });
 onMounted(() => {

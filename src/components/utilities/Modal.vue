@@ -1,7 +1,7 @@
 <template>
   <!--  Modal region  -->
   <teleport to="body">
-  <input type="checkbox" :id="props.id" ref="closeModalRef" class="modal-toggle"/>
+    <input type="checkbox" :id="props.id" ref="closeModalRef" class="modal-toggle"/>
 
     <div class="modal md:modal-middle ">
       <label for="" style="direction: ltr!important;" class="modal-box m-2 p-0 bg-white dark:bg-dark-muted">
@@ -39,7 +39,7 @@ const props = defineProps({
   },
   title: {
     type: String,
-    default:null
+    default: null
   },
   closeModalTitle: {
     type: String,
@@ -60,12 +60,13 @@ const closeModalRef: any = ref(null)
 
 function ok(): void {
   emits('ok')
+  closeModalRef.value.click()
   closeModal()
 }
 
 function closeModal(): void {
   emits('closeModal')
-  closeModalRef.click()
+  closeModalRef?.click()
 }
 
 </script>

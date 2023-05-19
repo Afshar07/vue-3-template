@@ -1,22 +1,22 @@
 <template>
-  <div class="w-full min-h-full h-full bg-white relative">
+  <div class="w-full min-h-full  bg-white relative">
     <header
-      class="h-14 shadow-md w-full flex items-center justify-between p-4 fixed top-0 right-0 bg-white !z-10"
+        class="h-14 shadow-md w-full flex items-center justify-between p-4 sticky top-0 right-0 bg-white !z-10"
     >
       <div v-if="userData" class="avatar-name-section flex items-center">
         <div class="avatar placeholder">
           <div class="w-10 h-10 rounded-full">
             <img
-              v-if="userData.profileImage"
-              src="https://static.wikia.nocookie.net/starwars/images/6/6f/Anakin_Skywalker_RotS.png/"
+                v-if="userData.profileImage"
+                src="https://static.wikia.nocookie.net/starwars/images/6/6f/Anakin_Skywalker_RotS.png/"
             />
             <div
-              v-else
-              class="bg-neutral-focus flex items-center justify-center text-neutral-content rounded-full h-10 w-10"
+                v-else
+                class="bg-neutral-focus flex items-center justify-center text-neutral-content rounded-full h-10 w-10"
             >
               <span class="text-3xl">{{
-                userData["name"].substring(0, 1)
-              }}</span>
+                  userData["name"].substring(0, 1)
+                }}</span>
             </div>
           </div>
         </div>
@@ -24,91 +24,119 @@
           {{ userData["name"] + " " + userData["familyName"] }}
         </h2>
       </div>
-      <span @click="routeBack">
+      <span @click="routeBack" class="cursor-pointer">
         <ChevronLeft class="w-5 h-5"></ChevronLeft>
       </span>
     </header>
     <main
-      ref="chatContainer"
-      class="h-full overflow-scroll space-y-2 mt-1 pt-14 pb-10 md:pb-14 bg-[url('/chatbg.svg')] px-2 bg-[#f2f0f7] bg-repeat bg-[length:210px_210px] md:bg-full bg-fixed"
-      dir="ltr"
+        ref="chatContainer"
+        class="h-full overflow-scroll space-y-2 mt-1 pt-14 pb-10  bg-[url('/chatbg.svg')] px-2 bg-[#f2f0f7] bg-repeat bg-[length:210px_210px] md:bg-full bg-fixed"
+        dir="ltr"
     >
       <chat-bubble
-        @emitSelectedMedia="setSelectedMedia"
-        v-for="(item, idx) in conversation"
-        :ref="(el) => (chatItems[idx] = el)"
-        :message="item"
-        :id="`bubble${idx}`"
-        :chatDirection="item.position"
-        :chatMessage="item.message"
-        :isRead="item.isRead"
-        :isDelivered="item.isDelivered"
-        :createDate="item.createDate"
+          @emitSelectedMedia="setSelectedMedia"
+          v-for="(item, idx) in conversation"
+          :ref="(el) => (chatItems[idx] = el)"
+          :message="item"
+          :id="`bubble${idx}`"
+          :chatDirection="item.position"
+          :chatMessage="item.message"
+          :isRead="item.isRead"
+          :isDelivered="item.isDelivered"
+          :createDate="item.createDate"
       ></chat-bubble>
     </main>
     <footer
-      class="fixed w-full bottom-0 h-14 shadow border-t p-2 flex items-center bg-white"
+        class="fixed md:sticky  w-full bottom-0 h-14 shadow border-t p-1 flex items-center bg-white"
     >
       <div class="w-full flex items-center justify-between">
         <div
-          class="w-auto flex items-center justify-around md:justify-start gap-x-3 md:gap-x-5 mx-2 md:mx-4"
+            class="w-auto flex items-center justify-around md:justify-start gap-x-1 md:gap-x-5 mx-1 md:mx-4"
         >
           <!-- Send Button -->
-          <button @click="sendMessage" type="button">
-            <SendIcon></SendIcon>
-          </button>
-          <!-- Mic Button -->
-          <button type="button">
-            <MicIcon></MicIcon>
+          <button @click="sendMessage" type="button" class="sm:btn sm:btn-sm sm:bg-violet  border-none">
+            <SendIcon class="md:w-5 md:h-5 w-6  h-6"></SendIcon>
           </button>
           <input
-            type="file"
-            ref="mediaInput"
-            accept="image/png,image/jpeg"
-            class="hidden"
-            @input="handleFileUpload"
+              type="file"
+              ref="mediaInput"
+              accept="image/png,image/jpeg"
+              class="hidden"
+              @input="handleFileUpload"
           />
           <!-- Attachment Button -->
-          <label for="chatMediaModal" type="button">
+          <label for="chatMediaModal" class="md:mx-0.5 mx-1 sm:btn sm:btn-sm sm:bg-primary  border-none" type="button" >
             <label for="showChatMediaModal" ref="showChatMediaBtn"></label>
-            <AttachmentIcon></AttachmentIcon>
+            <AttachmentIcon class=" md:w-5 md:h-5 w-6 h-6"></AttachmentIcon>
           </label>
         </div>
 
         <input
-          @keydown.enter="sendMessage"
-          v-model.trim="newMessage.messageBody"
-          type="text"
-          placeholder="متن پیام را وارد کنید"
-          class="input input-bordered input-sm w-full bg-gray-200 text-gray-800"
+            @keydown.enter="sendMessage"
+            v-model.trim="newMessage.messageBody"
+            type="text"
+            placeholder="متن پیام را وارد کنید"
+            class="input rounded-2xl input-sm w-full bg-gray-100 text-gray-800"
         />
+        <!-- Mic Button -->
+        <label for="voiceRecorder" class="mx-3 sm:btn sm:btn-sm sm:bg-secondary  border-none" type="button" >
+          <MicIcon class=" md:w-5 md:h-5 w-6 h-6"></MicIcon>
+        </label>
       </div>
     </footer>
     <Modal
-      :id="'chatMediaModal'"
-      @ok="sendMessage"
-      :closeModalTitle="'بستن'"
-      :okModalTitle="'ارسال'"
-      :title="'اپلود عکس'"
+        :id="'voiceRecorder'"
+        @ok="sendMessage"
+        :closeModalTitle="'بستن'"
+        :okModalTitle="'ارسال'"
+        :title="'افزودن صوت'"
+    >
+      <template #modalBody>
+        <div class="w-full p-3">
+          <AudioRecorder @getAudioBlob="setAudioBlob" ref="recorder"></AudioRecorder>
+          <div class="w-full h-[10rem] flex flex-col  items-center justify-center rounded-2xl ">
+            <button v-if="!isRecording" type="button" @click.stop="startRecording">
+              <i class="ri-play-line text-green-500"></i>
+            </button>
+            <div v-else @click="stopRecording" class="blob red cursor-pointer"></div>
+            <div class="flex items-center dark:text-white flex-row-reverse gap-3 my-2">
+              <small>{{ hours }}</small>
+              :
+              <small>{{ minutes }}</small>
+              :
+              <small>{{ seconds }}</small>
+            </div>
+            <audio v-if="voiceMedia!==''" :src="generateAudioSrc" controls></audio>
+          </div>
+        </div>
+      </template>
+    </Modal>
+
+    <Modal
+        :id="'chatMediaModal'"
+        @ok="sendMessage"
+        :closeModalTitle="'بستن'"
+        :okModalTitle="'ارسال'"
+        :title="'اپلود عکس'"
     >
       <template #modalBody>
         <div class="w-full p-3">
           <div
-            v-if="convertedMedia.pictureUrl === ''"
-            @click="mediaInput.click()"
-            class="rounded-xl bg-gray-500 h-40 flex items-center justify-center"
+              v-if="convertedMedia.pictureUrl === ''"
+              @click="mediaInput.click()"
+              class="rounded-xl bg-gray-500 h-40 flex items-center justify-center"
           >
             <i class="ri-cloud-fill text-white text-5xl"></i>
           </div>
           <div
-            v-if="convertedMedia.pictureUrl !== ''"
-            @click="mediaInput.click()"
-            class="rounded-xl h-40 flex items-center justify-center"
+              v-if="convertedMedia.pictureUrl !== ''"
+              @click="mediaInput.click()"
+              class="rounded-xl h-40 flex items-center justify-center"
           >
             <img
-              :src="convertedMedia.pictureUrl"
-              class="w-full h-full object-contain"
-              alt=""
+                :src="convertedMedia.pictureUrl"
+                class="w-full h-full object-contain"
+                alt=""
             />
           </div>
         </div>
@@ -119,9 +147,9 @@
       <template #modalBody>
         <div class="w-full overflow-scroll p-3">
           <img
-            :src="helper.baseUrl + 'media/gallery/ChatMedia/' + selectedMedia"
-            class="w-full h-full object-contain"
-            alt=""
+              :src="helper.baseUrl + 'media/gallery/ChatMedia/' + selectedMedia"
+              class="w-full h-full object-contain"
+              alt=""
           />
         </div>
       </template>
@@ -129,18 +157,19 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useAppStore } from "@/stores/app";
-import { computed, inject, onMounted, reactive, ref, watch } from "vue";
+import {useAppStore} from "@/stores/app";
+import {computed, inject, onMounted, reactive, ref, watch} from "vue";
 import ChevronLeft from "@/components/icons/ChevronLeft.vue";
 import ChatBubble from "@/components/utilities/chat/mini/ChatBubble.vue";
-import { useRoute, useRouter } from "vue-router";
-import { useAuthStore } from "@/stores/auth";
+import {useRoute, useRouter} from "vue-router";
+import {useAuthStore} from "@/stores/auth";
 import AttachmentIcon from "@/components/icons/AttachmentIcon.vue";
 import MicIcon from "@/components/icons/MicIcon.vue";
 import SendIcon from "@/components/icons/SendIcon.vue";
-import { messageModel } from "@/models/messageModel";
-import { useChatStore } from "@/stores/chat";
+import {messageModel} from "@/models/messageModel";
+import {useChatStore} from "@/stores/chat";
 import Modal from "@/components/utilities/Modal.vue";
+import AudioRecorder from "@/components/utilities/AudioRecorder.vue";
 
 const chatStore: any = useChatStore();
 const repositories: any = inject("repositories");
@@ -172,6 +201,21 @@ let convertedMedia = reactive({
 let mediaInput = ref<any>(null);
 let userData = ref(null);
 let observer: any = ref(null);
+let isRecording = ref<boolean>(false)
+let recorder:any = ref(null)
+let audioStopWatch = ref<any>(null)
+let seconds = ref<number>(0)
+let minutes = ref<number>(0)
+let hours = ref<number>(0)
+let voiceMedia = ref('')
+
+let generateAudioSrc = computed(()=>{
+  if(voiceMedia.value!==''){
+    //@ts-ignore
+    return URL.createObjectURL(voiceMedia.value)
+  }
+})
+
 onMounted(async () => {
   await Promise.all([getUser(), readMessage(), getConversation(false)]);
   scrollBottom();
@@ -209,9 +253,49 @@ watch(isMessageDelivered, async (val) => {
     chatStore.isMessageDelivered(false);
   }
 });
+function setAudioBlob(blob:any){
+  voiceMedia.value = blob
+  const reader = new FileReader()
+  reader.onload = (function (theFile) {
+    return function () {
+      const binaryData:any = reader.result
+      newMessage.fileData = {
+        base64:window.btoa(binaryData),
+        priority:2
+      }
+    }
+  })(blob)
+  reader.readAsBinaryString(blob)
 
+}
+function startRecording(){
+ isRecording.value = true
+  if (isRecording.value) {
+      audioStopWatch.value = setInterval(() => {
+      seconds.value++
+      if (seconds.value === 59) {
+        seconds.value = 0
+        minutes.value++
+        if (minutes.value === 59) {
+          hours.value++
+        }
+      }
+    }, 1000)
+    recorder.value.startRecording()
+  }
+
+}
+function stopRecording(){
+  clearInterval(audioStopWatch.value)
+  isRecording.value = false
+  seconds.value = 0
+  minutes.value = 0
+  hours.value = 0
+  recorder.value.stopRecording()
+
+}
 function checkObserverView(entries: any, observer: any) {
-  entries.forEach(async ({ target, isIntersecting }: any) => {
+  entries.forEach(async ({target, isIntersecting}: any) => {
     if (isIntersecting) {
       selectedMessageId.value = conversation.value[0].messageId;
       await getConversation(true);
@@ -249,7 +333,7 @@ async function getUser() {
 
 function scrollBottom() {
   let lastItem: any = document.getElementById(
-    `bubble${conversation.value.length - 1}`
+      `bubble${conversation.value.length - 1}`
   );
   lastItem?.scrollIntoView();
 }
@@ -271,7 +355,7 @@ async function getConversation(loadingHistory: boolean) {
     });
     res.data.forEach((item: any) => {
       const idx = conversation.value.findIndex(
-        (e: { messageId: any }) => e.messageId === item.messageId
+          (e: { messageId: any }) => e.messageId === item.messageId
       );
       if (idx > -1) {
         conversation.value[idx] = item;
@@ -316,7 +400,7 @@ async function readMessage() {
 }
 
 async function sendMessage() {
-  if (newMessage.messageBody || convertedMedia.base64) {
+  if (newMessage.messageBody || convertedMedia.base64 || voiceMedia.value!=='') {
     if (convertedMedia.base64 !== "") {
       newMessage.fileData = {
         base64: convertedMedia.base64,
@@ -327,6 +411,9 @@ async function sendMessage() {
       const res = await repositories.sendMessage.setPayload(newMessage);
       newMessage.messageBody = "";
       newMessage.fileData = null;
+      voiceMedia.value = ''
+      convertedMedia.base64 =''
+      convertedMedia.pictureUrl = ''
     } catch (e) {
       console.log(e);
     } finally {
@@ -340,3 +427,34 @@ async function handleFileUpload() {
   convertedMedia.pictureUrl = media.pictureUrl;
 }
 </script>
+
+
+<style>
+.blob {
+  background: #FF5252B2;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(255, 82, 82, 0.7);
+  margin: 10px;
+  height: 20px;
+  width: 20px;
+  transform: scale(1);
+  animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 82, 82, 0.7);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(255, 82, 82, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 82, 82, 0);
+  }
+}
+</style>

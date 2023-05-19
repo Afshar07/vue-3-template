@@ -1,5 +1,6 @@
 <template>
   <div
+      v-if="route.name!=='conversation'"
     class="bg-white mb-3 sticky top-0 z-50 dark:bg-dark-muted rounded-xl flex items-center justify-between w-full shadow gap-3 p-5"
   >
     <div @click="openSideBar" class="hidden hover:fill-primary">
@@ -7,7 +8,7 @@
     </div>
     <div class="flex items-center z-50 relative justify-center">
       <small>{{
-        authStore.getUser.name + " " + authStore.getUser.familyName
+        authStore?.getUser?.name + " " + authStore?.getUser?.familyName
       }}</small>
     </div>
     <div class="flex items-center">
@@ -63,11 +64,12 @@ import router from "@/router";
 import DoorIcon from "@/components/icons/DoorIcon.vue";
 import PowerIcon from "@/components/icons/PowerIcon.vue";
 import Modal from "@/components/utilities/Modal.vue";
+import {useRoute} from "vue-router";
 
 const sideBar = useSideBarStore();
 const appStore = useAppStore();
 const authStore = useAuthStore();
-
+const route = useRoute()
 function toggleSiteTheme() {
   appStore.toggleSiteTheme();
 }

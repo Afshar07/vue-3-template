@@ -1,5 +1,6 @@
 <template>
   <div
+      v-if="route.name!=='conversation'"
     class="w-full flex rounded-b-lg relative items-center justify-around dark:text-white h-16 bg-white dark:bg-dark-muted shadow-xl border-t border-t-gray-200 dark:border-t-gray-800"
   >
     <transition name="slide-up" appear>

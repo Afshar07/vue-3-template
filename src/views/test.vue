@@ -59,3 +59,73 @@ function showToast(){
 <style scoped>
 
 </style>
+
+
+
+
+<!--<script>-->
+<!--export default {-->
+<!--  emits: ["getAudioBlob", "getMediaRecorderState"],-->
+<!--  data() {-->
+<!--    return {-->
+<!--      audioPermission: {audio: true},-->
+<!--      isRecording: false,-->
+<!--      isPlaying: false,-->
+<!--      audioChunks: [],-->
+<!--      audioBlob: null,-->
+<!--      mainStream: null,-->
+<!--      base64Data: null,-->
+<!--      mediaRecorderState: null,-->
+<!--    };-->
+<!--  },-->
+<!--  methods: {-->
+<!--    async startRecording() {-->
+<!--      try {-->
+<!--        this.mainStream = await navigator.mediaDevices.getUserMedia(-->
+<!--            this.audioPermission-->
+<!--        );-->
+<!--        this.audioChunks = [];-->
+<!--        this.handleRecording();-->
+<!--      } catch (error) {-->
+<!--        console.log(error);-->
+<!--        if (-->
+<!--            error.name === "NotFoundError" ||-->
+<!--            error.name === "DevicesNotFoundError"-->
+<!--        ) {-->
+<!--          this.$toast.show({content: `هیچ میکروفونی روی دستگاه شما یافت نشد`, Title: 'عملیات ناموفق', Icon: 'alert'})-->
+
+<!--        } else if (-->
+<!--            error.name === "NotAllowedError" ||-->
+<!--            error.name === "PermissionDeniedError"-->
+<!--        ) {-->
+<!--          this.$toast.show({content: `دسترسی میکروفون خود را فعال کنید`, Title: 'عملیات ناموفق', Icon: 'alert'})-->
+
+<!--        }-->
+<!--      }-->
+<!--    },-->
+<!--    handleRecording() {-->
+<!--      this.mediaRecorder = new MediaRecorder(this.mainStream);-->
+<!--      this.mediaRecorder.start();-->
+<!--      this.mediaRecorder.addEventListener("dataavailable", (event) => {-->
+<!--        this.audioChunks.push(event.data);-->
+<!--      });-->
+<!--      this.$emit("getMediaRecorderState", this.mediaRecorder.state);-->
+<!--    },-->
+<!--    async stopRecording() {-->
+<!--      await this.mediaRecorder.addEventListener("stop", () => {-->
+<!--        this.audioBlob = new Blob(this.audioChunks, {-->
+<!--          type: this.mediaRecorder.mimeType,-->
+<!--        });-->
+
+<!--        this.$emit("getAudioBlob", this.audioBlob);-->
+<!--      });-->
+<!--      if (this.mediaRecorder.state !== "inactive") {-->
+<!--        this.mainStream.getTracks()[0].stop();-->
+<!--        this.mediaRecorder.stop();-->
+<!--      }-->
+<!--      this.isPlaying = true;-->
+<!--      this.$emit("getMediaRecorderState", this.mediaRecorder.state);-->
+<!--    },-->
+<!--  },-->
+<!--};-->
+<!--</script>-->
