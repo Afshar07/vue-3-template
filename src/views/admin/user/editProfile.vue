@@ -2,7 +2,7 @@
   <div class="main-card w-full">
     <div v-if="userInfo" class="grid grid-cols-12 gap-3 p-5">
       <div class="w-full col-span-12 flex flex-row justify-center md:justify-start mb-5">
-        <input @input="handleImage" type="file" ref="fileInput" class="hidden">
+        <input @input="handleImage" type="file" accept="image/jpeg,image/png" ref="fileInput" class="hidden">
         <div class="relative">
           <div @click="openFileHandler" class="p-1  bg-primary rounded-full absolute bottom-0 ">
             <PlusIcon class="fill-white cursor-pointer"></PlusIcon>
@@ -32,7 +32,7 @@
       </div>
       <div class="col-span-12 grid grid-cols-12">
         <div class="col-span-12 md:col-span-1">
-          <button @click="updateUser" type="button" class="btn w-full border-none bg-primary my-3 text-white">ثبت ویرایش</button>
+          <button @click="updateUser" type="button" class="btn w-full border-none bg-primary my-3 text-white"> ویرایش</button>
         </div>
       </div>
     </div>
@@ -61,17 +61,17 @@ onMounted(() => {
 })
 
 let computedProfileImage = computed(() => {
-  if (userInfo?.value?.selfieFileData?.includes('blob')) {
-    return userInfo?.value?.selfieFileData
+  if (userInfo?.value?.profileImage?.includes('blob')) {
+    return userInfo?.value?.profileImage
   } else {
-    return helper.baseUrl + userInfo?.value?.selfieFileData
+    return helper.baseUrl + userInfo?.value?.profileImage
   }
 })
 
 async function getUserById() {
   try {
     appStore.showOverlay = true
-    const res = await api.getUserById.setParams({
+    const res = await api.getUserByToken.setParams({
       id: userId
     })
     userInfo.value = res.data
@@ -90,14 +90,14 @@ function openFileHandler() {
 }
 
 async function handleImage() {
-  userInfo.value.selfieFileData = URL.createObjectURL(fileInput.value.files[0])
+  userInfo.value.profileImage = URL.createObjectURL(fileInput.value.files[0])
   base64Image.value = await helper.fileToBase64(fileInput.value.files[0])
 }
 
 async function updateUser() {
   try {
     appStore.showOverlay = true
-    userInfo.value.selfieFileData = base64Image.value
+    userInfo.value.profileImage = base64Image.value.base64
     const res = await api.updateUser.setPayload(userInfo.value)
     toast.success({content:'عملیات انجام شد'});
     await getUserById()

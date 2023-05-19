@@ -9,6 +9,7 @@ export default {
             signIn:createRequestsRepository(app,'Account/SignIn',authStore),
             forgetPassword:createRequestsRepository(app,'Account/ForgotPassword',authStore),
             getUserById:createRequestsRepository(app,'User/Get',authStore),
+            getUserByToken:createRequestsRepository(app,'User/GetById',authStore),
             updateUser:createRequestsRepository(app,'User/Update',authStore),
             getAllOrders:createRequestsRepository(app,'Order/GetAll',authStore),
             getAllRequests:createRequestsRepository(app,'Order/GetAll',authStore),

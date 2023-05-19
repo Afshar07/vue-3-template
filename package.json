@@ -1,17 +1,17 @@
 {
   "name": "Dashboard",
-  "main": "main.js",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "build": "vite build",
     "build-only": "vite build",
     "dev": "vite",
-    "preview": "vite preview",
-    "type-check": "vue-tsc --noEmit",
+    "electron:build": "electron-builder",
     "electron:start": "electron .",
-    "electron:build": "electron-builder"
+    "preview": "vite preview",
+    "type-check": "vue-tsc --noEmit"
   },
+  "main": "main.js",
   "dependencies": {
     "@microsoft/signalr": "^7.0.5",
     "audio-recorder-polyfill": "^0.4.1",
