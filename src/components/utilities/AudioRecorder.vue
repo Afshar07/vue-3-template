@@ -4,7 +4,7 @@
 <script setup>
 import {inject, reactive, ref} from "vue";
 
-let emits = defineEmits(['getAudioBlob', 'getMediaRecorderState'])
+let emits = defineEmits(['getAudioBlob', 'getMediaRecorderState','startTimer'])
 defineExpose({
   stopRecording,
   handleRecording,
@@ -27,18 +27,21 @@ async function startRecording(){
     mainStream.value = await navigator.mediaDevices.getUserMedia(audioPermission);
     audioChunks.value = [];
     handleRecording();
+    emits('startTimer',true)
   } catch (error) {
     console.log(error);
     if (
         error.name === "NotFoundError" ||
         error.name === "DevicesNotFoundError"
     ) {
+       emits('startTimer',false)
       toast.error({content: `هیچ میکروفونی روی دستگاه شما یافت نشد`})
 
     } else if (
         error.name === "NotAllowedError" ||
         error.name === "PermissionDeniedError"
     ) {
+       emits('startTimer',false)
       toast.error({content: `دسترسی میکروفون خود را فعال کنید`})
     }
   }

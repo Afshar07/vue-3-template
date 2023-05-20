@@ -58,14 +58,14 @@ import MenuIcon from "@/components/icons/MenuIcon.vue";
 import { useSideBarStore } from "@/stores/sideBar";
 import MoonIcon from "@/components/icons/MoonIcon.vue";
 import SunIcon from "@/components/icons/SunIcon.vue";
-import { ref, watch } from "vue";
+import {inject, ref, watch} from "vue";
 import { useAuthStore } from "@/stores/auth";
 import router from "@/router";
 import DoorIcon from "@/components/icons/DoorIcon.vue";
 import PowerIcon from "@/components/icons/PowerIcon.vue";
 import Modal from "@/components/utilities/Modal.vue";
 import { useRoute } from "vue-router";
-
+const $cookies = inject('$cookies')
 const sideBar = useSideBarStore();
 const appStore = useAppStore();
 const authStore = useAuthStore();
@@ -76,6 +76,8 @@ function toggleSiteTheme() {
 function logout() {
   authStore.logout();
   router.push("/");
+  $cookies.remove('token')
+
 }
 
 function openSideBar() {

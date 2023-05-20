@@ -34,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, watch } from "vue";
+import {computed, inject, onMounted, watch} from "vue";
 import { RouterView, useRoute } from "vue-router";
 import Header from "@/components/main/Header.vue";
 import Toast from "@/components/utilities/Toast.vue";
@@ -43,10 +43,14 @@ import SideBar from "@/components/main/sideBar.vue";
 import { useAppStore } from "@/stores/app";
 import { useSideBarStore } from "@/stores/sideBar";
 import BottomNav from "@/components/main/BottomNav.vue";
+import {VueCookies} from "vue-cookies";
+import {useAuthStore} from "@/stores/auth";
 const appStore = useAppStore();
 const sideBarStore = useSideBarStore();
 const route: any = useRoute();
-
+const $cookies : any = inject<VueCookies>('$cookies')
+const authStore:any = useAuthStore()
+const repositories:any = inject('repositories')
 let fullLayout = computed(() => {
   return (
     (route.name !== undefined && route.name === "index")
@@ -58,7 +62,12 @@ let showBottomNav = computed(() => {
     route.name !== "index"
   );
 });
-onMounted(() => {
+onMounted(async() => {
+  if($cookies.get('token')){
+    authStore.setToken($cookies.get('token'))
+    const res = await repositories.getUserByToken.setTag()
+    console.log(res)
+  }
   const body: any = document.querySelector("body");
   // Set theme
   if (appStore.getSiteTheme) {

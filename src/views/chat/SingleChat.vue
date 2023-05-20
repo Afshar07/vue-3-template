@@ -106,6 +106,7 @@
       <template #modalBody>
         <div class="w-full p-3">
           <AudioRecorder
+              @startTimer="startTimer"
             @getAudioBlob="setAudioBlob"
             ref="recorder"
           ></AudioRecorder>
@@ -201,7 +202,7 @@ import { messageModel } from "@/models/messageModel";
 import { useChatStore } from "@/stores/chat";
 import Modal from "@/components/utilities/Modal.vue";
 import AudioRecorder from "@/components/utilities/AudioRecorder.vue";
-
+const toast:any = inject('toast')
 const chatStore: any = useChatStore();
 const repositories: any = inject("repositories");
 const helper: any = inject("helper");
@@ -299,19 +300,21 @@ function setAudioBlob(blob: any) {
   reader.readAsBinaryString(blob);
 }
 function startRecording() {
-  isRecording.value = true;
-  if (isRecording.value) {
-    audioStopWatch.value = setInterval(() => {
-      seconds.value++;
-      if (seconds.value === 59) {
-        seconds.value = 0;
-        minutes.value++;
-        if (minutes.value === 59) {
-          hours.value++;
-        }
-      }
-    }, 1000);
     recorder.value.startRecording();
+}
+function startTimer(isMicPermissionGranted:boolean){
+  if(isMicPermissionGranted){
+    isRecording.value = true;
+  audioStopWatch.value = setInterval(() => {
+    seconds.value++;
+    if (seconds.value === 59) {
+      seconds.value = 0;
+      minutes.value++;
+      if (minutes.value === 59) {
+        hours.value++;
+      }
+    }
+  }, 1000);
   }
 }
 function stopRecording() {
@@ -455,9 +458,13 @@ async function sendMessage() {
 }
 
 async function handleFileUpload() {
+  if(mediaInput.value.files[0].size<2000000){
   let media = await helper.fileToBase64(mediaInput.value.files[0]);
   convertedMedia.base64 = media.base64;
   convertedMedia.pictureUrl = media.pictureUrl;
+  }else{
+    toast.error({content:'اندازه فایل نمیتواند بیشتر از 2 مگابایت باشد'})
+  }
 }
 </script>
 

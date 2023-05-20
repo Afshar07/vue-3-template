@@ -1,4 +1,4 @@
-import { ref, computed } from "vue";
+import {ref, computed, inject} from "vue";
 import { defineStore } from "pinia";
 import { useRouter } from "vue-router";
 export const useAuthStore = defineStore("auth", {
@@ -24,6 +24,10 @@ export const useAuthStore = defineStore("auth", {
       this.loggedIn = false;
       this.token = "";
       this.user = null;
+
+    },
+    setToken(token:any){
+      this.token = token
     },
     setUser(authenticationData: any) {
       this.loggedIn = true;

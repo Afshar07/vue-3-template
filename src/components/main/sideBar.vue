@@ -62,6 +62,7 @@ import {
   inject,
   onBeforeMount,
 } from "vue";
+const $cookies:any = inject<VueCookies>('$cookies')
 import { useSideBarStore } from "@/stores/sideBar";
 import NavItemCollapse from "@/components/utilities/NavItemCollapse.vue";
 import NavItem from "@/components/utilities/NavItem.vue";
@@ -69,6 +70,7 @@ import DoorIcon from "@/components/icons/DoorIcon.vue";
 import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router";
 import { sideBarItems } from "@/models/sideBarItems";
+import {VueCookies} from "vue-cookies";
 
 const router = useRouter();
 const authStore: any = useAuthStore();
@@ -118,6 +120,7 @@ const navigationItems = sideBarItems;
 function logout() {
   authStore.logout();
   router.push("/");
+  $cookies.remove('token')
 }
 </script>
 

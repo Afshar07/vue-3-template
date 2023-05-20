@@ -164,7 +164,8 @@ import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router";
 import errorHandler from "@/plugins/errorHandler";
 import Modal from "@/components/utilities/Modal.vue";
-
+import {VueCookies} from "vue-cookies";
+const $cookies:any = inject<VueCookies>('$cookies');
 const appStore = useAppStore();
 const toastStore = useToastStore();
 const toast: any = inject("toast");
@@ -233,6 +234,7 @@ async function login() {
       errorHandler(res.data.data.status);
     } else {
       if (res.data.data.status === 7) {
+        $cookies.set('token',res.data.data.data.token,'30d')
         authStore.setUser(res.data.data.data);
         if (
           res.data.data.data.user.role &&

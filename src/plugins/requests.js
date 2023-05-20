@@ -12,6 +12,7 @@ axios.interceptors.response.use(
       const authStore = useAuthStore();
       authStore.logout();
       router.push("/");
+
     }
     throw err;
   }
