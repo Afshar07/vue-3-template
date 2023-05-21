@@ -31,7 +31,7 @@
     </header>
     <main
       ref="chatContainer"
-      class="h-full min-h-[calc(100vh-28px)] overflow-scroll space-y-2 mt-1 pt-4 pb-10 bg-[url('/peakpx.jpg')] px-2  bg-[length:500px_800px] md:bg-full bg-fixed"
+      class="h-full min-h-[calc(100vh-28px)] overflow-scroll space-y-2 mt-1 pt-4 pb-10 bg-[url('/chatbg2.webp')] bg-cover bg-no-repeat px-2   md:bg-full bg-fixed"
       dir="ltr"
     >
       <chat-bubble
@@ -119,7 +119,7 @@
               type="button"
               @click.stop="startRecording"
             >
-              <i class="ri-play-line text-green-500"></i>
+              <i class="ri-play-line text-2xl text-green-500"></i>
             </button>
             <div
               v-else
