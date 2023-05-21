@@ -5,7 +5,7 @@
         <PaperIcon class="w-8 h-8 dark:fill-white"></PaperIcon>
       </div>
       <div
-          class="w-full  flex bg-[#ec4899]   rounded-b shadow text-white items-center justify-center h-1/3">
+          class="w-full text-center flex bg-[#ec4899]   rounded-b shadow text-white items-center justify-center h-1/3">
         <small>اظهار نامه</small>
       </div>
     </router-link>

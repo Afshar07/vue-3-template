@@ -1,18 +1,14 @@
 <template>
-  <div
-      class="min-h-screen relative items-between w-full grid grid-cols-12 bg-gray-100 dark:bg-dark"
-  >
+  <div class="min-h-screen relative items-between w-full grid grid-cols-12 bg-gray-100 dark:bg-dark">
     <Overlay></Overlay>
     <Toast></Toast>
-    <div
-        v-if="!fullLayout"
-        :class="{
-        ' md:!block md:!relative   hidden ': !sideBarStore.showSideBar,
-      }"
+<!--  sidebar  -->
+    <div v-if="!fullLayout" :class="{  ' md:!block md:!relative   hidden ': !sideBarStore.showSideBar,}"
         class="lg:col-span-3 2xl:col-span-2 2md:hidden min-h-screen max-h-full fixed top-0 left-0 z-10 col-span-12"
     >
       <side-bar></side-bar>
     </div>
+    <!--  main content  -->
     <div
         :class="[fullLayout ? '' : 'p-2', route.name==='conversation' ? '!p-0' : '']"
         class="lg:col-span-9 2xl:col-span-10 z-50 min-h-screen md:mb-0 mb-10 col-span-12 h-full"
@@ -24,6 +20,13 @@
         </transition>
       </router-view>
     </div>
+
+
+
+
+
+
+    <!--  bottom nav  -->
     <div
         v-if="showBottomNav"
         class="col-span-12 md:hidden block sticky mt-2 bottom-2 left-0 z-50 flex items-end h-1"

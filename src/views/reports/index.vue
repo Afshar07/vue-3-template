@@ -5,7 +5,7 @@
         <ListIcon class="w-8 h-8 dark:fill-white"></ListIcon>
       </div>
       <div
-                   class="w-full  flex bg-[#22c55e]  rounded-b shadow text-white items-center justify-center h-1/3">
+                   class="w-full text-center  flex bg-[#22c55e]  rounded-b shadow text-white items-center justify-center h-1/3">
         <small>گزارشات فصلی</small>
       </div>
     </router-link>
@@ -15,7 +15,7 @@
 
       </div>
       <router-link to="/services/statement"
-                   class="w-full  flex bg-[#14b8a6]  rounded-b shadow text-white items-center justify-center h-1/3">
+                   class="w-full text-center  flex bg-[#14b8a6]  rounded-b shadow text-white items-center justify-center h-1/3">
         <small>استعلام بدهی مالیاتی</small>
       </router-link>
     </div>
@@ -24,7 +24,7 @@
         <BillIcon class="w-8 h-8 dark:fill-white"></BillIcon>
       </div>
       <router-link to="/services/statement"
-                   class="w-full  flex bg-[#f97316]  rounded-b shadow text-white items-center justify-center h-1/3">
+                   class="w-full text-center flex bg-[#f97316]  rounded-b shadow text-white items-center justify-center h-1/3">
         <small>پرداخت قبوض</small>
       </router-link>
     </div>
