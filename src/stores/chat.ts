@@ -14,7 +14,7 @@ export const useChatStore = defineStore("chat", {
     isMessageReaded(): boolean {
       return this.readMessage;
     },
-    isMessageDeilvered(): boolean {
+    isMessageDelivered(): boolean {
       return this.deliverMessage;
     },
   },

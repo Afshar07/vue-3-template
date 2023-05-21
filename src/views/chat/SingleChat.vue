@@ -250,7 +250,7 @@ let generateAudioSrc = computed(() => {
 });
 
 onMounted(async () => {
-  await Promise.all([getUser(), readMessage(), getConversation(false)]);
+  await Promise.all([getUser(),deliverMessage(), readMessage(), getConversation(false)]);
   scrollBottom();
   observer.value = new IntersectionObserver(checkObserverView, {
     threshold: 1.0,
@@ -270,21 +270,25 @@ let isMessageDelivered = computed(() => {
 
 watch(getSocketId, async (val) => {
   if (val !== undefined && val != 0) {
-    getConversation(false);
+    await deliverMessage();
+    await readMessage();
+   await getConversation(false);
   }
   chatStore.setDefaultSocketId();
 });
 watch(isMessageReaded, async (val) => {
   if (val) {
     await readMessage();
-    chatStore.messageReaded(false);
+    await getConversation(false)
   }
+    chatStore.messageReaded(false);
 });
 watch(isMessageDelivered, async (val) => {
   if (val) {
     await deliverMessage();
-    chatStore.isMessageDelivered(false);
+    await getConversation(false)
   }
+    chatStore.messageDelivered(false);
 });
 function setAudioBlob(blob: any) {
   voiceMedia.value = blob;
