@@ -8,6 +8,7 @@
           <div class="w-10 h-10 rounded-full">
             <img
               v-if="userData.profileImage"
+              :src="helper.baseUrl +userData.profileImage "
               src="https://static.wikia.nocookie.net/starwars/images/6/6f/Anakin_Skywalker_RotS.png/"
             />
             <div
@@ -30,7 +31,7 @@
     </header>
     <main
       ref="chatContainer"
-      class="h-full min-h-[calc(100vh-28px)] overflow-scroll space-y-2 mt-1 pt-4 pb-10 bg-[url('/chatbg.svg')] px-2 bg-[#f2f0f7] bg-repeat bg-[length:210px_210px] md:bg-full bg-fixed"
+      class="h-full min-h-[calc(100vh-28px)] overflow-scroll space-y-2 mt-1 pt-4 pb-10 bg-[url('/peakpx.jpg')] px-2  bg-[length:500px_800px] md:bg-full bg-fixed"
       dir="ltr"
     >
       <chat-bubble

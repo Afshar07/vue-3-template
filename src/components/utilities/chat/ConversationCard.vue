@@ -13,14 +13,14 @@
             {{ props.userItem['unReadCount'] }}
           </small>
         </div>
-        <div v-if="props.userItem.userPhoto!==' '" class="w-14 rounded-full">
+        <div v-if="props.userItem['userPhoto']!==' '" class="w-14 rounded-full">
           <img
-              src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+              :src="helper.baseUrl + 'media/gallery/profile/' +props.userItem['userPhoto'] "
           />
         </div>
         <div
             v-else
-            class="bg-neutral-focus text-neutral-content rounded-full w-12"
+            class="bg-neutral-focus text-neutral-content rounded-full w-14"
         >
           <span class="text-3xl">{{ props.userItem['userName'].substring(0, 1) }}</span>
         </div>
@@ -39,6 +39,9 @@
   </div>
 </template>
 <script setup>
+import {inject} from "vue";
+
+const helper = inject('helper')
 const props = defineProps({
   userItem: {
     type: Object,

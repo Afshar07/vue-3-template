@@ -7,7 +7,7 @@
       <MenuIcon class="fill-black dark:fill-white"></MenuIcon>
     </div>
     <div class="flex items-center z-50 relative justify-center">
-      <small>{{
+      <small class="dark:text-white">{{
         authStore?.getUser?.name + " " + authStore?.getUser?.familyName
       }}</small>
     </div>

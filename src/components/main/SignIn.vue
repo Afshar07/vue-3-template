@@ -155,7 +155,7 @@
 
 <script setup lang="ts">
 import type { signDto } from "@/models/signModel";
-import { computed, inject, reactive, ref } from "vue";
+import {computed, inject, onMounted, reactive, ref} from "vue";
 import LockIcon from "@/components/icons/LockIcon.vue";
 import VInput from "@/components/utilities/VInput.vue";
 import { useAppStore } from "@/stores/app";
@@ -175,6 +175,7 @@ const api: any = inject("repositories");
 
 const helper: any = inject("helper");
 const appName = helper.appName;
+const repositories: any = inject('repositories')
 
 let loginData = reactive<signDto>({
   mobile: "",
@@ -187,6 +188,23 @@ let loginData = reactive<signDto>({
   type: 2,
   userName: "",
 });
+
+onMounted(async ()=>{
+  if ($cookies.get('token')) {
+    if (!authStore.loggedIn) {
+      authStore.setToken($cookies.get('token'))
+      const res = await repositories.getUserByToken.setTag()
+      authStore.setUserFromCookie(res.data)
+    }
+    if (authStore.getUser.role && authStore.getUser.role.toLowerCase() === "admin") {
+      await router.push("/dashboard/users/AllUsers");
+    } else {
+      await router.push("/services");
+    }
+
+  }
+})
+
 const mobileNotValid: any = computed(() => {
   let resolve = null;
   if (loginData.mobile !== undefined) {

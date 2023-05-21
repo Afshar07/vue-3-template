@@ -34,6 +34,10 @@ export const useAuthStore = defineStore("auth", {
       this.token = authenticationData.token;
       this.user = authenticationData.user;
     },
+    setUserFromCookie(user:any){
+      this.loggedIn = true;
+      this.user = user;
+    },
     setUserFormSignIn(User: any,token:any) {
       this.loggedIn = true;
       this.token = token;
