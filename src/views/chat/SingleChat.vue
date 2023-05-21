@@ -31,7 +31,7 @@
     </header>
     <main
       ref="chatContainer"
-      class="h-full min-h-[calc(100vh-28px)] overflow-scroll space-y-2 mt-1 pt-4 pb-10 bg-[url('/chatbg.svg')]  bg-purple-50  px-2 bg-length[210px_210px]  md:bg-full bg-fixed"
+      class="h-full min-h-[calc(100vh-28px)] overflow-scroll space-y-2 mt-1 pt-4 pb-10 bg-[url('/chatbg.svg')] bg-[#f2f0f7] bg-repeat bg-[length:210px_210px]  md:bg-full bg-fixed"
       dir="ltr"
     >
       <chat-bubble
