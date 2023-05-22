@@ -4,27 +4,31 @@
 @tailwind components;
 @tailwind utilities;
 .link-active-class {
-    @apply  bg-primary rounded-xl;
+    @apply bg-primary rounded-xl;
     @apply text-white !important;
     @apply fill-white !important;
 }
+
 .link-active-class span {
     @apply text-white !important;
-    
+
 }
-.bottom-link-active-class{
+
+.bottom-link-active-class {
     @apply text-primary
 }
-.bottom-link-active-class svg{
+
+.bottom-link-active-class svg {
     @apply fill-primary !important;
 }
+
 body {
     font-family: PELAK-Economic, serif !important;
     direction: ltr;
     text-align: right;
 }
 
-.main-card{
+.main-card {
     @apply w-full bg-white dark:bg-dark-muted rounded-xl shadow-lg p-5;
 }
 
@@ -180,3 +184,16 @@ body {
 
 
 /* transitions region  end*/
+@media only screen and (min-width: 768px) {
+    .drawer-mobile > .drawer-toggle ~ .drawer-side > .drawer-overlay {
+        visibility: visible !important;
+    }
+
+    .drawer-toggle ~ .drawer-side > .drawer-overlay + * {
+        transform: none !important;
+    }
+
+    .drawer-mobile > .drawer-toggle ~ .drawer-side > .drawer-overlay + * {
+        transform: none !important;
+    }
+}

@@ -1,19 +1,23 @@
 <template>
-  <div class="min-h-screen relative items-between w-full grid grid-cols-12 bg-gray-100 dark:bg-dark">
+  <div class="min-h-screen relative items-between w-full flex flex-col md:flex-row  bg-gray-100 dark:bg-dark">
     <Overlay></Overlay>
     <Toast></Toast>
     <!--  sidebar  -->
-    <div v-if="!fullLayout" :class="{  ' md:!block md:!relative   hidden ': !sideBarStore.showSideBar,}"
-         class="lg:col-span-3 2xl:col-span-2 2md:hidden min-h-screen max-h-full fixed top-0 left-0 z-10 col-span-12"
+    <div v-if="!fullLayout"
+         :class="{  ' md:!block md:!relative   hidden ': !sideBarStore.showSideBar, '!w-[16rem]' : route.name ==='conversation'}"
+         class="w-[17rem] 2md:hidden min-h-screen max-h-full fixed top-0 left-0 z-10 "
     >
+
+      <!--      lg:col-span-3 2xl:col-span-2 col-span-12-->
       <side-bar></side-bar>
     </div>
     <!--  main content  -->
 
     <div
         :class="[fullLayout ? '' : 'p-2', route.name==='conversation' ? '!p-0' : '']"
-        class="lg:col-span-9 2xl:col-span-10 z-50 min-h-screen md:mb-0 mb-10 col-span-12 h-full"
+        class=" lg:w-[calc(100vw-16rem)] md:w-[calc(100vw-14rem)] w-full  md:ml-3 z-50 min-h-screen md:mb-0 mb-10  h-full"
     >
+      <!--      lg:col-span-9 col-span-12 2xl:col-span-10-->
       <Header v-if="!fullLayout"></Header>
       <router-view v-slot="{ Component }">
         <transition name="fade" appear mode="out-in">
@@ -26,7 +30,7 @@
     <!--  bottom nav  -->
     <div
         v-if="showBottomNav"
-        class="col-span-12 md:hidden block sticky mt-2 bottom-2 left-0 z-50 flex items-end h-1"
+        class="col-span-12 md:hidden block sticky mt-2 bottom-3 left-0 z-50 flex items-end h-1"
     >
       <BottomNav></BottomNav>
     </div>

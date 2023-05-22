@@ -8,7 +8,7 @@ module.exports = {
     },
     pwa: {
         name: 'Mali-eh Iran',
-        themeColor: '#06b6d4',
+        themeColor: '#283046',
         msTileColor: '#283046',
         appleMobileWebAppCapable: 'yes',
         appleMobileWebAppStatusBarStyle: 'black',
