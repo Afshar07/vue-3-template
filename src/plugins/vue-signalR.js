@@ -21,7 +21,7 @@ hub.on("ReadMessage", (res) => {
 });
 hub.on("DeliverMessage", (res) => {
   const chatStore = useChatStore();
-  chatStore.deliverMessage(true);
+  chatStore.messageDelivered(true);
 });
 
 async function start() {

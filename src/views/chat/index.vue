@@ -32,29 +32,23 @@ import {onBeforeRouteUpdate} from "vue-router";
 const repositories: any = inject("repositories");
 const appStore = useAppStore();
 const chatStore: any = useChatStore();
-onBeforeRouteUpdate(async ()=>{
-  await Promise.all([
-    deliverMessage(),
-    getMenu()]);
-})
+
 onMounted(async () => {
   await Promise.all([
       deliverMessage(),
-      getMenu()]);
+      getMenu()
+  ]);
 });
 let chats = ref(null)
 
 async function getMenu() {
   try {
-    appStore.showOverlay = true;
     const res = await repositories.getMenu.setParams({
       searchCommand: search.value,
     });
     chats.value = res.data
   } catch (e) {
     console.log(e);
-  } finally {
-    appStore.showOverlay = false;
   }
 }
 
@@ -72,13 +66,15 @@ let timeout = ref<any>(null);
 watch(search, async (val) => {
   getMenu();
 });
-
-watch(chatStore.getSocketId, async (val) => {
-  if (val) {
+let getSocketId = computed(() => {
+  return chatStore.SocketUserId;
+});
+watch(getSocketId, async (val:any) => {
+  if (val !== undefined && val != 0) {
     await deliverMessage();
     await getMenu()
-    chatStore.setDefaultSocketId();
   }
+    chatStore.setDefaultSocketId();
 },{immediate:true})
 let debouncedSearch = computed({
   get() {

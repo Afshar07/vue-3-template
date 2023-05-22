@@ -8,6 +8,7 @@
           <div class="w-10 h-10 rounded-full">
             <img
               v-if="userData.profileImage"
+              :src="helper.baseUrl +userData.profileImage "
               src="https://static.wikia.nocookie.net/starwars/images/6/6f/Anakin_Skywalker_RotS.png/"
             />
             <div
@@ -30,7 +31,7 @@
     </header>
     <main
       ref="chatContainer"
-      class="h-full min-h-[calc(100vh-28px)] overflow-scroll space-y-2 mt-1 pt-4 pb-10 bg-[url('/chatbg.svg')] px-2 bg-[#f2f0f7] bg-repeat bg-[length:210px_210px] md:bg-full bg-fixed"
+      class="h-full min-h-[calc(100vh-28px)] overflow-scroll space-y-2 mt-1 pt-4 pb-10 bg-[url('/chatbg.svg')] bg-[#f2f0f7] bg-repeat bg-[length:210px_210px]  md:bg-full bg-fixed"
       dir="ltr"
     >
       <chat-bubble
@@ -118,7 +119,7 @@
               type="button"
               @click.stop="startRecording"
             >
-              <i class="ri-play-line text-green-500"></i>
+              <i class="ri-play-line text-2xl text-green-500"></i>
             </button>
             <div
               v-else
@@ -249,7 +250,7 @@ let generateAudioSrc = computed(() => {
 });
 
 onMounted(async () => {
-  await Promise.all([getUser(), readMessage(), getConversation(false)]);
+  await Promise.all([getUser(),deliverMessage(), readMessage(), getConversation(false)]);
   scrollBottom();
   observer.value = new IntersectionObserver(checkObserverView, {
     threshold: 1.0,
@@ -269,21 +270,25 @@ let isMessageDelivered = computed(() => {
 
 watch(getSocketId, async (val) => {
   if (val !== undefined && val != 0) {
-    getConversation(false);
+    await deliverMessage();
+    await readMessage();
+   await getConversation(false);
   }
   chatStore.setDefaultSocketId();
 });
 watch(isMessageReaded, async (val) => {
   if (val) {
     await readMessage();
-    chatStore.messageReaded(false);
+    await getConversation(false)
   }
+    chatStore.messageReaded(false);
 });
 watch(isMessageDelivered, async (val) => {
   if (val) {
     await deliverMessage();
-    chatStore.isMessageDelivered(false);
+    await getConversation(false)
   }
+    chatStore.messageDelivered(false);
 });
 function setAudioBlob(blob: any) {
   voiceMedia.value = blob;

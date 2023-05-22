@@ -19,7 +19,7 @@
         <PaperIcon class="w-8 h-8 dark:fill-white"></PaperIcon>
       </div>
       <label for="statement"
-                   class="w-full  flex bg-[#f97316]  rounded-b shadow text-white items-center justify-center h-1/3">
+                   class="w-full text-center  flex bg-[#f97316]  rounded-b shadow text-white items-center justify-center h-1/3">
         <small>درخواست اظهار‌نامه</small>
       </label>
     </div>
@@ -28,7 +28,7 @@
         <PaperIcon class="w-8 h-8 dark:fill-white"></PaperIcon>
       </div>
       <router-link to="/services/statement"
-                   class="w-full  flex bg-[#22c55e]   rounded-b shadow text-white items-center justify-center h-1/3">
+                   class="w-full text-center  flex bg-[#22c55e]   rounded-b shadow text-white items-center justify-center h-1/3">
         <small>اظهارنامه ارزش افزوده</small>
       </router-link>
     </div>
@@ -37,7 +37,7 @@
         <PaperIcon class="w-8 h-8 dark:fill-white"></PaperIcon>
       </div>
       <router-link to="/services/statement"
-                   class="w-full  flex bg-[#8b5cf6]  rounded-b shadow text-white items-center justify-center h-1/3">
+                   class="w-full text-center  flex bg-[#8b5cf6]  rounded-b shadow text-white items-center justify-center h-1/3">
         <small>اظهارنامه سالیانه</small>
       </router-link>
     </div>
@@ -46,7 +46,7 @@
         <PaperIcon class="w-8 h-8 dark:fill-white"></PaperIcon>
       </div>
       <router-link to="/services/statement"
-                   class="w-full  flex bg-[#ec4899]  rounded-b shadow text-white items-center justify-center h-1/3">
+                   class="w-full text-center  flex bg-[#ec4899]  rounded-b shadow text-white items-center justify-center h-1/3">
         <small>اظهارنامه عملکرد</small>
       </router-link>
     </div>

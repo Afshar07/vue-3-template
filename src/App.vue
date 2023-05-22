@@ -1,32 +1,32 @@
 <template>
-  <div
-    class="min-h-screen relative items-between w-full grid grid-cols-12 bg-gray-100 dark:bg-dark"
-  >
+  <div class="min-h-screen relative items-between w-full grid grid-cols-12 bg-gray-100 dark:bg-dark">
     <Overlay></Overlay>
     <Toast></Toast>
-    <div
-      v-if="!fullLayout"
-      :class="{
-        ' md:!block md:!relative   hidden ': !sideBarStore.showSideBar,
-      }"
-      class="lg:col-span-3 2xl:col-span-2 2md:hidden min-h-screen max-h-full fixed top-0 left-0 z-10 col-span-12"
+    <!--  sidebar  -->
+    <div v-if="!fullLayout" :class="{  ' md:!block md:!relative   hidden ': !sideBarStore.showSideBar,}"
+         class="lg:col-span-3 2xl:col-span-2 2md:hidden min-h-screen max-h-full fixed top-0 left-0 z-10 col-span-12"
     >
       <side-bar></side-bar>
     </div>
+    <!--  main content  -->
+
     <div
-      :class="[fullLayout ? '' : 'p-2', route.name==='conversation' ? '!p-0' : '']"
-      class="lg:col-span-9 2xl:col-span-10 z-50 min-h-screen md:mb-0 mb-10 col-span-12 h-full"
+        :class="[fullLayout ? '' : 'p-2', route.name==='conversation' ? '!p-0' : '']"
+        class="lg:col-span-9 2xl:col-span-10 z-50 min-h-screen md:mb-0 mb-10 col-span-12 h-full"
     >
       <Header v-if="!fullLayout"></Header>
       <router-view v-slot="{ Component }">
         <transition name="fade" appear mode="out-in">
-          <component :is="Component" />
+          <component :is="Component"/>
         </transition>
       </router-view>
     </div>
+
+
+    <!--  bottom nav  -->
     <div
-      v-if="showBottomNav"
-      class="col-span-12 md:hidden block sticky mt-2 bottom-0 left-0 z-50 flex items-end h-1"
+        v-if="showBottomNav"
+        class="col-span-12 md:hidden block sticky mt-2 bottom-2 left-0 z-50 flex items-end h-1"
     >
       <BottomNav></BottomNav>
     </div>
@@ -35,39 +35,36 @@
 
 <script setup lang="ts">
 import {computed, inject, onMounted, watch} from "vue";
-import { RouterView, useRoute } from "vue-router";
+import {RouterView, useRoute, useRouter} from "vue-router";
 import Header from "@/components/main/Header.vue";
 import Toast from "@/components/utilities/Toast.vue";
 import Overlay from "@/components/utilities/Overlay.vue";
 import SideBar from "@/components/main/sideBar.vue";
-import { useAppStore } from "@/stores/app";
-import { useSideBarStore } from "@/stores/sideBar";
+import {useAppStore} from "@/stores/app";
+import {useSideBarStore} from "@/stores/sideBar";
 import BottomNav from "@/components/main/BottomNav.vue";
 import {VueCookies} from "vue-cookies";
 import {useAuthStore} from "@/stores/auth";
+
 const appStore = useAppStore();
 const sideBarStore = useSideBarStore();
 const route: any = useRoute();
-const $cookies : any = inject<VueCookies>('$cookies')
-const authStore:any = useAuthStore()
-const repositories:any = inject('repositories')
+const router: any = useRouter();
+const $cookies: any = inject<VueCookies>('$cookies')
+const authStore: any = useAuthStore()
 let fullLayout = computed(() => {
   return (
-    (route.name !== undefined && route.name === "index")
+      (route.name !== undefined && route.name === "index")
   );
 });
 let showBottomNav = computed(() => {
   return (
-    route.name !== undefined &&
-    route.name !== "index"
+      route.name !== undefined &&
+      route.name !== "index"
   );
 });
-onMounted(async() => {
-  if($cookies.get('token')){
-    authStore.setToken($cookies.get('token'))
-    const res = await repositories.getUserByToken.setTag()
-    console.log(res)
-  }
+onMounted(async () => {
+
   const body: any = document.querySelector("body");
   // Set theme
   if (appStore.getSiteTheme) {
