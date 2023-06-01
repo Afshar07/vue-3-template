@@ -125,7 +125,6 @@ async function createUtilityRequest() {
   } finally {
     appStore.showOverlay = false;
   }
-  console.log(utilityRequest);
 }
 </script>
 
