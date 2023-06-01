@@ -1,5 +1,5 @@
 <template>
-  <div class="md:main-card grid gap-y-7 md:gap-2 grid-cols-12">
+  <div class="md:main-card grid gap-y-7 gap-x-6 md:gap-4 grid-cols-12">
     <div
       class="col-span-12 p-3 bg-white flex flex-col items-start rounded-xl shadow"
     >
@@ -17,7 +17,7 @@
     <div
       v-for="(price, index) in priceList"
       :key="index"
-      class="col-span-12 md:col-span-4 bg-white py-6 flex flex-col items-center px-3 rounded-md border-t-4 shadow h-full"
+      class="col-span-12 sm:col-span-6 xl:col-span-4 bg-white py-6 flex flex-col items-center px-3 rounded-md border-t-4 shadow h-full"
       :class="price.borderClass"
     >
       <div
@@ -37,14 +37,24 @@
       <p class="mb-6 font-bold">
         {{ Intl.NumberFormat("en-US").format(+price.amount) }} تومان
       </p>
-      <button class="btn bg-green-600 border-none mt-auto">پرداخت</button>
+      <button
+        class="btn bg-green-600 border-none mt-auto"
+        @click="sendPaymentRequest"
+      >
+        پرداخت
+      </button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { inject, reactive } from "vue";
+import { utilityRequest } from "@/models/utilityRequest";
+import { useAuthStore } from "@/stores/auth";
+import { UtilityTypes } from "@/models/enums/utilityTypes";
+import { useAppStore } from "@/stores/app";
 
+// Interfaces
 interface PriceObject {
   title: string;
   amount: string | number;
@@ -53,6 +63,19 @@ interface PriceObject {
 }
 
 // Variables
+const authStore: any = useAuthStore();
+const appStore = useAppStore();
+const api: any = inject("repositories");
+const toast: any = inject("toast");
+
+let utilityRequest = reactive<utilityRequest>({
+  userId: authStore.getUser.userId,
+  shopId: null,
+  createDate: new Date(Date.now()),
+  type: UtilityTypes.VIPRequest,
+  description: "درخواست VIP",
+});
+
 const priceList: Array<PriceObject> = reactive([
   {
     title: "1 ماهه",
@@ -73,6 +96,37 @@ const priceList: Array<PriceObject> = reactive([
     badgeClass: "bg-emerald-600 border-emerald-700",
   },
 ]);
+
+// Functions
+async function sendPaymentRequest() {
+  verifyPaymentRequest();
+}
+async function verifyPaymentRequest() {
+  toast.success({ content: "پرداخت با موفقیت انجام شد." });
+  createUtilityRequest();
+}
+async function createUtilityRequest() {
+  try {
+    appStore.showOverlay = true;
+    const res = await api.createUtilityRequest.setPayload(utilityRequest);
+    if (res.data != 0) {
+      utilityRequest = {
+        userId: authStore.getUser.userId,
+        shopId: null,
+        createDate: new Date(Date.now()),
+        type: UtilityTypes.VIPRequest,
+        description: "درخواست VIP",
+      };
+    } else {
+      toast.error({ content: "خطایی رخ داده است" });
+    }
+  } catch (error) {
+    console.error(error);
+  } finally {
+    appStore.showOverlay = false;
+  }
+  console.log(utilityRequest);
+}
 </script>
 
 <style scoped></style>
