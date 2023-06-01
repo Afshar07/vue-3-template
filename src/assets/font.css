@@ -13,10 +13,10 @@
   font-family: PELAK-Economic;
   font-style: normal;
   font-weight: bold;
-  src: url("fonts/PELAK-Economic/PelakFontFamily/webfonts/eot/Pelak-Bold.eot")
+  src: url("./fonts/PELAK-Economic/PelakFontFamily/webfonts/eot/Pelak-Bold.eot")
       format("eot"),
-    url("fonts/PELAK-Economic/PelakFontFamily/webfonts/woff/Pelak-bold.woff")
+    url("./fonts/PELAK-Economic/PelakFontFamily/webfonts/woff/Pelak-Bold.woff")
       format("woff"),
-    url("fonts/PELAK-Economic/PelakFontFamily/webfonts/woff2/Pelak-bold.woff2")
+    url("./fonts/PELAK-Economic/PelakFontFamily/webfonts/woff2/Pelak-Bold.woff2")
       format("woff2");
 }
