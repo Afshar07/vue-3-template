@@ -57,6 +57,7 @@ const helper = inject("helper");
 const authStore = useAuthStore();
 
 function emitSelectedMedia(media) {
+  window.location.replace(helper.baseUrl + 'media/gallery/ChatMedia/' +props.message['chatMedia'])
   emits("emitSelectedMedia", media);
 }
 

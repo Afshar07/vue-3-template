@@ -11,8 +11,8 @@
         <span class="p-2 border border-green-500 text-green-500 rounded-xl shadow">پرداخت شده</span>
       </div>
     </div>
-    <div class="w-full flex h-40 bg-gray-50 shadow items-center justify-center">
-      <i class="ri-file-pdf-line text-5xl"></i>
+    <div class="w-full flex h-40 bg-gray-50 shadow rounded-xl mt-4 items-center justify-center">
+      <i class="ri-file-pdf-line dark:text-gray-900 text-5xl"></i>
     </div>
     <div class="w-full flex pt-3 flex-col items-start">
       <p class="flex-wrap dark:text-white text-gray-500">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از

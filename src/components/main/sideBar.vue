@@ -18,7 +18,7 @@
         class="menu h-full p-4 w-[16rem] bg-white dark:bg-dark-muted text-base-content"
       >
         <div class="flex items-center gap-1">
-          <img src="/logo.png" class="w-8 h-8" alt="" />
+          <img src="/logo.jpg" class="w-8 h-8" alt="" />
           <h1 class="font-bold text-gray-800 dark:text-white text-2xl p-2">
             {{ appName }}
           </h1>
