@@ -6,7 +6,8 @@
     </div>
     <div class="rounded-lg border rounded border-gray-300" :class="{'!border-red-500':error,'!border-achareh-green':error === false}">
       <input
-          class="w-full rounded-lg text-right bg-gray-50 leading-10 ring-0 text-[14px] pr-2 placeholder:text-[14px] outline-0 px-2"
+          :class="{'!border-primary':isRequired}"
+          class="w-full rounded-lg text-right border dark:text-gray-900 bg-gray-50 leading-10 ring-0 text-[14px] pr-2 placeholder:text-[14px] outline-0 px-2"
           :placeholder="placeHolder"
           :type="dataType"
           :value="modelValue"
@@ -23,7 +24,7 @@
 
 import CloseIcon from "../icons/CloseIcon.vue";
 
-defineProps(['modelValue','dataType','maxLength','error','errorMessage','placeHolder'])
+defineProps(['modelValue','dataType','maxLength','error','errorMessage','placeHolder','isRequired'])
 defineEmits(['update:modelValue'])
 
 </script>

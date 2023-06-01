@@ -29,15 +29,20 @@
               :fields="fields"
               emptyText="Nothing Found"
           >
-            <template #userId="data">
-              <span>{{ data.items.userId }}</span>
+            <template #createDate="data">
+              <span>{{ new Date(data.items.createDate).toLocaleDateString('fa-IR') }}</span>
             </template>
             <template #actions="data">
               <div class="flex justify-center items-center">
-
-                <router-link :to="{ name: 'conversation', params: { username: data.items.userId } }">
-                  <i title="ویرایش" class="ri-chat-1-line dark:text-white text-violet cursor-pointer text-xl"></i>
-                </router-link>
+                <label @click="setSelectedShop(data.items)" for="deleteShop">
+                  <i title="حذف" class="ri-delete-bin-line  text-red-500 cursor-pointer text-xl"></i>
+                </label>
+                <label @click="setSelectedShop(data.items)" for="editShop">
+                  <i title="ویرایش" class="ri-edit-2-line  text-primary cursor-pointer text-xl"></i>
+                </label>
+                <label @click="setSelectedShop(data.items)" for="viewShop">
+                  <i title="مشاهده" class="ri-eye-line  text-violet cursor-pointer text-xl"></i>
+                </label>
               </div>
             </template>
           </Table>
@@ -49,29 +54,35 @@
       </div>
     </div>
     <!--  createShopModal  -->
-    <Modal :id="'createShop'" @ok="create" :closeModalTitle="'بستن'" :okModalTitle="'ثبت'"
+    <Modal :id="'createShop'" @ok="validateShop(newShop,1)" :closeModalTitle="'بستن'" :okModalTitle="'ثبت'"
            title="ایجاد فروشگاه جدید">
       <template #modalBody>
         <div class="w-full dark:text-white grid grid-cols-1 p-3">
           <div class="flex my-1 flex-col">
-            <small class="mb-1">نام فروشگاه</small>
+            <small class="mb-1">کد ملی</small>
             <VInput
-                v-model="newShop.shopName"
-                :dataType="'text'"
-                :placeHolder="'کد ملی'"
-            ></VInput>
-          </div>
-          <div class="flex my-1 flex-col">
-            <small class="mb-1">نام فروشگاه</small>
-            <VInput
+                :isRequired="true"
+
                 v-model="newShop.nationalId"
                 :dataType="'text'"
                 :placeHolder="'کد ملی'"
             ></VInput>
           </div>
           <div class="flex my-1 flex-col">
+            <small class="mb-1">نام فروشگاه</small>
+            <VInput
+                :isRequired="true"
+
+                v-model="newShop.shopName"
+                :dataType="'text'"
+                :placeHolder="'نام فروشگاه'"
+            ></VInput>
+          </div>
+          <div class="flex my-1 flex-col">
             <small class="mb-1">واحد مالیاتی</small>
             <VInput
+                :isRequired="true"
+
                 v-model="newShop.taxUnit"
                 :dataType="'text'"
                 :placeHolder="'واحد مالیاتی'"
@@ -80,6 +91,8 @@
           <div class="flex my-1 flex-col">
             <small class="mb-1">شماره پرونده</small>
             <VInput
+                :isRequired="true"
+
                 v-model="newShop.fileNumber"
                 :dataType="'text'"
                 :placeHolder="'شماره پرونده'"
@@ -88,20 +101,137 @@
           <div class="flex my-1 flex-col">
             <small class="mb-1">شماره ترمینال</small>
             <VInput
+                :isRequired="true"
                 v-model="newShop.terminalNumber"
                 :dataType="'text'"
                 :placeHolder="'شماره ترمینال'"
             ></VInput>
           </div>
           <div class="flex my-1 flex-col">
+            <small class="mb-1">تاریخ تاسیس</small>
+            <datePicker v-model="newShop.companyStartDate" style="direction: rtl!important"></datePicker>
+          </div>
+          <div class="flex my-1 flex-col">
             <small for="">آدرس</small>
-            <textarea class="border-gray-300 border rounded-xl" v-model="newShop.address"></textarea>
+            <textarea class="border-gray-300 text-right border rounded-xl dark:text-gray-900" v-model="newShop.address"></textarea>
           </div>
 
         </div>
       </template>
     </Modal>
+    <!--  editShopModal  -->
+    <Modal :id="'editShop'" @ok="validateShop(selectedShop,2)" :closeModalTitle="'بستن'" :okModalTitle="'بروزرسانی'"
+           title="بروزرسانی فروشگاه">
+      <template #modalBody>
+        <div v-if="selectedShop" class="w-full dark:text-white grid grid-cols-1 p-3">
+          <div class="flex my-1 flex-col">
+            <small class="mb-1">کد ملی</small>
+            <VInput
+                :isRequired="true"
 
+                v-model="selectedShop.nationalId"
+                :dataType="'text'"
+                :placeHolder="'کد ملی'"
+            ></VInput>
+          </div>
+          <div class="flex my-1 flex-col">
+            <small class="mb-1">نام فروشگاه</small>
+            <VInput
+                :isRequired="true"
+
+                v-model="selectedShop.shopName"
+                :dataType="'text'"
+                :placeHolder="'نام فروشگاه'"
+            ></VInput>
+          </div>
+          <div class="flex my-1 flex-col">
+            <small class="mb-1">واحد مالیاتی</small>
+            <VInput
+                :isRequired="true"
+
+                v-model="selectedShop.taxUnit"
+                :dataType="'text'"
+                :placeHolder="'واحد مالیاتی'"
+            ></VInput>
+          </div>
+          <div class="flex my-1 flex-col">
+            <small class="mb-1">شماره پرونده</small>
+            <VInput
+                :isRequired="true"
+
+                v-model="selectedShop.fileNumber"
+                :dataType="'text'"
+                :placeHolder="'شماره پرونده'"
+            ></VInput>
+          </div>
+          <div class="flex my-1 flex-col">
+            <small class="mb-1">شماره ترمینال</small>
+            <VInput
+                :isRequired="true"
+                v-model="selectedShop.terminalNumber"
+                :dataType="'text'"
+                :placeHolder="'شماره ترمینال'"
+            ></VInput>
+          </div>
+          <div class="flex my-1 flex-col">
+            <small class="mb-1">تاریخ تاسیس</small>
+            <datePicker v-model="selectedShop.companyStartDate" style="direction: rtl!important"></datePicker>
+          </div>
+          <div class="flex my-1 flex-col">
+            <small for="">آدرس</small>
+            <textarea class="border-gray-300 text-right border rounded-xl dark:text-gray-900" v-model="selectedShop.address"></textarea>
+          </div>
+
+        </div>
+      </template>
+    </Modal>
+    <!--  viewShopModal  -->
+    <Modal :id="'viewShop'" :closeModalTitle="'بستن'"
+           title="جزئیات فروشگاه">
+      <template #modalBody>
+        <div v-if="selectedShop" class="w-full dark:text-white grid grid-cols-1 p-3">
+          <div class="flex my-1 items-center justify-between">
+           <small>{{selectedShop.nationalId}}</small>
+            <small class="mb-1 text-gray-400">کد ملی</small>
+          </div>
+          <div class="flex my-1 items-center justify-between">
+            <small>{{selectedShop.shopName}}</small>
+            <small class="mb-1 text-gray-400">نام فروشگاه</small>
+          </div>
+          <div class="flex my-1 items-center justify-between">
+            <small>{{selectedShop.taxUnit}}</small>
+            <small class="mb-1 text-gray-400">واحد مالیاتی</small>
+          </div>
+          <div class="flex my-1 items-center justify-between">
+            <small>{{selectedShop.fileNumber}}</small>
+            <small class="mb-1 text-gray-400">شماره پرونده</small>
+          </div>
+          <div class="flex my-1 items-center justify-between">
+            <small>{{selectedShop.terminalNumber}}</small>
+            <small class="mb-1 text-gray-400">شماره ترمینال</small>
+          </div>
+
+          <div class="flex my-1 items-center justify-between">
+            <small class="mb-1 ">{{new Date(selectedShop.companyStartDate).toLocaleDateString('fa-IR')}}</small>
+            <small class="mb-1 text-gray-400">تاریخ تاسیس</small>
+          </div>
+          <div class="flex my-1 flex-col">
+            <small class="text-gray-400">آدرس</small>
+            <p style="overflow-wrap: anywhere">{{selectedShop.address}}</p>
+          </div>
+
+        </div>
+      </template>
+    </Modal>
+    <!--  deleteShopModal  -->
+    <Modal
+        :id="'deleteShop'"
+        @ok="deleteShop"
+        :closeModalTitle="'خیر'"
+        :okModalTitle="'بله'"
+        :has-body="false"
+        :title="'آیا از حذف این فروشگاه اطمینان دارید ؟'"
+    ></Modal>
   </div>
 </template>
 
@@ -115,10 +245,11 @@ import VInput from "@/components/utilities/VInput.vue";
 import {useAuthStore} from "@/stores/auth";
 import Modal from "@/components/utilities/Modal.vue";
 
+let toast: any = inject('toast')
 let authStore: any = useAuthStore()
 let appStore = useAppStore()
 const helper = inject('helper')
-let api = inject('repositories')
+let api: any = inject('repositories')
 let shop = reactive({
   shops: null
 })
@@ -165,8 +296,8 @@ let fields = ref([
   },
 ])
 let selectedPageId = ref(1)
-let totalPages = reactive([])
-
+let totalPages = reactive<any>([])
+let selectedShop = ref<any>(null)
 watch(pageCount, async () => {
   await getShopsByUserId()
 }, {deep: true})
@@ -175,11 +306,73 @@ onMounted(() => {
   getShopsByUserId()
 })
 
-async function create() {
-
+function setSelectedShop(shop: object) {
+  selectedShop.value = shop
 }
 
-function changePage(id) {
+function validateShop(data: any, actionType: number) {
+  if (data.shopName !== '' &&
+      data.companyStartDate !== '' &&
+      data.terminalNumber !== '' &&
+      data.fileNumber !== '' &&
+      data.taxUnit !== '' &&
+      data.nationalId !== '') {
+    if (actionType === 1) {
+      create()
+    } else if (actionType === 2) {
+      update()
+    }
+  } else {
+    toast.error({content: 'لطفا همه فیلد های اجباری را پر کنید'})
+  }
+}
+async function deleteShop(){
+  try {
+    appStore.showOverlay = true
+    const res = await api.deleteShop.setParams({
+      id:selectedShop.value.shopId
+    })
+    if (res.data !== 0) {
+      toast.success({content: 'فروشگاه با موفقیت حذف شد'})
+      getShopsByUserId()
+    }
+  } catch (e) {
+    console.log(e)
+  } finally {
+    appStore.showOverlay = false
+  }
+}
+async function update() {
+  try {
+    appStore.showOverlay = true
+    const res = await api.updateShop.setPayload(selectedShop.value)
+    if (res.data !== 0) {
+      toast.success({content: 'فروشگاه با موفقیت بروزرسانی شد'})
+      getShopsByUserId()
+    }
+  } catch (e) {
+    console.log(e)
+  } finally {
+    appStore.showOverlay = false
+  }
+}
+
+async function create() {
+  try {
+    appStore.showOverlay = true
+    const res = await api.createShop.setPayload(newShop)
+    if (res.data !== 0) {
+      toast.success({content: 'فروشگاه با موفقیت ساخته شد'})
+      getShopsByUserId()
+    }
+  } catch (e) {
+    console.log(e)
+  } finally {
+    appStore.showOverlay = false
+  }
+}
+
+function changePage(id: number) {
   selectedPageId.value = id
   getShopsByUserId()
 }

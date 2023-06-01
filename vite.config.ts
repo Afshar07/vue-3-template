@@ -8,6 +8,13 @@ export default defineConfig({
   plugins: [vue()],
   base: "/",
   resolve: {
+    mainFields: [
+      'browser',
+      'module',
+      'main',
+      'jsnext:main',
+      'jsnext'
+    ],
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
