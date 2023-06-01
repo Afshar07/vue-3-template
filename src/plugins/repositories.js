@@ -25,7 +25,8 @@ export default {
             getConversation:createRequestsRepository(app,'Message/GetConversation',authStore),
             readMessage:createRequestsRepository(app,'Message/ReadMessage',authStore),
             sendMessage:createRequestsRepository(app,'Message/SendMessage',authStore),
-            deliverMessage:createRequestsRepository(app,'Message/DeliverMessage',authStore)
+            deliverMessage:createRequestsRepository(app,'Message/DeliverMessage',authStore),
+            createUtilityRequest:createRequestsRepository(app,'Utility/Create',authStore)
         }
         app.provide('repositories', repositories)
     }
