@@ -3,7 +3,7 @@
     <div
       class="col-span-12 p-3 bg-white flex flex-col items-start rounded-xl shadow"
     >
-      <strong>خرید اشتراک vip</strong>
+      <strong>خرید اشتراک VIP</strong>
       <small class="my-3 border-b pb-3"
         >با خرید اشتراک VIP از مزایای زیر بهره مند شوید</small
       >
@@ -37,7 +37,7 @@
       <p class="mb-6 font-bold">
         {{ Intl.NumberFormat("en-US").format(+price.amount) }} تومان
       </p>
-      <button class="btn bg-green-500 border-none mt-auto">پرداخت</button>
+      <button class="btn bg-green-600 border-none mt-auto">پرداخت</button>
     </div>
   </div>
 </template>
@@ -57,8 +57,8 @@ const priceList: Array<PriceObject> = reactive([
   {
     title: "1 ماهه",
     amount: 30000,
-    borderClass: "border-red-600",
-    badgeClass: "bg-red-600 border-red-700",
+    borderClass: "border-orange-400",
+    badgeClass: "bg-orange-400 border-orange-500",
   },
   {
     title: "6 ماهه",
@@ -69,8 +69,8 @@ const priceList: Array<PriceObject> = reactive([
   {
     title: "1 ساله",
     amount: 100000,
-    borderClass: "border-green-500",
-    badgeClass: "bg-green-500 border-green-600",
+    borderClass: "border-emerald-600",
+    badgeClass: "bg-emerald-600 border-emerald-700",
   },
 ]);
 </script>
