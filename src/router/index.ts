@@ -51,6 +51,15 @@ const router = createRouter({
       },
     },
     {
+      path: "/user/my-shops",
+      name: "user-my-shops",
+      component: () => import("../views/admin/user/myShops.vue"),
+      meta: {
+        auth: true,
+        title: "مالی ایران | فروشگاه های من ",
+      },
+    },
+    {
       path: "/requests/list",
       name: "requests-list",
       component: () => import("../views/admin/requests/RequestsList.vue"),

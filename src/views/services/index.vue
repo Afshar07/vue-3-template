@@ -6,7 +6,7 @@
     <Modal :id="'statement'" @ok="submitStatementForm" :closeModalTitle="'بستن'" :okModalTitle="'ارسال'"
            :title="selectedUtility?.title">
       <template #modalBody>
-        <div class="w-full grid grid-cols-1 p-3">
+        <div class="w-full dark:text-white grid grid-cols-1 p-3">
           <div class="mb-2">
             <small for="">انتخاب فروشگاه</small>
             <v-select

@@ -53,12 +53,23 @@ export const sideBarItems: navItems[] = [
     children: [],
   },
   {
-    title: " اکانت",
-    link: "/user/profile",
+    title: "اکانت",
+    link: "",
     icon: "UserIcon",
-    hasChildren: false,
+    hasChildren: true,
     hasAccess: ['subscriber'],
-    children: [],
+    children: [
+      {
+        title: "حساب کاربری",
+        link: "/user/profile",
+        hasAccess:  ['subscriber'],
+      },
+      {
+        title: "فروشگاه ها",
+        link: "/user/my-shops",
+        hasAccess:  ['subscriber'],
+      },
+    ],
   },
   // {
   //     title: 'Profile',
