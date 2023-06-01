@@ -17,6 +17,7 @@ export default {
             getAllOrderByUserId: createRequestsRepository(app, 'Order/GetByUserId', authStore),
             createOrder: createRequestsRepository(app, 'Order/Create', authStore),
             getAllUsers: createRequestsRepository(app, 'User/GetAll', authStore),
+            createUser: createRequestsRepository(app, 'User/Create', authStore),
             changeOrderStatus: createRequestsRepository(app, 'Order/ChangeOrderStatus', authStore),
             getCryptoAccountsByUserId: createRequestsRepository(app, 'CryptoAccount/GetByUserId', authStore),
             createCryptoAccount: createRequestsRepository(app, 'CryptoAccount/Create', authStore),

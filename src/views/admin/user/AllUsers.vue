@@ -8,7 +8,7 @@
         <VInput class="col-span-12" v-model="searchCommand" :dataType="'text'"
                  :placeHolder="'جستجو...'"></VInput>
       </div>
-      <div class="col-span-12 md:col-span-6 mb-5 flex justify-start md:justify-end items-center">
+      <div class="col-span-12 md:col-span-5 mb-5 flex justify-start md:justify-start items-center px-3">
         <span class="text-md dark:text-white ml-1"> تعداد در هر صفحه :</span>
         <v-select
             class="md:w-1/3 min-w-[8rem]"
@@ -19,15 +19,22 @@
             :clearable="false">
         </v-select>
       </div>
+      <div class="col-span-12 md:col-span-1 mb-5 flex justify-start md:justify-end items-center">
+        <label for="createUserModal" class="btn bg-primary border-none w-full text-white">+ افزودن کاربر</label>
+      </div>
       <div class="grid grid-cols-12 col-span-12 rounded-xl border border-gray-200 dark:border-gray-500 gap-3 mb-5">
         <div class="overflow-x-auto w-full rounded-xl col-span-12">
          <Table
          :items="user.users"
          :fields="userFields"
-         emptyText="Nothing Found"
+         emptyText="موردی یافت نشد"
          >
            <template #userId="data">
-             <span >{{ data.items.userId }}</span>
+             <span>{{ data.items.userId }}</span>
+           </template>
+           <template #shops="data">
+             <span v-if="data.items.shops.length > 0">{{ data.items.shops[0].shopName }}</span>
+             <span v-else> - </span>
            </template>
            <template #actions="data">
              <div class="flex justify-center items-center">
@@ -44,6 +51,58 @@
         <Pagination :activePage="selectedPageId" :totalPages="totalPages.value" @PageChanged="changePage($event)"></Pagination>
       </div>
     </div>
+
+  <!--  Create User Modal  -->
+    <Modal
+        :id="'createUserModal'"
+        @ok="createUser"
+        :closeModalTitle="'بستن'"
+        :okModalTitle="'ارسال'"
+        :title="'افزودن کابر'"
+    >
+      <template #modalBody>
+        <div class="w-full p-3">
+          <div class="space-y-3">
+            <VInput
+                v-model="newUser.name"
+                class="w-full"
+                :dataType="'text'"
+                :placeHolder="'نام'"
+            ></VInput>
+            <VInput
+                v-model="newUser.familyName"
+                class="w-full"
+                :dataType="'text'"
+                :placeHolder="'نام خانوادگی'"
+            ></VInput>
+            <VInput
+                v-model="newUser.userName"
+                class="w-full"
+                :dataType="'text'"
+                :placeHolder="'نام کاربری'"
+            ></VInput>
+            <VInput
+                v-model="newUser.mobile"
+                class="w-full"
+                :dataType="'text'"
+                :placeHolder="'موبایل'"
+            ></VInput>
+            <VInput
+                v-model="newUser.email"
+                class="w-full"
+                :dataType="'text'"
+                :placeHolder="'ایمیل'"
+            ></VInput>
+            <VInput
+                v-model="newUser.password"
+                class="w-full"
+                :dataType="'text'"
+                :placeHolder="'رمز عبور'"
+            ></VInput>
+          </div>
+        </div>
+      </template>
+    </Modal>
   </div>
 </template>
 
@@ -57,6 +116,7 @@ import Table from "@/components/utilities/Table.vue";
 import TrashIcon from "@/components/icons/TrashIcon.vue";
 import EditIcon from "@/components/icons/EditIcon.vue";
 import VInput from "@/components/utilities/VInput.vue";
+import Modal from "@/components/utilities/Modal.vue";
 let appStore = useAppStore()
 const helper = inject('helper')
 let api = inject('repositories')
@@ -94,12 +154,34 @@ let userFields = ref([
     label: 'ایمیل'
   },
   {
+    key:'shops',
+    label: 'کسب و کار'
+  },
+  {
     key:'actions',
     label: 'عملیات'
   },
 ])
-let selectedPageId = ref(1)
-let totalPages = reactive([])
+let selectedPageId = ref(1);
+let totalPages = reactive([]);
+let newUser = ref({
+  userId: 0,
+  name: "",
+  familyName: "",
+  email: "",
+  mobile: "",
+  type: 1,
+  status: 1,
+  password: "",
+  userName: "",
+  createDate: new Date(Date.now()),
+  updateDate: new Date(Date.now()),
+  role: "",
+  profileImage: null,
+  currentPassword: "",
+  shops:[],
+  isDeleted: false
+})
 
 watch(pageCount, async () => {
   await getAllUsers()
@@ -126,6 +208,18 @@ async function getAllUsers(){
       totalPages.value.push(i);
     }
     user.users = res.data.users
+  }catch (e) {
+    console.log(e)
+  }finally {
+    appStore.showOverlay = false
+  }
+}
+
+async function createUser(){
+  try {
+    appStore.showOverlay = true
+    const res = await api.createUser.setPayload(newUser.value);
+    await getAllUsers()
   }catch (e) {
     console.log(e)
   }finally {
