@@ -3,13 +3,16 @@
     <div class="w-full flex border-b pb-3 items-center justify-between">
       <strong>اظهار نامه سالیانه</strong>
       <div class="flex items-center justify-center gap-2">
-        <button class=" btn-sm border-none p-2 !h-full btn bg-primary text-white fill-white rounded-xl shadow">
-          <label for="viewStatement">
-            <EyeIcon class="w-6 h-6"></EyeIcon>
-          </label>
-        </button>
+<!--        <button class=" btn-sm border-none p-2 !h-full btn bg-primary text-white fill-white rounded-xl shadow">-->
+<!--          <label for="viewStatement">-->
+<!--            <EyeIcon class="w-6 h-6"></EyeIcon>-->
+<!--          </label>-->
+<!--        </button>-->
         <span class="p-2 border border-green-500 text-green-500 rounded-xl shadow">پرداخت شده</span>
       </div>
+    </div>
+    <div class="w-full flex h-40 bg-gray-50 shadow items-center justify-center">
+      <i class="ri-file-pdf-line text-5xl"></i>
     </div>
     <div class="w-full flex pt-3 flex-col items-start">
       <p class="flex-wrap dark:text-white text-gray-500">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از
@@ -24,10 +27,10 @@
         <span class="text-gray-400">مبلغ محاسبه شده</span>
         <strong>120,000 تومان</strong>
       </div>
-      <div class="w-full mt-3  flex gap-1">
-        <button class="w-1/2 btn bg-green-500 border-none">پرداخت</button>
-        <button class="w-1/2 btn bg-red-500 border-none">بازگشت</button>
+      <div class="w-full mt-3  flex flex-col gap-1">
+        <button class="w-full btn bg-violet border-none">دانلود</button>
 
+        <button class="w-full btn bg-green-500 border-none">پرداخت</button>
       </div>
     </div>
   </div>

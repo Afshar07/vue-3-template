@@ -10,10 +10,11 @@
           <div class="mb-2">
             <small for="">انتخاب فروشگاه</small>
             <v-select
-                :options="pageCountItems"
+                v-if="shop.shops"
+                :options="shop.shops"
                 v-model="utilityRequest.shopId"
-                label="name"
-                :reduce="(name) => name.value"
+                label="shopName"
+                :reduce="(shopName) => shopName.shopId"
                 :clearable="false">
             </v-select>
           </div>
@@ -29,25 +30,18 @@
 </template>
 
 <script setup lang="ts">
-import {inject, reactive, ref} from "vue";
-import CloseIcon from "@/components/icons/CloseIcon.vue";
-import PaperIcon from "@/components/icons/PaperIcon.vue";
+import {inject, onMounted, reactive, ref} from "vue";
 import Modal from "@/components/utilities/Modal.vue";
 import {utilityRequest} from "@/models/utilityRequest";
 import UtilityCard from "@/components/main/utilityCard.vue";
 import {useAppStore} from "@/stores/app";
 import {useAuthStore} from "@/stores/auth";
-let toast:any =  inject('toast')
+
+let toast: any = inject('toast')
 let appStore = useAppStore()
-let authStore:any = useAuthStore()
+let authStore: any = useAuthStore()
 const helper: any = inject('helper')
 let api: any = inject('repositories')
-let pageCountItems = reactive([
-  {name: '10', value: 10}, {name: '20', value: 20}, {name: '30', value: 30}, {name: '40', value: 40}, {
-    name: '50',
-    value: 50
-  }
-])
 let utilityRequest = reactive<utilityRequest>({
   userId: authStore.getUser.userId,
   shopId: null,
@@ -81,6 +75,30 @@ let utilityCardsData = reactive({
   ]
 })
 let selectedUtility = ref<any>(null)
+let shop = reactive({
+  shops: null
+})
+
+onMounted(() => {
+  getUserShops()
+})
+
+
+async function getUserShops() {
+  try {
+    appStore.showOverlay = true
+    const res = await api.getShopsByUserId.setParams({
+      pageNumber: 0,
+      count: 0,
+      searchCommand: ''
+    })
+    shop.shops = res.data.shops
+  } catch (e) {
+    console.log(e)
+  } finally {
+    appStore.showOverlay = false
+  }
+}
 
 function getUtilityData(data: Object): void {
   selectedUtility.value = data
@@ -88,20 +106,33 @@ function getUtilityData(data: Object): void {
 }
 
 async function submitStatementForm(): Promise<any> {
-  if(!utilityRequest.shopId){
-    toast.error({content:'لطفا فروشگاه خود را انتخاب کنید'})
-  }else if(!utilityRequest.description){
-    toast.error({content:'لطفا توضیحات درخواست خود را وارد کنید'})
-  }else{
+  if (!utilityRequest.shopId) {
+    toast.error({content: 'لطفا فروشگاه خود را انتخاب کنید'})
+  } else if (!utilityRequest.description) {
+    toast.error({content: 'لطفا توضیحات درخواست خود را وارد کنید'})
+  } else {
     await createUtility()
   }
 }
 
 async function createUtility() {
   try {
-    utilityRequest.type = selectedUtility.type
+    utilityRequest.type = selectedUtility.value.type
     appStore.showOverlay = true
     const res = await api.createUtilityRequest.setPayload(utilityRequest)
+    if(res.data!==0){
+      toast.success({content:'درخواست شما با موفقیت ارسال شد'})
+      utilityRequest = {
+        userId: authStore.getUser.userId,
+        shopId: null,
+        createDate: new Date(Date.now()),
+        type: null,
+        description: '',
+      }
+    }else{
+      toast.error({content:'خطایی رخ داده است'})
+
+    }
   } catch (e) {
     console.log(e)
   } finally {

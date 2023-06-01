@@ -8,7 +8,7 @@
         <label for="createShop" class="btn bg-violet border-none text-white" type="button">ایجاد فروشگاه جدید</label>
       </div>
       <div class="col-span-12 md:col-span-6 mb-5">
-        <VInput class="col-span-12" v-model="searchCommand" :dataType="'text'"
+        <VInput class="col-span-12" v-model="debouncedSearch" :dataType="'text'"
                 :placeHolder="'جستجو...'"></VInput>
       </div>
       <div class="col-span-12 md:col-span-6 mb-5 flex justify-start md:justify-end items-center">
@@ -113,7 +113,8 @@
           </div>
           <div class="flex my-1 flex-col">
             <small for="">آدرس</small>
-            <textarea class="border-gray-300 text-right border rounded-xl dark:text-gray-900" v-model="newShop.address"></textarea>
+            <textarea class="border-gray-300 text-right border rounded-xl dark:text-gray-900"
+                      v-model="newShop.address"></textarea>
           </div>
 
         </div>
@@ -179,7 +180,8 @@
           </div>
           <div class="flex my-1 flex-col">
             <small for="">آدرس</small>
-            <textarea class="border-gray-300 text-right border rounded-xl dark:text-gray-900" v-model="selectedShop.address"></textarea>
+            <textarea class="border-gray-300 text-right border rounded-xl dark:text-gray-900"
+                      v-model="selectedShop.address"></textarea>
           </div>
 
         </div>
@@ -191,33 +193,33 @@
       <template #modalBody>
         <div v-if="selectedShop" class="w-full dark:text-white grid grid-cols-1 p-3">
           <div class="flex my-1 items-center justify-between">
-           <small>{{selectedShop.nationalId}}</small>
+            <small>{{ selectedShop.nationalId }}</small>
             <small class="mb-1 text-gray-400">کد ملی</small>
           </div>
           <div class="flex my-1 items-center justify-between">
-            <small>{{selectedShop.shopName}}</small>
+            <small>{{ selectedShop.shopName }}</small>
             <small class="mb-1 text-gray-400">نام فروشگاه</small>
           </div>
           <div class="flex my-1 items-center justify-between">
-            <small>{{selectedShop.taxUnit}}</small>
+            <small>{{ selectedShop.taxUnit }}</small>
             <small class="mb-1 text-gray-400">واحد مالیاتی</small>
           </div>
           <div class="flex my-1 items-center justify-between">
-            <small>{{selectedShop.fileNumber}}</small>
+            <small>{{ selectedShop.fileNumber }}</small>
             <small class="mb-1 text-gray-400">شماره پرونده</small>
           </div>
           <div class="flex my-1 items-center justify-between">
-            <small>{{selectedShop.terminalNumber}}</small>
+            <small>{{ selectedShop.terminalNumber }}</small>
             <small class="mb-1 text-gray-400">شماره ترمینال</small>
           </div>
 
           <div class="flex my-1 items-center justify-between">
-            <small class="mb-1 ">{{new Date(selectedShop.companyStartDate).toLocaleDateString('fa-IR')}}</small>
+            <small class="mb-1 ">{{ new Date(selectedShop.companyStartDate).toLocaleDateString('fa-IR') }}</small>
             <small class="mb-1 text-gray-400">تاریخ تاسیس</small>
           </div>
           <div class="flex my-1 flex-col">
             <small class="text-gray-400">آدرس</small>
-            <p style="overflow-wrap: anywhere">{{selectedShop.address}}</p>
+            <p style="overflow-wrap: anywhere">{{ selectedShop.address }}</p>
           </div>
 
         </div>
@@ -236,7 +238,7 @@
 </template>
 
 <script setup lang="ts">
-import {inject, onMounted, reactive, ref, watch} from "vue";
+import {computed, inject, onMounted, reactive, ref, watch} from "vue";
 import {useAppStore} from "@/stores/app";
 import Pagination from "../../../components/utilities/Pagination.vue";
 import Table from "@/components/utilities/Table.vue";
@@ -271,7 +273,7 @@ let pageCountItems = reactive([
   }
 ])
 let pageCount = ref(10);
-let searchCommand = '';
+let searchCommand = ref<any>(null);
 let fields = ref([
   {
     key: 'shopId',
@@ -297,6 +299,7 @@ let fields = ref([
 ])
 let selectedPageId = ref(1)
 let totalPages = reactive<any>([])
+let timeout = ref<any>(null)
 let selectedShop = ref<any>(null)
 watch(pageCount, async () => {
   await getShopsByUserId()
@@ -305,6 +308,23 @@ watch(pageCount, async () => {
 onMounted(() => {
   getShopsByUserId()
 })
+watch(searchCommand,()=>{
+  getShopsByUserId()
+})
+let debouncedSearch = computed({
+  get() {
+    return searchCommand.value;
+  },
+  // setter
+  set(val: string) {
+    if (timeout.value) {
+      clearTimeout(timeout.value);
+    }
+    timeout.value = setTimeout(() => {
+      searchCommand.value = val;
+    }, 600);
+  },
+});
 
 function setSelectedShop(shop: object) {
   selectedShop.value = shop
@@ -326,11 +346,12 @@ function validateShop(data: any, actionType: number) {
     toast.error({content: 'لطفا همه فیلد های اجباری را پر کنید'})
   }
 }
-async function deleteShop(){
+
+async function deleteShop() {
   try {
     appStore.showOverlay = true
     const res = await api.deleteShop.setParams({
-      id:selectedShop.value.shopId
+      id: selectedShop.value.shopId
     })
     if (res.data !== 0) {
       toast.success({content: 'فروشگاه با موفقیت حذف شد'})
@@ -342,12 +363,14 @@ async function deleteShop(){
     appStore.showOverlay = false
   }
 }
+
 async function update() {
   try {
     appStore.showOverlay = true
     const res = await api.updateShop.setPayload(selectedShop.value)
     if (res.data !== 0) {
       toast.success({content: 'فروشگاه با موفقیت بروزرسانی شد'})
+      selectedShop = null
       getShopsByUserId()
     }
   } catch (e) {
@@ -364,6 +387,17 @@ async function create() {
     if (res.data !== 0) {
       toast.success({content: 'فروشگاه با موفقیت ساخته شد'})
       getShopsByUserId()
+      newShop = {
+        userId: authStore.getUser.userId,
+        nationalId: '',
+        address: '',
+        taxUnit: '',
+        fileNumber: '',
+        createDate: new Date(Date.now()),
+        shopName: '',
+        terminalNumber: '',
+        companyStartDate: ''
+      }
     }
   } catch (e) {
     console.log(e)
@@ -383,7 +417,7 @@ async function getShopsByUserId() {
     const res = await api.getShopsByUserId.setParams({
       pageNumber: selectedPageId.value,
       count: pageCount.value,
-      searchCommand: searchCommand
+      searchCommand: searchCommand.value
     })
     totalPages.value = []
     const result = Math.ceil(res.data.count / pageCount.value)
