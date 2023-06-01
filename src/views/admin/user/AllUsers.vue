@@ -34,7 +34,7 @@
            </template>
            <template #shops="data">
              <span v-if="data.items.shops.length > 0">{{ data.items.shops[0].shopName }}</span>
-             <span v-else> - </span>
+             <label v-else for="createShopModal" @click="newShop.userId = data.items.userId" class="btn bg-primary border-none text-white">ایجاد فروشگاه</label>
            </template>
            <template #actions="data">
              <div class="flex justify-center items-center">
@@ -103,6 +103,60 @@
         </div>
       </template>
     </Modal>
+
+    <!--  Create Shop Modal  -->
+    <Modal
+        :id="'createShopModal'"
+        @ok="createShop"
+        :closeModalTitle="'بستن'"
+        :okModalTitle="'ارسال'"
+        :title="'ایجاد فروشگاه'"
+    >
+      <template #modalBody>
+        <div class="w-full p-3">
+          <div class="space-y-3">
+            <VInput
+                v-model="newShop.shopName"
+                class="w-full"
+                :dataType="'text'"
+                :placeHolder="'نام فروشگاه'"
+            ></VInput>
+            <VInput
+                v-model="newShop.nationalId"
+                class="w-full"
+                :dataType="'text'"
+                :placeHolder="'کد ملی'"
+            ></VInput>
+            <VInput
+                v-model="newShop.taxUnit"
+                class="w-full"
+                :dataType="'text'"
+                :placeHolder="'واحد مالیاتی'"
+            ></VInput>
+            <VInput
+                v-model="newShop.fileNumber"
+                class="w-full"
+                :dataType="'text'"
+                :placeHolder="'شماره پرونده'"
+            ></VInput>
+            <VInput
+                v-model="newShop.terminalNumber"
+                class="w-full"
+                :dataType="'text'"
+                :placeHolder="'شماره ترمینال'"
+            ></VInput>
+            <div class="flex my-1 flex-col">
+              <small class="mb-1">: تاریخ تاسیس</small>
+              <datePicker class="mt-3" v-model="newShop.companyStartDate" style="direction: rtl!important"></datePicker>
+            </div>
+            <div class="flex my-1 flex-col">
+              <small class="mb-1">: آدرس</small>
+              <textarea class="w-full bg-white border-gray-300 text-right border rounded-xl dark:text-gray-900" v-model="newShop.address"></textarea>
+            </div>
+          </div>
+        </div>
+      </template>
+    </Modal>
   </div>
 </template>
 
@@ -155,7 +209,7 @@ let userFields = ref([
   },
   {
     key:'shops',
-    label: 'کسب و کار'
+    label: 'فروشگاه'
   },
   {
     key:'actions',
@@ -180,6 +234,19 @@ let newUser = ref({
   profileImage: null,
   currentPassword: "",
   shops:[],
+  isDeleted: false
+})
+let newShop = ref({
+  shopId: 0,
+  userId: null,
+  nationalId: "",
+  address: "",
+  taxUnit: "",
+  fileNumber: "",
+  createDate: new Date(Date.now()),
+  shopName: "",
+  terminalNumber: "",
+  companyStartDate: "",
   isDeleted: false
 })
 
@@ -214,12 +281,35 @@ async function getAllUsers(){
     appStore.showOverlay = false
   }
 }
-
 async function createUser(){
   try {
     appStore.showOverlay = true
     const res = await api.createUser.setPayload(newUser.value);
     await getAllUsers()
+  }catch (e) {
+    console.log(e)
+  }finally {
+    appStore.showOverlay = false
+  }
+}
+async function createShop(){
+  try {
+    appStore.showOverlay = true
+    const res = await api.createShop.setPayload(newShop.value);
+    await getAllUsers();
+    newShop = {
+      shopId: 0,
+      userId: null,
+      nationalId: "",
+      address: "",
+      taxUnit: "",
+      fileNumber: "",
+      createDate: new Date(Date.now()),
+      shopName: "",
+      terminalNumber: "",
+      companyStartDate: "",
+      isDeleted: false
+    }
   }catch (e) {
     console.log(e)
   }finally {

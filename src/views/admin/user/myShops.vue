@@ -180,7 +180,7 @@
           </div>
           <div class="flex my-1 flex-col">
             <small for="">آدرس</small>
-            <textarea class="border-gray-300 text-right border rounded-xl dark:text-gray-900"
+            <textarea class="border-gray-300 bg-white text-right border rounded-xl dark:text-gray-900"
                       v-model="selectedShop.address"></textarea>
           </div>
 
