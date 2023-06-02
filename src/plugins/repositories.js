@@ -29,10 +29,14 @@ export default {
             sendMessage: createRequestsRepository(app, 'Message/SendMessage', authStore),
             deliverMessage: createRequestsRepository(app, 'Message/DeliverMessage', authStore),
             createUtilityRequest: createRequestsRepository(app, 'Utility/Create', authStore),
+            getAllUtilityRequest: createRequestsRepository(app, 'Utility/GetAll', authStore),
+            deleteUtilityRequest: createRequestsRepository(app, 'Utility/Delete', authStore),
+            changeUtilityStatusRequest: createRequestsRepository(app, 'Utility/ChangeStatus', authStore),
             getShopsByUserId: createRequestsRepository(app, 'Shop/GetByUserId', authStore),
             createShop:createRequestsRepository(app,'Shop/Create',authStore),
             updateShop:createRequestsRepository(app,'Shop/Update',authStore),
-            deleteShop:createRequestsRepository(app,'Shop/Delete',authStore)
+            deleteShop:createRequestsRepository(app,'Shop/Delete',authStore),
+            createReport:createRequestsRepository(app,'Report/Create',authStore),
 
 
         }

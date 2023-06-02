@@ -6,16 +6,15 @@
         <th class="min-w-[5rem]" v-for="(item,idx) in props.fields" :key="idx">{{ item['label'] }}</th>
       </tr>
       </thead>
-      <tbody class="text-xs md:text-base">
-      <!-- row 1 -->
-      <tr v-for="(row,idx) in props.items" :key="idx" :class="computedColors(+idx)">
-        <td v-for="(td,idx) in props.fields" :key="idx">
-          <slot :items="row" :name="td?.key">
-            <span v-if="row[td?.key]">{{ row[td?.key] }}</span>
-            <span v-else>-</span>
-          </slot>
-        </td>
-      </tr>
+      <tbody v-if="props.items.length > 0" class="text-xs md:text-base">
+        <tr v-for="(row,idx) in props.items" :key="idx" :class="computedColors(+idx)">
+          <td v-for="(td,idx) in props.fields" :key="idx">
+            <slot :items="row" :name="td?.key">
+              <span v-if="row[td?.key]">{{ row[td?.key] }}</span>
+              <span v-else>-</span>
+            </slot>
+          </td>
+        </tr>
       </tbody>
     </table>
 </template>

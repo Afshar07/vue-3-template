@@ -40,7 +40,10 @@
              <div class="flex justify-center items-center">
 
                <router-link :to="{ name: 'conversation', params: { username: data.items.userId } }">
-                 <i title="ویرایش" class="ri-chat-1-line dark:text-white text-violet cursor-pointer text-xl"></i>
+                 <i title="چت" class="ri-chat-1-line dark:text-white text-violet cursor-pointer text-xl"></i>
+               </router-link>
+               <router-link :to="{ name: 'user-profile', params: { username: data.items.userId } }">
+                 <i title="ویرایش" class="ri-settings-3-line dark:text-white text-orange-400 cursor-pointer text-xl mx-3"></i>
                </router-link>
              </div>
            </template>
@@ -218,7 +221,7 @@ let userFields = ref([
 ])
 let selectedPageId = ref(1);
 let totalPages = reactive([]);
-let newUser = ref({
+let newUser = reactive({
   userId: 0,
   name: "",
   familyName: "",
@@ -236,7 +239,7 @@ let newUser = ref({
   shops:[],
   isDeleted: false
 })
-let newShop = ref({
+let newShop = reactive({
   shopId: 0,
   userId: null,
   nationalId: "",
