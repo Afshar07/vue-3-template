@@ -69,6 +69,15 @@ const router = createRouter({
       },
     },
     {
+      path: "/reports/list",
+      name: "reports-list",
+      component: () => import("../views/admin/reports/ReportsList.vue"),
+      meta: {
+        auth: true,
+        title: "مالی ایران | لیست گزارشات",
+      },
+    },
+    {
       path: "/test",
       name: "test",
       component: () => import("../views/test.vue"),

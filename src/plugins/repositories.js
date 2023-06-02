@@ -34,9 +34,11 @@ export default {
             changeUtilityStatusRequest: createRequestsRepository(app, 'Utility/ChangeStatus', authStore),
             getShopsByUserId: createRequestsRepository(app, 'Shop/GetByUserId', authStore),
             createShop:createRequestsRepository(app,'Shop/Create',authStore),
+            createShopByAdmin:createRequestsRepository(app,'Shop/CreateByAdmin',authStore),
             updateShop:createRequestsRepository(app,'Shop/Update',authStore),
             deleteShop:createRequestsRepository(app,'Shop/Delete',authStore),
             createReport:createRequestsRepository(app,'Report/Create',authStore),
+            getAllReport:createRequestsRepository(app,'Report/GetAll',authStore),
 
 
         }

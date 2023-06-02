@@ -344,6 +344,20 @@ async function createReport() {
     appStore.showOverlay = true
     const res = await api.createReport.setPayload(newReport)
     toast.success({content: `ثبت گزارش انجام شد.`});
+    newReport = {
+      reportId: 0,
+      title: "",
+      userId: 0,
+      shopId: 0,
+      description: "",
+      type: 1,
+      createDate: new Date(Date.now()),
+      file: {
+        base64: "",
+        priority: 0
+      },
+      isDeleted: false
+    }
     getAllRequests();
   } catch (e) {
     console.log(e)
