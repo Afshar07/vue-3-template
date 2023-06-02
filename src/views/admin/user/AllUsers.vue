@@ -33,7 +33,9 @@
              <span>{{ data.items.userId }}</span>
            </template>
            <template #shops="data">
-             <span v-if="data.items.shops.length > 0">{{ data.items.shops[0].shopName }}</span>
+             <div v-if="data.items.shops.length > 0" class="flex flex-col justify-center">
+               <span v-for="(shop,idx) in data.items.shops" class="mx-1">{{ shop.shopName }}</span>
+             </div>
              <label v-else for="createShopModal" @click="newShop.userId = data.items.userId" class="btn bg-primary border-none text-white">ایجاد فروشگاه</label>
            </template>
            <template #actions="data">
@@ -233,10 +235,6 @@ let newUser = reactive({
   userName: "",
   createDate: new Date(Date.now()),
   updateDate: new Date(Date.now()),
-  role: "",
-  profileImage: null,
-  currentPassword: "",
-  shops:[],
   isDeleted: false
 })
 let newShop = reactive({
@@ -287,7 +285,7 @@ async function getAllUsers(){
 async function createUser(){
   try {
     appStore.showOverlay = true
-    const res = await api.createUser.setPayload(newUser.value);
+    const res = await api.createUser.setPayload(newUser);
     await getAllUsers()
   }catch (e) {
     console.log(e)
@@ -298,7 +296,7 @@ async function createUser(){
 async function createShop(){
   try {
     appStore.showOverlay = true
-    const res = await api.createShop.setPayload(newShop.value);
+    const res = await api.createShopByAdmin.setPayload(newShop);
     await getAllUsers();
     newShop = {
       shopId: 0,

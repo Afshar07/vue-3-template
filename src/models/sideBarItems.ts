@@ -118,6 +118,20 @@ export const sideBarItems: navItems[] = [
       },
     ],
   },
+  {
+    title: "گزارشات",
+    link: "",
+    icon: "ListIcon",
+    hasChildren: true,
+    hasAccess: ['admin'],
+    children: [
+      {
+        title: "لیست",
+        link: "/reports/list",
+        hasAccess:  ['admin'],
+      },
+    ],
+  },
   // {
   //     title: 'Orders',
   //     link: '',

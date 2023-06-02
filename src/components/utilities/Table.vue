@@ -6,7 +6,7 @@
         <th class="min-w-[5rem]" v-for="(item,idx) in props.fields" :key="idx">{{ item['label'] }}</th>
       </tr>
       </thead>
-      <tbody v-if="props.items.length > 0" class="text-xs md:text-base">
+      <tbody class="text-xs md:text-base">
         <tr v-for="(row,idx) in props.items" :key="idx" :class="computedColors(+idx)">
           <td v-for="(td,idx) in props.fields" :key="idx">
             <slot :items="row" :name="td?.key">
