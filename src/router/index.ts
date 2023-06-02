@@ -98,7 +98,7 @@ const router = createRouter({
       },
     },
     {
-      path: "/reports/seasonalReports",
+      path: "/reports/seasonal-report",
       name: "seasonalReports",
       component: () => import("../views/reports/seasonalReports.vue"),
       meta: {
