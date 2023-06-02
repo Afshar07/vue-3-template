@@ -1,6 +1,6 @@
 <template>
   <div class="md:main-card  grid gap-2 grid-cols-12">
-    <utility-card v-for="(item,idx) in utilityCardsData.data" :key="idx" :data="item"
+    <utility-card class="cursor-pointer" v-for="(item,idx) in utilityCardsData.data" :key="idx" :data="item"
                   @setUtilityData="getUtilityData"></utility-card>
     <!--create utility request modal -->
     <Modal :id="'statement'" @ok="submitStatementForm" :closeModalTitle="'بستن'" :okModalTitle="'ارسال'"
