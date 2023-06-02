@@ -82,11 +82,11 @@
                   <i title="ویرایش وضعیت"
                      class="ri-settings-3-line dark:text-white text-orange-400 cursor-pointer text-xl mr-2"></i>
                 </label>
-                <label @click="newReport.shopId = data.items.shopId ; newReport.userId = data.items.userId"
-                       for="setReport">
-                  <i title="ثبت گزارش"
-                     class="ri-file-list-3-line dark:text-white text-sky-500 cursor-pointer text-xl mr-2"></i>
-                </label>
+<!--                <label @click="newReport.shopId = data.items.shopId ; newReport.userId = data.items.userId"-->
+<!--                       for="setReport">-->
+<!--                  <i title="ثبت گزارش"-->
+<!--                     class="ri-file-list-3-line dark:text-white text-sky-500 cursor-pointer text-xl mr-2"></i>-->
+<!--                </label>-->
               </div>
             </template>
           </Table>
