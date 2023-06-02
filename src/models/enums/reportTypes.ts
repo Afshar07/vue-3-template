@@ -7,7 +7,7 @@ export enum reportTypes {
   TaxSystemDocument,
   PayBill,
 }
-enum routeToReportType {
+export enum routeToReportType {
   "protest" = 1,
   "seasonal-report",
   "announcement",

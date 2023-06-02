@@ -98,9 +98,9 @@ const router = createRouter({
       },
     },
     {
-      path: "/reports/seasonal-report",
+      path: "/reports/:slug",
       name: "seasonalReports",
-      component: () => import("../views/reports/seasonalReports.vue"),
+      component: () => import("../views/reports/ReportComponentHandler.vue"),
       meta: {
         auth: true,
         title: "مالی ایران | گزارشات فصلی",
