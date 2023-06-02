@@ -45,10 +45,52 @@
       </button>
     </div>
   </div>
+  <!--Utility Modal Start -->
+  <div
+    class="modal modal-open modal-bottom sm:modal-middle"
+    v-if="isRenderingUtilityModal"
+    @click="closeUtilityModal"
+  >
+    <div class="modal-box" @click.stop>
+      <div
+        class="flex items-center justify-center pb-2 border-b dark:border-gray-400 border-gray-200"
+      >
+        <strong class="dark:text-white text-gray-700 text-sm md:text-lg">
+          تکمیل درخواست VIP
+        </strong>
+      </div>
+      <div class="py-4">
+        <p>انتخاب فروشگاه</p>
+        <v-select
+          v-if="userShops.shops"
+          :options="userShops.shops"
+          v-model="utilityRequest.shopId"
+          label="shopName"
+          :reduce="(shop:any) => shop.shopId"
+          :clearable="false"
+        >
+        </v-select>
+      </div>
+      <div class="modal-action flex items-center justify-start gap-x-5">
+        <button type="button" @click="closeUtilityModal" class="btn">
+          بستن
+        </button>
+        <button
+          :disabled="!utilityRequest.shopId"
+          @click="verifyPaymentRequest"
+          type="button"
+          class="btn bg-violet border-none text-white"
+        >
+          ثبت
+        </button>
+      </div>
+    </div>
+  </div>
+  <!--Utility Modal End -->
 </template>
 
 <script setup lang="ts">
-import { inject, reactive } from "vue";
+import { inject, reactive, ref, computed } from "vue";
 import { utilityRequest } from "@/models/utilityRequest";
 import { useAuthStore } from "@/stores/auth";
 import { UtilityTypes } from "@/models/enums/utilityTypes";
@@ -67,6 +109,7 @@ const authStore: any = useAuthStore();
 const appStore = useAppStore();
 const api: any = inject("repositories");
 const toast: any = inject("toast");
+const isRenderingUtilityModal = ref(false);
 
 let utilityRequest = reactive<utilityRequest>({
   userId: authStore.getUser.userId,
@@ -97,19 +140,46 @@ const priceList: Array<PriceObject> = reactive([
   },
 ]);
 
+let userShops = reactive({ shops: null });
+
 // Functions
 async function sendPaymentRequest() {
-  verifyPaymentRequest();
+  isRenderingUtilityModal.value = true;
+  getUserShops();
 }
+
+function closeUtilityModal() {
+  isRenderingUtilityModal.value = false;
+}
+
 async function verifyPaymentRequest() {
-  toast.success({ content: "پرداخت با موفقیت انجام شد." });
   createUtilityRequest();
 }
+
+async function getUserShops() {
+  try {
+    appStore.showOverlay = true;
+    const res = await api.getShopsByUserId.setParams({
+      pageNumber: 0,
+      count: 0,
+      searchCommand: null,
+    });
+    userShops.shops = reactive(res.data.shops);
+    console.log(userShops);
+  } catch (e) {
+    console.error(e);
+  } finally {
+    appStore.showOverlay = false;
+  }
+}
+
 async function createUtilityRequest() {
   try {
     appStore.showOverlay = true;
     const res = await api.createUtilityRequest.setPayload(utilityRequest);
     if (res.data != 0) {
+      closeUtilityModal();
+      toast.success({ content: "پرداخت با موفقیت انجام شد." });
       utilityRequest = {
         userId: authStore.getUser.userId,
         shopId: null,
@@ -126,6 +196,16 @@ async function createUtilityRequest() {
     appStore.showOverlay = false;
   }
 }
+
+// Computed
+const utilityDescription = computed({
+  set(value: string) {
+    utilityRequest.description = value;
+  },
+  get(): string {
+    return utilityRequest.description!;
+  },
+});
 </script>
 
 <style scoped></style>
