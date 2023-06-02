@@ -67,6 +67,29 @@ const myReportOjects = [
     borderColor: "border-t-cyan-500",
     icon: "FolderPlusIcon",
   },
+  {
+    title: "اظهارنامه عملکرد",
+    type: reportTypes.FunctionStatement,
+    slug: "performance-statement",
+    bgColor: "bg-orange-500",
+    borderColor: "border-t-orange-500",
+    icon: "FlashIcon",
+  },
+  {
+    title: "مدارک سامانه مالیاتی",
+    type: reportTypes.TaxSystemDocument,
+    slug: "tax-system-document",
+    bgColor: "bg-lime-600",
+    borderColor: "border-t-lime-600",
+    icon: "PaperIcon",
+  },
+  {
+    title: "پرداخت قبض",
+    type: reportTypes.PayBill,
+    slug: "pay-bill",
+    bgColor: "bg-fuchsia-700",
+    borderColor: "border-t-fuschia-700",
+  },
 ];
 </script>
 

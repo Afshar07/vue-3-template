@@ -10,5 +10,9 @@ export enum reportTypes {
 enum routeToReportType {
   "protest" = 1,
   "seasonal-report",
+  "announcement",
   "added-value-statement",
+  "performance-statement", //FunctionStatement
+  "tax-system-document",
+  "pay-bill",
 }
