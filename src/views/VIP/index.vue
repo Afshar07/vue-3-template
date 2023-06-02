@@ -1,92 +1,95 @@
 <template>
-  <div class="md:main-card grid gap-y-7 gap-x-6 md:gap-4 grid-cols-12">
-    <div
-      class="col-span-12 p-3 bg-white flex flex-col items-start rounded-xl shadow"
-    >
-      <strong>خرید اشتراک VIP</strong>
-      <small class="my-3 border-b pb-3"
+  <div>
+    <div class="md:main-card grid gap-y-7 gap-x-6 md:gap-4 grid-cols-12">
+      <div
+          class="col-span-12 p-3 bg-white flex flex-col items-start rounded-xl shadow"
+      >
+        <strong>خرید اشتراک VIP</strong>
+        <small class="my-3 border-b pb-3"
         >با خرید اشتراک VIP از مزایای زیر بهره مند شوید</small
-      >
-      <p class="flex-wrap dark:text-white text-gray-500">
-        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
-        استفادهلورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
-        استفاده ازلورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و
-        با استفاده از از
-      </p>
-    </div>
-    <div
-      v-for="(price, index) in priceList"
-      :key="index"
-      class="col-span-12 sm:col-span-6 xl:col-span-4 bg-white py-6 flex flex-col items-center px-3 rounded-md border-t-4 shadow h-full"
-      :class="price.borderClass"
-    >
-      <div
-        class="px-10 shadow-md py-2 rounded-full text-white gap-2"
-        :class="price.badgeClass"
-      >
-        <strong>{{ price.title }}</strong>
-      </div>
-      <hr class="w-full my-6" />
-      <ul class="list-disc text-sm">
-        <li>لورم ایپسوم متن ساختگی با</li>
-        <li>تولید سادگی نامفهوم از صنعت چاپ</li>
-        <li>و با استفاده از طراحان گرافیک است</li>
-        <li>چاپگرها و متون بلکه روزنامه و مجله</li>
-      </ul>
-      <hr class="w-full my-6" />
-      <p class="mb-6 font-bold">
-        {{ Intl.NumberFormat("en-US").format(+price.amount) }} تومان
-      </p>
-      <button
-        class="btn bg-green-600 border-none mt-auto"
-        @click="sendPaymentRequest"
-      >
-        پرداخت
-      </button>
-    </div>
-  </div>
-  <!--Utility Modal Start -->
-  <div
-    class="modal modal-open modal-bottom sm:modal-middle"
-    v-if="isRenderingUtilityModal"
-    @click="closeUtilityModal"
-  >
-    <div class="modal-box" @click.stop>
-      <div
-        class="flex items-center justify-center pb-2 border-b dark:border-gray-400 border-gray-200"
-      >
-        <strong class="dark:text-white text-gray-700 text-sm md:text-lg">
-          تکمیل درخواست VIP
-        </strong>
-      </div>
-      <div class="py-4">
-        <p>انتخاب فروشگاه</p>
-        <v-select
-          v-if="userShops.shops"
-          :options="userShops.shops"
-          v-model="utilityRequest.shopId"
-          label="shopName"
-          :reduce="(shop:any) => shop.shopId"
-          :clearable="false"
         >
-        </v-select>
+        <p class="flex-wrap dark:text-white text-gray-500">
+          لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+          استفادهلورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با
+          استفاده ازلورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و
+          با استفاده از از
+        </p>
       </div>
-      <div class="modal-action flex items-center justify-start gap-x-5">
-        <button type="button" @click="closeUtilityModal" class="btn">
-          بستن
-        </button>
+      <div
+          v-for="(price, index) in priceList"
+          :key="index"
+          class="col-span-12 sm:col-span-6 xl:col-span-4 bg-white py-6 flex flex-col items-center px-3 rounded-md border-t-4 shadow h-full"
+          :class="price.borderClass"
+      >
+        <div
+            class="px-10 shadow-md py-2 rounded-full text-white gap-2"
+            :class="price.badgeClass"
+        >
+          <strong>{{ price.title }}</strong>
+        </div>
+        <hr class="w-full my-6" />
+        <ul class="list-disc text-sm">
+          <li>لورم ایپسوم متن ساختگی با</li>
+          <li>تولید سادگی نامفهوم از صنعت چاپ</li>
+          <li>و با استفاده از طراحان گرافیک است</li>
+          <li>چاپگرها و متون بلکه روزنامه و مجله</li>
+        </ul>
+        <hr class="w-full my-6" />
+        <p class="mb-6 font-bold">
+          {{ Intl.NumberFormat("en-US").format(+price.amount) }} تومان
+        </p>
         <button
-          :disabled="!utilityRequest.shopId"
-          @click="verifyPaymentRequest"
-          type="button"
-          class="btn bg-violet border-none text-white"
+            class="btn bg-green-600 border-none mt-auto"
+            @click="sendPaymentRequest"
         >
-          ثبت
+          پرداخت
         </button>
       </div>
     </div>
+    <!--Utility Modal Start -->
+    <div
+        class="modal modal-open modal-bottom sm:modal-middle"
+        v-if="isRenderingUtilityModal"
+        @click="closeUtilityModal"
+    >
+      <div class="modal-box" @click.stop>
+        <div
+            class="flex items-center justify-center pb-2 border-b dark:border-gray-400 border-gray-200"
+        >
+          <strong class="dark:text-white text-gray-700 text-sm md:text-lg">
+            تکمیل درخواست VIP
+          </strong>
+        </div>
+        <div class="py-4">
+          <p>انتخاب فروشگاه</p>
+          <v-select
+              v-if="userShops.shops"
+              :options="userShops.shops"
+              v-model="utilityRequest.shopId"
+              label="shopName"
+              :reduce="(shop:any) => shop.shopId"
+              :clearable="false"
+          >
+          </v-select>
+        </div>
+        <div class="modal-action flex items-center justify-start gap-x-5">
+          <button type="button" @click="closeUtilityModal" class="btn">
+            بستن
+          </button>
+          <button
+              :disabled="!utilityRequest.shopId"
+              @click="verifyPaymentRequest"
+              type="button"
+              class="btn bg-violet border-none text-white"
+          >
+            ثبت
+          </button>
+        </div>
+      </div>
+    </div>
+    <!--Utility Modal End -->
   </div>
-  <!--Utility Modal End -->
+
 </template>
 
 <script setup lang="ts">
